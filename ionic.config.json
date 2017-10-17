@@ -1,5 +1,18 @@
 {
   "name": "contacto",
   "app_id": "",
-  "type": "ionic1"
+  "type": "ionic1",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "integrations": {
+    "gulp": {}
+  },
+  "watchPatterns": [
+    "scss/**/*",
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
 }
