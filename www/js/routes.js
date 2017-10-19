@@ -21,13 +21,15 @@ angular.module('app.routes', [])
       url: '/page11',
       views: {
         'side-menu21': {
-          templateUrl: 'templates/sLARELEVANTES.html'
+          templateUrl: 'templates/sLARELEVANTES.html',
+          controller:'sLARELEVANTESCtrl'
         }
       }
     })
         .state('puestosYAgentes', {
       url: '/page35',
-      templateUrl: 'templates/puestosYAgentes.html'
+      templateUrl: 'templates/puestosYAgentes.html',
+      controller:'puestosYAgentesCtrl'
     })
         .state('puestos', {
       url: '/page36',
