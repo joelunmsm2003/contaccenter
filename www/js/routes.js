@@ -31,7 +31,7 @@ angular.module('app.routes', [])
               url: '/page36',
               views: {
               'side-menu21': {
-                templateUrl: 'templates/puestos.html',
+                templateUrl: 'templates/puestosYAgentes.html',
                 controller:'puestosCtrl'
                 }
               }
