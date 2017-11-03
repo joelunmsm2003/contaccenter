@@ -24,7 +24,7 @@ function ($scope, $stateParams,$http ) {
     
 $scope.data = 99999
 
-$http.get("http://localhost:8000/reporte1/").success(function(response) {
+$http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
 
 
 
@@ -46,7 +46,7 @@ function ($scope, $stateParams,$http) {
 
 	//https://www.ccf.com.pe/webresources/reporte3/2/2
 
-$http.get("http://localhost:8000/reporte2/").success(function(response) {
+$http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
 
 
 
@@ -55,7 +55,7 @@ $http.get("http://localhost:8000/reporte2/").success(function(response) {
 	$scope.reporte2 = response
 
 });
-
+	
 }])
    
 .controller('puestosCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

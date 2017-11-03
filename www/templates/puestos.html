@@ -1,44 +1,82 @@
-<ion-view title="Puestos" id="page36">
+<ion-view title="SLA RELEVANTES" id="page11">
   <ion-content padding="true" class="has-header">
-    <div class="spacer" style="width: 300px; height: 20px;"></div>
-    <div class="spacer" style="width: 287px; height: 31px;"></div>
-    <form id="puestos-form34" class="list">
-      <h4 id="puestos-heading53" style="color:#000000;font-weight:300;text-align:center;">PUESTOS Y AGENTES CONECTADOS</h4>
-      <div class="spacer" style="width: 300px; height: 26px;"></div>
-      <label class="item item-select" id="puestos-select22">
+    <form id="sLARELEVANTES-form5" class="list">
+      <h4 id="sLARELEVANTES-heading30" style="color:#000000;font-weight:300;text-align:center;">SLA RELEVANTESaaaaaaa</h4>
+      <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
         <select>
-          <option></option>
-          <option>IFA</option>
-          <option>IFA Sr.</option>
-          <option>Relationship Managger</option>
-          <option>Relationship Director</option>
-          <option>Bussiness Associate</option>
+          <option>CMR SAC CH</option>
+
         </select>
       </label>
-      <label class="item item-select" id="puestos-select23">
-        <span class="input-label">Campaña</span>
+      <label class="item item-select" id="sLARELEVANTES-select19">
+        <span class="input-label">Cola </span>
         <select>
-          <option></option>
-          <option>IFA</option>
-          <option>IFA Sr.</option>
-          <option>Relationship Managger</option>
-          <option>Relationship Director</option>
-          <option>Bussiness Associate</option>
+          <option>CMR SAC</option>
+  
+
+<!-- .......pa : llamadas abandonadas (%)
+............po: Ocupación (%)
+............sla : Nivel de Servicio (%) -->
+
+
+
         </select>
       </label>
-      <label class="item item-input" id="puestos-input74">
-        <span class="input-label">LLamadas Contestatadas</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="puestos-input75">
-        <span class="input-label">LLamadas abandonadas</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="puestos-input76">
-        <span class="input-label">Hit Ratio %</span>
-        <input type="text" placeholder="">
-      </label>
+      <div style="overflow-x:auto;">
+        <table>
+          <tbody>
+         
+
+            <tr>
+
+
+              <td style="background:#e36c09; color:#fff;">LLamadas contestadas</td>
+              <td>{{reporte1.r}}</td>
+              <td></td>
+
+            </tr>
+            <tr>
+
+
+
+
+
+
+              <td style="background:#c90; color:#fff;">llamadas abandonadas</td>
+              <td>{{reporte1.a}}</td>
+              <td></td>
+
+
+            </tr>
+
+            <tr>
+
+
+              <td style="background:#366092; color:#fff;">llamadas en espera</td>
+              <td>{{reporte1.e}}</td>
+              <td></td>
+
+
+            </tr>
+
+            <tr>
+
+
+              <td style="background:#e36c09; color:#fff;">Tiempo de Espera</td>
+              <td>{{reporte1.tawg}}</td>
+             
+
+            </tr>
+            <tr></tr>
+
+
+          </tbody>
+
+
+      </div>
+      <br>
+      <h3 id="sLARELEVANTES-heading24" style="color:#000000;font-weight:300;">Tabla de Comisiones</h3>
     </form>
   </ion-content>
 </ion-view>

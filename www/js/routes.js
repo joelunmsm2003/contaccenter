@@ -17,24 +17,35 @@ angular.module('app.routes', [])
       url: '/side-menu21',
       templateUrl: 'templates/capital.html'
     })
-        .state('capital.sLARELEVANTES', {
-      url: '/page11',
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/sLARELEVANTES.html',
-          controller:'sLARELEVANTESCtrl'
-        }
-      }
-    })
+              .state('capital.sLARELEVANTES', {
+            url: '/page11',
+            views: {
+              'side-menu21': {
+                templateUrl: 'templates/sLARELEVANTES.html',
+                controller:'sLARELEVANTESCtrl'
+              }
+            }
+          })
+
+             .state('capital.puestos', {
+              url: '/page36',
+              views: {
+              'side-menu21': {
+                templateUrl: 'templates/puestos.html',
+                controller:'puestosCtrl'
+                }
+              }
+              
+            })
+
+
+
         .state('puestosYAgentes', {
       url: '/page35',
       templateUrl: 'templates/puestosYAgentes.html',
       controller:'puestosYAgentesCtrl'
     })
-        .state('puestos', {
-      url: '/page36',
-      templateUrl: 'templates/puestos.html'
-    })
+   
         .state('informacion', {
       url: '/page37',
       templateUrl: 'templates/informacion.html'
