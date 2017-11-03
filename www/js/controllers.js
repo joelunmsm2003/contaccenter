@@ -17,7 +17,7 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('sLARELEVANTESCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http ) {
@@ -36,8 +36,32 @@ $http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
 
 
 }])
+
+
+.controller('marcadorpredictivoCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http) {
+
+	
+
+	//https://www.ccf.com.pe/webresources/reporte3/2/2
+
+$http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
+
+
+
+	console.log('response',response)
+
+	$scope.reporte2 = response
+
+});
+	
+}])
+
+
    
-.controller('puestosYAgentesCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http) {

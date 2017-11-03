@@ -13,26 +13,39 @@ angular.module('app.routes', [])
       url: '/page1',
       templateUrl: 'templates/login.html'
     })
-        .state('capital', {
-      url: '/side-menu21',
-      templateUrl: 'templates/capital.html'
+
+
+    .state('menu', {
+    url: '/side-menu21',
+    templateUrl: 'templates/menu.html'
     })
-              .state('capital.sLARELEVANTES', {
+              .state('menu.slarelevantes', {
             url: '/page11',
             views: {
               'side-menu21': {
-                templateUrl: 'templates/sLARELEVANTES.html',
-                controller:'sLARELEVANTESCtrl'
+                templateUrl: 'templates/slarelevantes.html',
+                controller:'slarelevantesCtrl'
               }
             }
           })
 
-             .state('capital.puestos', {
+             .state('menu.puestosyagentes', {
               url: '/page36',
               views: {
               'side-menu21': {
-                templateUrl: 'templates/puestosYAgentes.html',
-                controller:'puestosCtrl'
+                templateUrl: 'templates/puestosyagentes.html',
+                controller:'puestosyagentesCtrl'
+                }
+              }
+              
+            })
+
+              .state('menu.marcadorpredictivo', {
+              url: '/page36',
+              views: {
+              'side-menu21': {
+                templateUrl: 'templates/marcadorpredictivo.html',
+                controller:'marcadorpredictivoCtrl'
                 }
               }
               
@@ -40,20 +53,7 @@ angular.module('app.routes', [])
 
 
 
-        .state('puestosYAgentes', {
-      url: '/page35',
-      templateUrl: 'templates/puestosYAgentes.html',
-      controller:'puestosYAgentesCtrl'
-    })
-   
-        .state('informacion', {
-      url: '/page37',
-      templateUrl: 'templates/informacion.html'
-    })
-        .state('inicio', {
-      url: '/page30',
-      templateUrl: 'templates/inicio.html'
-    })
+
     ;
 
   // if none of the above states are matched, use this as the fallback
