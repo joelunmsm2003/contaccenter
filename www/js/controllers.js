@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['angularjs-gauge'])
   
 .controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -27,47 +27,59 @@ function ($scope, $stateParams,$http,$timeout ) {
     ///Grafica
 
 
-	   Highcharts.chart('containerx', {
 
-      chart: {
-        type: 'bar'
-      },
-      title: {
-        text: 'Temperature Data'
-      },
+    $('#containerx').highcharts({
+        chart: {
+            events: {
+                addSeries: function () {
+                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
+                        .attr({
+                            fill: Highcharts.getOptions().colors[0],
+                            padding: 10,
+                            r: 5,
+                            zIndex: 8
+                        })
+                        .css({
+                            color: '#FFFFFF'
+                        })
+                        .add();
 
-      xAxis: {
-        categories: ['Africa']
-   
-    },
+                    setTimeout(function () {
+                        label.fadeOut();
+                    }, 1000);
+                }
+            },
+            type:'bar'
+        },
 
-    yAxis: {
-        title: {
-            text: 'Valores expresados en porcentage'
-        }
-    },
-      
+	      title: {
+	        text: 'Llamadas'
+	      },
 
-    series: [{
+
+	    yAxis: {
+	        title: {
+	            text: 'Valores expresados en porcentaje'
+	        }
+	    },
+
+        xAxis: {
+            title: {
+	            text: null
+	        }
+        },
+
+        series: [{
         name: 'Abandono',
-        data: [107]
-    }, {
-        name: 'Ocupacion',
-        data: [133]
-    }, {
-        name: 'Nivel de Servicio',
-        data: [1052]
-    }]
-
-
-
-
+	        data: [2]
+	    }, {
+	        name: 'Ocupacion',
+	        data: [6]
+	    }, {
+	        name: 'Nivel de Servicio',
+	        data: [6]
+	    }]
     });
-
-
-
-
-
 
 
     
@@ -83,11 +95,17 @@ $scope.data = 99999
 
 $http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
 
+ 
+		$scope.reporte1 = response
 
+     var chart = $('#containerx').highcharts();
 
-	console.log('response',response)
+   console.log('jdjdj',$scope.reporte1)
 
-	$scope.reporte1 = response
+	chart.series[0].data[0].update(parseInt($scope.reporte1.a))
+	chart.series[1].data[0].update(parseInt($scope.reporte1.r))
+	chart.series[2].data[0].update(parseInt($scope.reporte1.e))
+	
 
 });
 
@@ -112,6 +130,9 @@ $http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
 
 	$scope.reporte2 = response
 
+
+
+
 });
 	
 }])
@@ -126,8 +147,7 @@ function ($scope, $stateParams,$http) {
 	
 
 ///inicio de grafica
-
-
+     
 
 
 //Fin

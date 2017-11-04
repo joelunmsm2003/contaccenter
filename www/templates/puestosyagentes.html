@@ -1,8 +1,7 @@
 <ion-view title="PUESTOS Y AGENTES CONECTADOS" id="page36">
 
   <ion-content padding="true" class="has-header">
-    <div class="spacer" style="width: 300px; height: 20px;"></div>
-    <div class="spacer" style="width: 287px; height: 31px;"></div>
+
     <form id="puestos-form34" class="list">
 
       <label class="item item-select" id="puestos-select22">
@@ -26,10 +25,7 @@
 
    
       
-      
-
-<br>
-
+    
           
 
             <table >
@@ -43,17 +39,17 @@
             <tr>
 
               <td >Agentes Libres</td>
-              <td  class='resultado'>0</td>
+              <td  class='resultado'>{{reporte2.ali}}</td>
               <td>Supervisores</td>
-              <td class='resultado'>0</td>
+              <td class='resultado'>{{reporte2.sup}}</td>
 
             </tr>
               <tr >
 
               <td >Agentes Ocupados</td>
-              <td class='resultado' >0</td>
+              <td class='resultado' >{{reporte2.aoc}}</td>
               <td>Operadores</td>
-              <td class='resultado'>0</td>
+              <td class='resultado'>{{reporte2.gr3_aoc+reporte2.gr3_ali+reporte2.gr2_rdy+reporte2.nrd+reporte2.gr2_inb+reporte2.hold}}</td>
 
             </tr>
           </table> 
@@ -70,16 +66,16 @@
 
             <tr>
               <td >Not Ready </td>
-              <td class='resultado'>0</td>
+              <td class='resultado'>{{reporte2.nrd}}</td>
               <td>Wat time</td> 
-               <td class='resultado'>0</td> 
+               <td class='resultado'>{{reporte2.wtm}}</td> 
 
             </tr>
              <tr>
               <td >After call Work(ACW) </td>
-              <td class='resultado'>0</td>
-              <td>Informacio Adicional</td> 
-               <td class='resultado'>0</td> 
+              <td class='resultado'>{{reporte2.acw}}</td>
+              <td>Información Adicional</td> 
+               <td class='resultado'></td> 
 
             </tr>
             <tr></tr>
@@ -88,8 +84,7 @@
           
     </form>
 
-       <div id="containerx">Placeholder for chart</div>
-
+<center><ng-gauge size="200" type="full" thick="5" min="0" max="reporte2.gr3_aoc+reporte2.gr3_ali+reporte2.gr2_rdy+reporte2.nrd+reporte2.gr2_inb+reporte2.hold" value="reporte2.aoc" cap="round" label="Ocupados"  foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes"></ng-gauge></center>
 
   </ion-content>
 </ion-view>
