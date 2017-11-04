@@ -15,14 +15,12 @@
           <option>CMR SAC</option>
   
 
-<!-- .......pa : llamadas abandonadas (%)
-............po: Ocupación (%)
-............sla : Nivel de Servicio (%) -->
-
 
 
         </select>
       </label>
+
+      <br>
       <div style="overflow-x:auto;">
         <table>
           <tbody>
@@ -31,9 +29,9 @@
             <tr>
 
 
-              <td style="background:#e36c09; color:#fff;">LLamadas contestadas</td>
-              <td>{{reporte1.r}}</td>
-              <td></td>
+              <td >Llamadas Contestadas</td>
+              <td class="resultado">{{reporte1.r}}</td>
+              
 
             </tr>
             <tr>
@@ -43,9 +41,9 @@
 
 
 
-              <td style="background:#c90; color:#fff;">llamadas abandonadas</td>
-              <td>{{reporte1.a}}</td>
-              <td></td>
+              <td >Llamadas Abandonadas</td>
+              <td class="resultado">{{reporte1.a}}</td>
+              
 
 
             </tr>
@@ -53,9 +51,9 @@
             <tr>
 
 
-              <td style="background:#366092; color:#fff;">llamadas en espera</td>
-              <td>{{reporte1.e}}</td>
-              <td></td>
+              <td >Llamadas en Espera</td>
+              <td class="resultado">{{reporte1.e}}</td>
+              
 
 
             </tr>
@@ -63,8 +61,8 @@
             <tr>
 
 
-              <td style="background:#e36c09; color:#fff;">Tiempo de Espera</td>
-              <td>{{reporte1.tawg}}</td>
+              <td>Tiempo de Espera</td>
+              <td class="resultado">{{reporte1.tawg}}</td>
              
 
             </tr>
@@ -75,8 +73,11 @@
 
 
       </div>
-      <br>
-      <h3 id="sLARELEVANTES-heading24" style="color:#000000;font-weight:300;">Tabla de Comisiones</h3>
+    
     </form>
+
+      <iframe width="100%" name="{{frameName}}" ng-src="{{frameUrl}}"></iframe>
+
+
   </ion-content>
 </ion-view>

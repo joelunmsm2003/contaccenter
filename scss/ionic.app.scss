@@ -2,7 +2,7 @@ $stable: #0D49A0;
 $primario: #99bd5f;
 $secundario: #2f6655;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-@import "../www/lib/ionic/scss";
+@import "../www/lib/ionic/scss/ionic";
 .profile-menu {
 	img {
 		border-radius: 50%;
@@ -10,6 +10,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	}
 	
 }
+
 .sider-menu,.inicio {
 	background: red;
 	/* For browsers that do not support gradients */
@@ -101,20 +102,20 @@ table {
 	width: 100%;
 	border: 1px solid #ddd;
 	color: #000;
-	font-size: 11px;
+	font-size: 13px;
 }
 
 th, td {
 	border: none;
 	text-align: left;
-	padding: 8px;
+	padding: 14px;
 }
 
 th {
 	font-weight: bold;
 }
 
-tr: nth-child(even) {
+tr:nth-child(even) {
 	background-color: #f2f2f2}
 .x {
 	color: $primario;
@@ -145,7 +146,7 @@ tr: nth-child(even) {
 	flex-direction: column;
 }
 
-.containerflex: hover {
+.containerflex:hover {
 	background-color: rgba(149, 179, 215,.2);
 }
 
@@ -268,6 +269,14 @@ tr: nth-child(even) {
 
 .xx {
 	background: $calm;
+}
+
+.resultado{
+	background:$balanced;
+	text-align:center;
+	color:#fff;
+	border: 1px solid #fff;
+
 }
 
 body {
