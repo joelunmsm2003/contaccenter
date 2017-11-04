@@ -125,6 +125,15 @@ function ($scope, $stateParams,$http) {
 
 	
 
+///inicio de grafica
+
+
+
+
+//Fin
+
+
+
 	//https://www.ccf.com.pe/webresources/reporte3/2/2
 
 $http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {

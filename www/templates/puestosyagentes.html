@@ -25,50 +25,43 @@
       <br>
 
    
-      <tr>
-      <label class="item item-input" id="puestos-input74">
-        <span class="input-label">Agentes</span>
-        <input type="text" placeholder="">
-        
-      </label>
-    
-      </tr>
-      <label class="item item-input" id="puestos-input75">
-        <span class="input-label">LLamadas abandonadas</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="puestos-input76">
-        <span class="input-label">Hit Ratio %</span>
-        <input type="text" placeholder="">
-      </label>
+      
+      
 
 <br>
 
           
 
             <table >
-            <tr>
+            <tr   class='resultado'>
 
-              <th  colspan="2" style="background:#8ab15d; color:#fff;">Agendas</th>
-              <th colspan="2"  style="background:#8ab15d;">Puestos de Servicio</th>
+              <th  colspan="2" >Agentes</th>
+              <th colspan="2"  >Puestos de Servicio</th>
             
                
             </tr>
             <tr>
 
-              <td style="background:#fff; ">Agentes libres</td>
-              <td style="background:#33cd5f"; >0</td>
+              <td >Agentes Libres</td>
+              <td  class='resultado'>0</td>
               <td>Supervisores</td>
-              <td style="background:#33cd5f";>0</td>
+              <td class='resultado'>0</td>
 
             </tr>
+              <tr >
 
+              <td >Agentes Ocupados</td>
+              <td class='resultado' >0</td>
+              <td>Operadores</td>
+              <td class='resultado'>0</td>
+
+            </tr>
           </table> 
           <br>
          <table>
-            <tr>
+            <tr class='resultado'>
 
-              <td colspan="4" style="background:#8ab15d; "> Tiempos de Grupo %</td>
+             <th colspan="4" > <center> Tiempos de Grupo % </center></th>
              
              
 
@@ -76,17 +69,17 @@
             </tr>
 
             <tr>
-              <td style="background:#fff;">Not Ready </td>
-              <td style="background:#33cd5f";>0</td>
+              <td >Not Ready </td>
+              <td class='resultado'>0</td>
               <td>Wat time</td> 
-               <td style="background:#33cd5f";>0</td> 
+               <td class='resultado'>0</td> 
 
             </tr>
              <tr>
-              <td style="background:#fff; ">After call Work(ACW) </td>
-              <td style="background:#33cd5f"; >0</td>
+              <td >After call Work(ACW) </td>
+              <td class='resultado'>0</td>
               <td>Informacio Adicional</td> 
-               <td style="background:#33cd5f";>0</td> 
+               <td class='resultado'>0</td> 
 
             </tr>
             <tr></tr>
@@ -94,6 +87,10 @@
           </table>
           
     </form>
+
+       <div id="containerx">Placeholder for chart</div>
+
+
   </ion-content>
 </ion-view>
 
