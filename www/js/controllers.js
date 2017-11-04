@@ -17,12 +17,52 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http ) {
+function ($scope, $stateParams,$http,$timeout ) {
+
+
+
+    ///Grafica
+
+
+	   Highcharts.chart('containerx', {
+
+      chart: {
+        type: 'bar'
+      },
+      title: {
+        text: 'Temperature Data'
+      },
+
+      xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ]
+      },
+
+      series: [{
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+      }]
+    });
+
+
+
+
+
+
+
     
 $scope.data = 99999
+
+    $scope.frameName = 'foo';
+    $scope.frameUrl = 'http://xiencias.com';
+    
+    // The timeout is here to be sure that the DOM is fully loaded.
+    // This is a dirty-as-hell example, please use a directive in a real application.
+    $timeout(function () { console.log(window.frames.foo); }, 1000);
+
 
 $http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
 
