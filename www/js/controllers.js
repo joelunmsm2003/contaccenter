@@ -104,7 +104,7 @@ $http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
 
 	chart.series[0].data[0].update(parseInt($scope.reporte1.a))
 	chart.series[1].data[0].update(parseInt($scope.reporte1.r))
-	chart.series[2].data[0].update(parseInt($scope.reporte1.e))
+	chart.series[2].data[0].update(parseInt($scope.reporte1.sla))
 	
 
 });
