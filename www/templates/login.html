@@ -10,13 +10,15 @@
         <div class="spacer" style="height: 100px;"></div>
         <label class="item item-input" id="login-input4">
           <span class="input-label">Usuario</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="" ng-model='data.usuario'>
         </label>
         <label class="item item-input" id="login-input5">
           <span class="input-label">Contraseña</span>
-          <input type="text" placeholder="">
+          <input type="password" placeholder="" ng-model='data.password'>
         </label>
-        <a ui-sref="menu.puestosyagentes()" id="login-button12" class="button button-positive button-block">Ingresar</a>
+        <a ng-click="ingresar(data)" id="login-button12" class="button button-positive button-block">Ingresar</a>
+
+        <span style='color:#fff;'>{{error}}</span>
         <div id="login-markdown10" class="show-list-numbers-and-dots">
           <p style="color:#61DC9D;">Versio 0.0.01</p>
         </div>

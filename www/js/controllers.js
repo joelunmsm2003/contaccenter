@@ -16,11 +16,45 @@ function ($scope, $stateParams) {
 
 
 }])
-   
-.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+
+
+.controller('loginCtrl', ['$scope', '$stateParams','$location','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$timeout ) {
+function ($scope, $stateParams,$location,$state) {
+
+
+    $scope.ingresar=function(data){
+
+        console.log(data)
+
+        if (data.usuario=='ejara' && data.password=='12345'){
+
+                console.log('jdjdjdjjd')
+
+                $state.go('menu.puestosyagentes')
+
+
+            }
+
+            else{
+
+                $scope.error='Usuario no valido'
+
+
+                }
+
+
+
+    }
+
+
+}])
+   
+.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout','$interval',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http,$timeout,$interval ) {
 
 
 
@@ -90,24 +124,34 @@ $scope.data = 99999
     
     // The timeout is here to be sure that the DOM is fully loaded.
     // This is a dirty-as-hell example, please use a directive in a real application.
-    $timeout(function () { console.log(window.frames.foo); }, 1000);
+    $interval(function () { $scope.reload(); }, 5000);
 
 
-$http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
 
- 
-		$scope.reporte1 = response
 
-     var chart = $('#containerx').highcharts();
 
-   console.log('jdjdj',$scope.reporte1)
 
-	chart.series[0].data[0].update(parseInt($scope.reporte1.a))
-	chart.series[1].data[0].update(parseInt($scope.reporte1.r))
-	chart.series[2].data[0].update(parseInt($scope.reporte1.sla))
-	
+$scope.reload=function(){
+
+    $http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
+
+     
+    $scope.reporte1 = response
+
+    var chart = $('#containerx').highcharts();
+
+    chart.series[0].data[0].update(parseInt($scope.reporte1.a))
+    chart.series[1].data[0].update(parseInt($scope.reporte1.r))
+    chart.series[2].data[0].update(parseInt($scope.reporte1.sla))
+        
 
 });
+
+}
+
+
+
+
 
 
 }])
@@ -139,32 +183,26 @@ $http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
 
 
    
-.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http','$interval', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
+function ($scope, $stateParams,$http,$interval) {
 
 	
 
-///inicio de grafica
-     
+$interval(function () { $scope.reload2(); }, 5000);
 
+$scope.reload2=function(){
 
-//Fin
-
-
-
-	//https://www.ccf.com.pe/webresources/reporte3/2/2
 
 $http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
 
+$scope.reporte2 = response
+
+})
 
 
-	console.log('response',response)
-
-	$scope.reporte2 = response
-
-});
+}
 	
 }])
    
