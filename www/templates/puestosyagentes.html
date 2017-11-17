@@ -1,9 +1,9 @@
 <ion-view title="PUESTOS Y AGENTES CONECTADOS" id="page36">
 
-  <ion-content padding="true" class="has-header">
+  <ion-content  class='contact' padding="true" class="has-header">
 
-    <form id="puestos-form34" class="list">
-
+ 
+   <div class="spacer" ng-class="{'preload_1': logeandose==1}"></div>
       <label class="item item-select" id="puestos-select22">
         <span class="input-label">Servicio:</span>
         <select>
@@ -29,7 +29,7 @@
           
 
             <table >
-            <tr   class='resultado'>
+            <tr   class='resultado1'>
 
               <th  colspan="2" >Agentes</th>
               <th colspan="2"  >Puestos de Servicio</th>
@@ -55,7 +55,7 @@
           </table> 
           <br>
          <table>
-            <tr class='resultado'>
+            <tr class='resultado1'>
 
              <th colspan="4" > <center> Tiempos de Grupo % </center></th>
              
@@ -81,10 +81,29 @@
             <tr></tr>
 
           </table>
-          
-    </form>
 
-<center><ng-gauge size="200" type="full" thick="5" min="0" max="reporte2.gr3_aoc+reporte2.gr3_ali+reporte2.gr2_rdy+reporte2.nrd+reporte2.gr2_inb+reporte2.hold" value="reporte2.aoc" cap="round" label="Ocupados"  foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes"></ng-gauge></center>
+
+          <br>
+         
+
+
+
+
+     
+       
+
+     <center><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round" label="{{maxvalue}} Operadores "  foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes ocupados"></ng-gauge></center>
+        
+
+
+    <div id="pie" style="height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+    <div id="3grafica" style="height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+
+
+
+
 
   </ion-content>
 </ion-view>

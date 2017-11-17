@@ -8,11 +8,12 @@
     </ion-nav-bar>
     <ion-nav-view name="side-menu21"></ion-nav-view>
   </ion-side-menu-content>
-  <ion-side-menu side="left" id="side-menu21" style="background-color:#FFF7F7;">
-    <ion-content padding="false" style="top:0px !important;" class="side-menu-left sider-menu">
+  <ion-side-menu side="left" id="side-menu21" style="background-color:#fff;">
+    <ion-content style="top:0px !important;" class="side-menu-left sider-menu">
       <div class="spacer" style="width: 268px; height: 41px;"></div>
-      <h1 id="capital-heading4" style="color:#FFFFFF;font-weight:300;text-align:center;">Leonardo</h1>
-      <div class="spacer" style="width: 268px; height: 29px;"></div>
+      
+
+      <img src="img/logo.jpg" style="padding: 9px;">
       <ion-list id="capital-list6">
         <ion-item class="item-icon-left side-menu" id="capital-list-item19" ui-sref="menu.slarelevantes()" menu-close="">
           <i class="icon ion-android-person"></i>SLA Relevantes del Servicio</ion-item>
@@ -25,13 +26,17 @@
         <ion-item class="item-icon-left dark side-menu" id="capital-list-item112" ui-sref="menu.marcadorpredictivo()" menu-close="">
           <i class="icon ion-android-call"></i>Marcador Predictivo / Progresivo</ion-item>
 
-
-        <ion-item class="item-icon-left dark side-menu" id="capital-list-item121">
+           <ion-item class="item-icon-left dark side-menu" id="capital-list-item112" ui-sref="menu.marcadorpredictivo()" menu-close="">
           <i class="icon ion-speedometer"></i>Indicadores del Negocio</ion-item>
 
+          <br>
 
-        <ion-item class="item-icon-left side-menu" id="capital-list-item20" ui-sref="login()" menu-close="">
-          <i class="icon ion-log-out"></i>Salir</ion-item>
+          <ion-item padding="true"  style='border:0px;'>
+          <a  ui-sref="login()" id="login-button12" class="button button-balanced button-block">Salir</a>
+
+        </ion-item>
+
+       
       </ion-list>
     </ion-content>
   </ion-side-menu>

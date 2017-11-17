@@ -13,20 +13,33 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	
 }
 
+ .preload_1{
+    
+        height: 100%;
+    background: #133;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: #ffffff url("../img/826.png") no-repeat fixed center;
+    z-index: 10;
+    opacity: .75;
+    right: 0;
+  }
+
 .sider-menu,.inicio {
-	background: red;
-	/* For browsers that do not support gradients */
-	  background: -webkit-linear-gradient(left top, $primario, $secundario);
-	/* For Safari 5.1 to 6.0 */
-	  background: -o-linear-gradient(bottom right, $primario, $secundario);
-	/* For Opera 11.1 to 12.0 */
-	  background: -moz-linear-gradient(bottom right, $primario, $secundario);
-	/* For Firefox 3.6 to 15 */
-	  background: linear-gradient(to bottom right, $primario, $secundario);
+	// background: red;
+	// /* For browsers that do not support gradients */
+	//   background: -webkit-linear-gradient(left top, $primario, $secundario);
+	// /* For Safari 5.1 to 6.0 */
+	//   background: -o-linear-gradient(bottom right, $primario, $secundario);
+	// /* For Opera 11.1 to 12.0 */
+	//   background: -moz-linear-gradient(bottom right, $primario, $secundario);
+	// /* For Firefox 3.6 to 15 */
+	//   background: linear-gradient(to bottom right, $primario, $secundario);
 	/* Standard syntax */}
 .side-menu {
 	background: none;
-	color: white;
+	color: black;
 	border: 0px;
 	.item-content {
 		background: none;
@@ -110,15 +123,14 @@ table {
 th, td {
 	border: none;
 	text-align: left;
-	padding: 14px;
+	padding: 9px;
 }
 
 th {
 	font-weight: bold;
 }
 
-tr:nth-child(even) {
-	background-color: #f2f2f2}
+
 .x {
 	color: $primario;
 }
@@ -273,13 +285,43 @@ tr:nth-child(even) {
 	background: $calm;
 }
 
-.resultado{
+.contact{
+
+.item {
+    border-color: #fff;
+    background-color: #fff;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 4px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+}
+
+}
+
+
+	.resultado{
+	background:#93a849;
+	text-align:center;
+	color:#fff;
+	border: 1px solid #fff;
+
+}
+
+.resultado1{
 	background:$balanced;
 	text-align:center;
 	color:#fff;
 	border: 1px solid #fff;
 
 }
+
+
+
 
 body {
 	color: #234;

@@ -1,7 +1,10 @@
 <ion-view title="SLA RELEVANTES" id="page11">
-  <ion-content padding="true" class="has-header">
-    <form id="sLARELEVANTES-form5" class="list">
-      
+  <ion-content  padding="true" class="has-header contact">
+
+
+
+    <div class="spacer" ng-class="{'preload_1': logeandose==1}"></div>
+
       <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
         <select>
@@ -13,26 +16,15 @@
         <span class="input-label">Cola </span>
         <select>
           <option>CMR SAC</option>
-  
-
-
-
         </select>
       </label>
 
       <br>
-      <div style="overflow-x:auto;">
         <table>
           <tbody>
-         
-
             <tr>
-
-
               <td >Llamadas Contestadas</td>
               <td class="resultado">{{reporte1.r}}</td>
-              
-
             </tr>
             <tr>
 
@@ -68,14 +60,14 @@
 
 
           </tbody>
+
+        </table>
       
 
-      </div>
+   
     
-    </form>
-
        <div id="containerx">Placeholder for chart</div>
-       <div id='button'>sisksi</div>
+      
 
   </ion-content>
 </ion-view>
