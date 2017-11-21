@@ -126,7 +126,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
 
 
-    $scope.logeandose=1
+    $scope.logeandose=0
 
 
 
@@ -297,7 +297,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
 })
 
-$scope.logeandose=1
+$scope.logeandose=0
 
 //$interval(function () { $scope.reload2(); }, 5000);
 
