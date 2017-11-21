@@ -146,7 +146,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
         },
 
 	      title: {
-	        text: 'Llamadas'
+	        text: null
 	      },
 
 
@@ -161,16 +161,29 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 	            text: null
 	        }
         },
+        legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
 
         series: [{
-        name: 'Nivel de Servicio',
+            name: 'Nivel de Servicio',
+            color: '#5dc10f',
 	        data: [0]
 	    }, {
 	        name: 'Ocupacion',
+            color: '#2a77a0',
 	        data: [0]
 	    }, {
 	        name: 'Abandono',
-	        data: [99]
+            color: '#cd3e30',
+	        data: [0]
 	    }]
     });
 
@@ -194,7 +207,7 @@ $scope.reload=function(){
 
     console.log('id_cola',$localStorage.id_cola)
 
-    $http.get("http://192.241.240.186:1000/reporte1").success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.id_cola+'/').success(function(response) {
 
      
             $scope.reporte1 = response
@@ -253,10 +266,27 @@ $http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
 
 
    
-.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http','$interval', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http','$interval','$localStorage', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$interval) {
+function ($scope, $stateParams,$http,$interval,$localStorage) {
+
+
+$http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+
+    $scope.servicios = response['servicios']
+
+    $scope.colas = response['servicios'][0]['cmps']
+
+    $scope.id_cola = $scope.colas[0]['id']
+
+    console.log('colas',$scope.id_cola)
+
+    $localStorage.id_cola = $scope.id_cola
+
+
+})
 
 $scope.logeandose=1
 
@@ -267,13 +297,13 @@ $scope.maxvalue=0
 $scope.reload2=function(){
 
 
-$http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
+$http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.id_cola+'/').success(function(response) {
 
 $scope.reporte2 = response
 
 $scope.maxvalue =response.gr3_aoc+response.gr3_ali+response.gr2_rdy+response.nrd+response.gr2_inb
  
-console.log('hola,..',$scope.maxvalue)
+
 
  var chart = $('#pie').highcharts();
 
@@ -317,6 +347,16 @@ Highcharts.chart('pie', {
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
+    legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
     plotOptions: {
         pie: {
             allowPointSelect: true,
@@ -332,12 +372,14 @@ Highcharts.chart('pie', {
         colorByPoint: true,
         data: [{
             name: 'Libres',
-            y: 0
+            y: 0,
+            color:'#e47731'
         }, {
             name: 'Ocupados',
             y: 0,
             sliced: true,
-            selected: true
+            selected: true,
+            color:'#8ac432'
         }]
     }]
 });
@@ -372,26 +414,31 @@ Highcharts.chart('3grafica', {
         colorByPoint: true,
         data: [{
             name: 'Not Ready',
-            y: 0
+            y: 0,
+            color:'#e1422d'
         }, {
             name: 'Ready',
             y: 0,
-            sliced: true
+            sliced: true,
+            color:'#68b62f'
         },
         {
             name: 'Inbound',
             y: 0,
-            sliced: true
+            sliced: true,
+            color:'#6f47ab'
         },
         {
             name: 'Hold',
             y: 0,
-            sliced: true
+            sliced: true,
+            color:'#000000'
         },
         {
             name: 'ACW',
             y: 0,
-            sliced: true
+            sliced: true,
+            color:'#44839b'
         }]
     }]
 });
