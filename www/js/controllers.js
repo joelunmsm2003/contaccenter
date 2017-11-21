@@ -109,7 +109,16 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
     })
 
+    $scope.seleccionacola=function(data){
+
+        console.log('mxmxm',data)
+
+
+    }
+
     $scope.traecolas =function(data){
+
+
 
         console.log('hshshs',data)
 
@@ -196,7 +205,7 @@ $scope.data = 99999
     
     // The timeout is here to be sure that the DOM is fully loaded.
     // This is a dirty-as-hell example, please use a directive in a real application.
-    $interval(function () { $scope.reload(); }, 5000);
+    //$interval(function () { $scope.reload(); }, 5000);
 
 
 
@@ -294,7 +303,7 @@ $interval(function () { $scope.reload2(); }, 5000);
 
 $scope.maxvalue=0
 
-$scope.reload2=function(){
+//$scope.reload2=function(){
 
 
 $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.id_cola+'/').success(function(response) {
