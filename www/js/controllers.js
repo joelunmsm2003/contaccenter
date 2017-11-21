@@ -299,11 +299,11 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
 $scope.logeandose=1
 
-$interval(function () { $scope.reload2(); }, 5000);
+//$interval(function () { $scope.reload2(); }, 5000);
 
 $scope.maxvalue=0
 
-//$scope.reload2=function(){
+$scope.reload2=function(){
 
 
 $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.id_cola+'/').success(function(response) {

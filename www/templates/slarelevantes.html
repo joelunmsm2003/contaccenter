@@ -15,7 +15,7 @@
       <label class="item item-select" id="sLARELEVANTES-select19">
         <span class="input-label">Cola </span>
         <select >
-          <option ng-repeat='c in colas' ng-change='seleccionacola(c)'>{{c.cmpn}}</option>
+          <option ng-repeat='c in colas' ng-change='seleccionacola(c)' ng-model='c'>{{c.cmpn}}</option>
         </select>
       </label>
 
@@ -65,8 +65,11 @@
       
 
    
-    
-       <div id="containerx">Placeholder for chart</div>
+      <button class="button button-balanced button-small" ng-click='reload()'>
+        Actualizar
+      </button>
+
+       <div id="containerx"></div>
       
 
   </ion-content>
