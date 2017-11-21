@@ -214,11 +214,24 @@ $scope.data = 99999
 
 $scope.reload=function(){
 
-    console.log('id_cola',$localStorage.id_cola)
 
-    $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.id_cola+'/').success(function(response) {
+   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
-     
+
+        $scope.servicios = response['servicios']
+
+        $scope.colas = response['servicios'][0]['cmps']
+
+        $scope.id_cola = $scope.colas[0]['id']
+
+        console.log('colas',$scope.id_cola)
+
+        $localStorage.id_cola = $scope.id_cola
+
+         ///Graficas
+
+            $http.get("http://192.241.240.186:1000/reporte1/"+$scope.id_cola+'/').success(function(response) {
+
             $scope.reporte1 = response
 
             var chart = $('#containerx').highcharts();
@@ -235,7 +248,14 @@ $scope.reload=function(){
             $scope.logeandose=0 
 
 
-    });
+            });
+
+
+    })
+
+
+
+
 
 }
 
