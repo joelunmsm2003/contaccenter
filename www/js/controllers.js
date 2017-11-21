@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['angularjs-gauge'])
+angular.module('app.controllers', ['angularjs-gauge','ngStorage'])
   
 .controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -18,10 +18,10 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('loginCtrl', ['$scope', '$stateParams','$location','$state','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams','$location','$state','$http','$localStorage',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$location,$state,$http) {
+function ($scope, $stateParams,$location,$state,$http,$localStorage) {
 
 
      $scope.logeandose = 0
@@ -42,14 +42,17 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
      if (response=='nologin'){
 
         $scope.error='Usuario no valido'
-            $scope.logeandose = 0
+        $scope.logeandose = 0
      }
      else{
 
         $state.go('menu.slarelevantes')
 
+        $localStorage.user = data.usuario
+        $localStorage.pass = data.password 
+
         location.href = "#/side-menu21/page11";
-            $scope.logeandose = 0
+        $scope.logeandose = 0
      }
 
 
@@ -78,14 +81,40 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
 }])
    
-.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout','$interval',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout','$interval','$localStorage',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$timeout,$interval ) {
+function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
 
 
     ///Grafica
+
+    console.log('$localStorage',$localStorage)
+
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+
+        $scope.servicios = response['servicios']
+
+        $scope.colas = response['servicios'][0]['cmps']
+
+        $scope.id_cola = $scope.colas[0]['id']
+
+        console.log('colas',$scope.id_cola)
+
+        $localStorage.id_cola = $scope.id_cola
+
+
+    })
+
+    $scope.traecolas =function(data){
+
+        console.log('hshshs',data)
+
+    }
+
 
 
     $scope.logeandose=1
@@ -134,14 +163,14 @@ function ($scope, $stateParams,$http,$timeout,$interval ) {
         },
 
         series: [{
-        name: 'Abandono',
+        name: 'Nivel de Servicio',
 	        data: [0]
 	    }, {
 	        name: 'Ocupacion',
 	        data: [0]
 	    }, {
-	        name: 'Nivel de Servicio',
-	        data: [0]
+	        name: 'Abandono',
+	        data: [99]
 	    }]
     });
 
@@ -163,25 +192,28 @@ $scope.data = 99999
 
 $scope.reload=function(){
 
-    $http.get("http://192.241.240.186:1000/reporte1/").success(function(response) {
+    console.log('id_cola',$localStorage.id_cola)
+
+    $http.get("http://192.241.240.186:1000/reporte1").success(function(response) {
 
      
-    $scope.reporte1 = response
+            $scope.reporte1 = response
 
-    var chart = $('#containerx').highcharts();
+            var chart = $('#containerx').highcharts();
 
-    console.log($scope.reporte1.a+$scope.reporte1.r,$scope.reporte1.a,$scope.reporte1.r)
+            console.log($scope.reporte1.sla)
 
-    x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+            x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
 
-    chart.series[0].data[0].update(parseInt($scope.reporte1.r)*100/x)
-    chart.series[1].data[0].update(parseInt($scope.reporte1.a)*100/x)
-    chart.series[2].data[0].update(parseInt($scope.reporte1.sla))
-    
+            chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
+            chart.series[1].data[0].update(parseInt($scope.reporte1.po))
+            ns =.1
+            chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
+            
+            $scope.logeandose=0 
 
-    $scope.logeandose=0        
 
-});
+    });
 
 }
 

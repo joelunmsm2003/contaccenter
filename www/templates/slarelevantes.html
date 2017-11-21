@@ -8,14 +8,14 @@
       <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
         <select>
-          <option>CMR SAC CH</option>
+          <option ng-repeat='s in servicios' ng-change='traecolas(servicio)' ng-model='servicio'>{{s.srvn}}</option>
 
         </select>
       </label>
       <label class="item item-select" id="sLARELEVANTES-select19">
         <span class="input-label">Cola </span>
-        <select>
-          <option>CMR SAC</option>
+        <select >
+          <option ng-repeat='c in colas'>{{c.cmpn}}</option>
         </select>
       </label>
 
