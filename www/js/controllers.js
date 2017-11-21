@@ -399,6 +399,16 @@ Highcharts.chart('3grafica', {
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
+        legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
     plotOptions: {
         pie: {
             allowPointSelect: true,
