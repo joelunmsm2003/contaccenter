@@ -46,13 +46,14 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
      }
      else{
 
-        $state.go('menu.slarelevantes')
+        //$state.go('menu.slarelevantes')
 
         $localStorage.user = data.usuario
         $localStorage.pass = data.password 
 
         location.href = "#/side-menu21/page11";
         $scope.logeandose = 0
+
      }
 
 
