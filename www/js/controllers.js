@@ -117,6 +117,10 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
             $scope.reload(data.id)
 
+            $scope.logeandose=1
+
+            $localStorage.id_cola = data.id
+
             console.log('Actualizando grafica...',data)
         }
 
@@ -144,9 +148,13 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
     $scope.reload=function(cola){
 
-    console.log(cola)
 
-    $scope.logeandose=1
+    if ($localStorage.id_cola==undefined){
+
+        $scope.logeandose=1
+
+    }
+    
 
     $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
@@ -156,14 +164,12 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
         $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
 
-        console.log('colas',$scope.id_cola)
-
-        $localStorage.id_cola = $scope.id_cola
-
         if(cola){
 
             $scope.id_cola = cola 
         }
+
+         // $localStorage.id_cola = $scope.id_cola
 
          ///Graficas
 
@@ -172,8 +178,6 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
             $scope.reporte1 = response
 
             var chart = $('#containerx').highcharts();
-
-            console.log($scope.reporte1.sla)
 
             x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
 
@@ -275,7 +279,7 @@ $scope.data = 99999
     
     // The timeout is here to be sure that the DOM is fully loaded.
     // This is a dirty-as-hell example, please use a directive in a real application.
-    //$interval(function () { $scope.reload(); }, 5000);
+    $interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
 
 
 
@@ -342,7 +346,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
 $scope.logeandose=1
 
-//$interval(function () { $scope.reload2(); }, 5000);
+
 
 $scope.maxvalue=0
 
@@ -352,6 +356,12 @@ $scope.maxvalue=0
         if(data){
 
             $scope.reload2(data.id)
+
+
+
+            $scope.logeandose=1
+
+            $localStorage.id_cola = data.id
 
             console.log('Actualizando grafica...',data)
         }
@@ -382,7 +392,11 @@ $scope.maxvalue=0
 $scope.reload2=function(cola){
 
 
-    $scope.logeandose=1
+    if ($localStorage.id_cola==undefined){
+
+        $scope.logeandose=1
+
+    }
 
 
     $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
@@ -398,7 +412,7 @@ $scope.reload2=function(cola){
     
     }
 
-    $localStorage.id_cola = $scope.id_cola
+    //$localStorage.id_cola = $scope.id_cola
 
     $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
 
@@ -565,6 +579,7 @@ Highcharts.chart('3grafica', {
 });
 
 
+$interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
     
 ////////
 

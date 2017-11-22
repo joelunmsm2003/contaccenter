@@ -9877,7 +9877,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-  border: 1px solid #ddd;
   color: #000;
   font-size: 13px; }
 
@@ -10043,21 +10042,6 @@ th {
   text-align: center;
   color: #fff;
   border: 1px solid #fff; }
-
-body {
-  color: #234; }
-
-body.platform-ios {
-  font-family: 'Open Sans', sans-serif; }
-
-.ionic-body.platform-ios {
-  font-family: 'Open Sans', sans-serif; }
-
-body.platform-android {
-  font-family: 'Open Sans', sans-serif; }
-
-.ionic-body.platform-android {
-  font-family: 'Open Sans', sans-serif; }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .tab-item, input, button, select, textarea {
   font-family: inherit; }
