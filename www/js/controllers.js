@@ -181,9 +181,8 @@ $scope.reload=function(){
 
 
 
+Highcharts.chart('containerx', {
 
-
-    $('#containerx').highcharts({
         chart: {
             events: {
                 addSeries: function () {
@@ -389,6 +388,8 @@ $scope.reload2()
 
 
 // Build the chart
+
+
 Highcharts.chart('pie', {
     chart: {
         plotBackgroundColor: null,
