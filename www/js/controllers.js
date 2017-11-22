@@ -214,6 +214,8 @@ $scope.data = 99999
 
 $scope.reload=function(){
 
+    $scope.logeandose=1
+
 
    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
@@ -324,6 +326,9 @@ $scope.logeandose=1
 $scope.maxvalue=0
 
 $scope.reload2=function(){
+
+
+    $scope.logeandose=1
 
 
     $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
