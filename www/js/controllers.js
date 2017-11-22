@@ -129,6 +129,59 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
     $scope.logeandose=1
 
 
+    
+
+$scope.reload=function(){
+
+    $scope.logeandose=1
+
+
+   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+
+        $scope.servicios = response['servicios']
+
+        $scope.colas = response['servicios'][0]['cmps']
+
+        $scope.id_cola = $scope.colas[0]['id']
+
+        console.log('colas',$scope.id_cola)
+
+        $localStorage.id_cola = $scope.id_cola
+
+         ///Graficas
+
+            $http.get("http://192.241.240.186:1000/reporte1/"+$scope.id_cola+'/').success(function(response) {
+
+            $scope.reporte1 = response
+
+            var chart = $('#containerx').highcharts();
+
+            console.log($scope.reporte1.sla)
+
+            x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+
+            chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
+            chart.series[1].data[0].update(parseInt($scope.reporte1.po))
+            chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
+            
+            $scope.logeandose=0 
+
+
+            });
+
+
+    })
+
+
+
+
+
+}
+
+$scope.reload()
+
+
 
     $('#containerx').highcharts({
         chart: {
@@ -211,56 +264,6 @@ $scope.data = 99999
 
 
 
-
-$scope.reload=function(){
-
-    $scope.logeandose=1
-
-
-   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
-
-
-        $scope.servicios = response['servicios']
-
-        $scope.colas = response['servicios'][0]['cmps']
-
-        $scope.id_cola = $scope.colas[0]['id']
-
-        console.log('colas',$scope.id_cola)
-
-        $localStorage.id_cola = $scope.id_cola
-
-         ///Graficas
-
-            $http.get("http://192.241.240.186:1000/reporte1/"+$scope.id_cola+'/').success(function(response) {
-
-            $scope.reporte1 = response
-
-            var chart = $('#containerx').highcharts();
-
-            console.log($scope.reporte1.sla)
-
-            x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
-
-            chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
-            chart.series[1].data[0].update(parseInt($scope.reporte1.po))
-            chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
-            
-            $scope.logeandose=0 
-
-
-            });
-
-
-    })
-
-
-
-
-
-}
-
-$scope.reload()
 
 
 
