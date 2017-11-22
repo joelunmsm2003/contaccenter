@@ -317,7 +317,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
 })
 
-$scope.logeandose=0
+$scope.logeandose=1
 
 //$interval(function () { $scope.reload2(); }, 5000);
 
@@ -326,35 +326,52 @@ $scope.maxvalue=0
 $scope.reload2=function(){
 
 
-$http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.id_cola+'/').success(function(response) {
-
-$scope.reporte2 = response
-
-$scope.maxvalue =response.gr3_aoc+response.gr3_ali+response.gr2_rdy+response.nrd+response.gr2_inb
- 
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
 
- var chart = $('#pie').highcharts();
+    $scope.servicios = response['servicios']
+
+    $scope.colas = response['servicios'][0]['cmps']
+
+    $scope.id_cola = $scope.colas[0]['id']
+
+    $localStorage.id_cola = $scope.id_cola
+
+    $http.get("http://192.241.240.186:1000/reporte2/"+$$scope.id_cola+'/').success(function(response) {
+
+    $scope.reporte2 = response
+
+    $scope.maxvalue =response.gr3_aoc+response.gr3_ali+response.gr2_rdy+response.nrd+response.gr2_inb
+     
 
 
-
- chart.series[0].data[0].update(response.ali)
- chart.series[0].data[1].update(response.aoc)
-
- var chart1 = $('#3grafica').highcharts();
-
- chart1.series[0].data[0].update(response.gr2_nrd)
- chart1.series[0].data[1].update(response.gr2_rdy)
- chart1.series[0].data[2].update(response.gr2_inb)
- chart1.series[0].data[3].update(response.gr2_hold)
- chart1.series[0].data[4].update(response.gr2_acw)
-
-
- $scope.logeandose=0
+     var chart = $('#pie').highcharts();
 
 
 
-})
+     chart.series[0].data[0].update(response.ali)
+     chart.series[0].data[1].update(response.aoc)
+
+     var chart1 = $('#3grafica').highcharts();
+
+     chart1.series[0].data[0].update(response.gr2_nrd)
+     chart1.series[0].data[1].update(response.gr2_rdy)
+     chart1.series[0].data[2].update(response.gr2_inb)
+     chart1.series[0].data[3].update(response.gr2_hold)
+     chart1.series[0].data[4].update(response.gr2_acw)
+
+
+     $scope.logeandose=0
+
+
+
+    })
+
+
+    })
+
+
+
 
 
 }
