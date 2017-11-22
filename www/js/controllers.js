@@ -126,7 +126,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
 
 
 
-    $scope.logeandose=0
+    $scope.logeandose=1
 
 
 
