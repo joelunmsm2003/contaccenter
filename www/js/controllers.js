@@ -129,7 +129,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
     $scope.logeandose=1
 
 
-    
+
 
 $scope.reload=function(){
 
@@ -179,7 +179,7 @@ $scope.reload=function(){
 
 }
 
-$scope.reload()
+
 
 
 
@@ -249,6 +249,8 @@ $scope.reload()
 	    }]
     });
 
+
+$scope.reload()
 
     
 $scope.data = 99999
