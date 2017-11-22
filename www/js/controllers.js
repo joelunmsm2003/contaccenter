@@ -524,7 +524,24 @@ Highcharts.chart('3grafica', {
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
-        legend: {
+ 
+
+
+     plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y} ',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            },
+            showInLegend: true
+        }
+    },
+     legend: {
 
             layout: 'horizontal',
             align: 'center',
@@ -534,16 +551,6 @@ Highcharts.chart('3grafica', {
             backgroundColor:'#FFFFFF'
            
         },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
     series: [{
         name: 'Brands',
         colorByPoint: true,
