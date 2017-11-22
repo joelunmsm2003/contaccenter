@@ -244,7 +244,6 @@ $scope.reload=function(){
 
             chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
             chart.series[1].data[0].update(parseInt($scope.reporte1.po))
-            ns =.1
             chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
             
             $scope.logeandose=0 
@@ -342,7 +341,7 @@ $scope.reload2=function(){
 
     $localStorage.id_cola = $scope.id_cola
 
-    $http.get("http://192.241.240.186:1000/reporte2/"+$$scope.id_cola+'/').success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
 
     $scope.reporte2 = response
 
