@@ -7,19 +7,25 @@
    
 
 
-     <label class="item item-select" id="sLARELEVANTES-select15">
+       <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
-        <select>
-          <option ng-repeat='s in servicios' ng-change='traecolas(servicio)' ng-model='servicio'>{{s.srvn}}</option>
 
-        </select>
+
+        <select ng-options="s as s.srvn for s in servicios track by s.id" ng-model="serv" ng-change='traecolas(serv)' ></select>
+
       </label>
       <label class="item item-select" id="sLARELEVANTES-select19">
         <span class="input-label">Cola </span>
-        <select >
-          <option ng-repeat='c in colas'>{{c.cmpn}}</option>
-        </select>
+
+
+
+        <select ng-options="s as s.cmpn for s in colas" ng-model="col" ng-change='seleccionacola(col)' ></select>
+
+
       </label>
+
+
+
       <br>
 
    
