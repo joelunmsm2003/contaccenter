@@ -82,32 +82,33 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
 }])
    
-.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout','$interval','$localStorage',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout','$interval','$localStorage','$filter',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$timeout,$interval,$localStorage) {
+function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
 
     ///Grafica
 
 
-    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
         $scope.servicios = response['servicios']
 
-        $scope.colas = response['servicios'][0]['cmps']
+        $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
+
+
+        $scope.colas = $scope.servicios[0]['cmps']
 
         $scope.id_cola = $scope.colas[0]['id']
-
-        console.log('loginuser',$scope.id_cola)
 
         $localStorage.id_cola = $scope.id_cola
 
         $scope.serv = $scope.servicios[0]
 
         $scope.col = $scope.servicios[0]['cmps'][0]
-
 
     })
 
@@ -321,20 +322,24 @@ $http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
 
 
    
-.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http','$interval','$localStorage', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('puestosyagentesCtrl', ['$scope', '$stateParams','$http','$interval','$localStorage','$filter',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$interval,$localStorage) {
+function ($scope, $stateParams,$http,$interval,$localStorage,$filter) {
 
 
 $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
 
-    $scope.servicios = response['servicios']
+  $scope.servicios = response['servicios']
 
-    $scope.colas = response['servicios'][0]['cmps']
+  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
 
-    $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
+
+  $scope.colas = $scope.servicios[0]['cmps']
+
+
+    $scope.id_cola = $scope.colas[0]['id']
 
     $localStorage.id_cola = $scope.id_cola
 
