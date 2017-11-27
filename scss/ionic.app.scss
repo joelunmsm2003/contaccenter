@@ -3,7 +3,38 @@ $primario: #E0E49F;
 $secundario: #BCC633;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+///SLider
 
+.categorias-slider{
+      padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 300px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.categorias-slider li {
+	flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    font-size: 10px;
+    padding: 12px 12px;
+    min-width: 100%;
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+////
 @import "../www/lib/ionic/scss/ionic";
 .profile-menu {
 	img {
