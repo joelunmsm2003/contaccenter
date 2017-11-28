@@ -90,15 +90,11 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
     ///Grafica
 
-
-
-
     $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
         $scope.servicios = response['servicios']
 
         $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
-
 
         $scope.colas = $scope.servicios[0]['cmps']
 
@@ -177,17 +173,60 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
             $http.get("http://192.241.240.186:1000/reporte1/"+$scope.id_cola+'/').success(function(response) {
 
-            $scope.reporte1 = response
+                $scope.reporte1 = response
 
-            var chart = $('#containerx').highcharts();
+                console.log('reporte1', $scope.reporte1)
 
-            x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+                var chart = $('#containerx').highcharts();
 
-            chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
-            chart.series[1].data[0].update(parseInt($scope.reporte1.po))
-            chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
-            
-            $scope.logeandose=0 
+                $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
+
+                    $scope.reporte2 = response
+
+                    console.log('reporte2',$scope.reporte2)
+                    // Nivel de servicio
+
+                    if($scope.reporte1.r + $scope.reporte1.a - $scope.reporte2.gr1_rngA <= 0){
+                        
+                        $scope.ns = 0
+                    }
+
+                    else {
+
+                          if (($scope.reporte2.gr1_rngC) > $scope.reporte1.r + $scope.reporte1.a - $scope.reporte2.gr1_rngA)
+
+                          { $scope.ns = 100}
+
+                           else
+
+                          {
+                           $scope.ns = parseFloat($scope.reporte2.gr1_rngC*100)/(parseFloat($scope.reporte2.gr1_rngA)+parseFloat($scope.reporte2.gr1_rngB)+parseFloat($scope.reporte2.gr1_rngC))
+                            chart.series[0].data[0].update(parseInt($scope.ns))
+                            chart.series[1].data[0].update(parseInt($scope.reporte1.po))
+                            chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
+
+
+
+
+                            }
+                        }
+
+
+                    x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+
+                    console.log('niv ser',$scope.ns)
+
+                   
+                    $scope.logeandose=0 
+
+
+                })
+
+
+
+
+
+
 
 
             });
@@ -504,13 +543,13 @@ Highcharts.chart('pie', {
         data: [{
             name: 'Libres',
             y: 0,
-            color:'#e47731'
+            color:'#8ac432'
         }, {
             name: 'Ocupados',
             y: 0,
             sliced: true,
             selected: true,
-            color:'#8ac432'
+            color:'#e47731'
         }]
     }]
 });
