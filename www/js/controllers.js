@@ -9,10 +9,208 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('capitalCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('indicadoresCtrl', ['$scope', '$stateParams','$http','$localStorage','$filter','$interval', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
+
+
+
+
+       $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+        $scope.servicios = response['servicios']
+
+        $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
+
+        $scope.colas = $scope.servicios[0]['cmps']
+
+        $scope.id_cola = $scope.colas[0]['id']
+
+        $localStorage.id_cola = $scope.id_cola
+
+        $scope.serv = $scope.servicios[0]
+
+        $scope.col = $scope.servicios[0]['cmps'][0]
+
+    })
+
+
+    $scope.seleccionacola=function(data){
+
+
+        if(data){
+
+            $scope.reload(data.id)
+
+            $scope.logeandose=1
+
+            $localStorage.id_cola = data.id
+
+            console.log('Actualizando grafica...',data)
+        }
+
+        
+
+        //$scope.colas=data.cmps
+
+    }
+
+    $scope.traecolas =function(data){
+
+        
+
+        if (data){
+
+            $scope.colas=data.cmps
+
+
+        }
+
+        
+    }
+
+    $scope.logeandose=1
+
+
+        $scope.reload=function(cola){
+
+
+
+
+    if ($localStorage.id_cola==undefined){
+
+        $scope.logeandose=1
+
+    }
+    
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+        // $scope.servicios = response['servicios']
+
+        // $scope.colas = response['servicios'][0]['cmps']
+
+        $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
+
+        if(cola){
+
+            $scope.id_cola = cola 
+        }
+
+         // $localStorage.id_cola = $scope.id_cola
+
+         ///Graficas
+
+            $http.get("http://192.241.240.186:1000/reporte4/"+$scope.id_cola+'/').success(function(response) {
+
+                $scope.gestiones = response['gest']
+
+                 $scope.consultas = response['cons']
+
+                  $scope.reclamos = response['recl']
+
+                  $scope.reporte4 = response
+
+
+                 var chart = $('#containerx').highcharts();
+
+
+
+                chart.series[0].data[0].update(parseInt($scope.reporte4.gest))
+                chart.series[1].data[0].update(parseInt($scope.reporte4.cons))
+                chart.series[2].data[0].update(parseInt($scope.reporte4.recl))
+
+                 $scope.logeandose=0
+        
+
+
+            });
+
+
+    })
+
+
+}
+
+
+$scope.reload()
+
+$interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
+
+
+Highcharts.chart('containerx', {
+
+        chart: {
+            events: {
+                addSeries: function () {
+                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
+                        .attr({
+                            fill: Highcharts.getOptions().colors[0],
+                            padding: 10,
+                            r: 5,
+                            zIndex: 8
+                        })
+                        .css({
+                            color: '#FFFFFF'
+                        })
+                        .add();
+
+                    setTimeout(function () {
+                        label.fadeOut();
+                    }, 1000);
+                }
+            },
+            type:'bar'
+        },
+
+          title: {
+            text: null
+          },
+
+
+        yAxis: {
+            title: {
+                text: 'Valores expresados en porcentaje'
+            }
+        },
+
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
+
+        series: [{
+            name: 'Gestion',
+            color: '#e84530',
+            data: [0]
+        }, {
+            name: 'Consulta',
+            color: '#2a789e',
+            data: [0]
+        }, {
+            name: 'Reclamo',
+            color: '#5cbf0d',
+            data: [0]
+        }]
+    });
+
+
+
+
+
+
 
 
 }])
@@ -25,6 +223,17 @@ function ($scope, $stateParams,$location,$state,$http,$localStorage) {
 
 
      $scope.logeandose = 0
+
+     if($localStorage.user){
+
+
+        console.log('dkkdkd')
+
+
+        $location.path('/side-menu21/page11')
+
+
+     }
 
 
     $scope.ingresar=function(data){
@@ -335,27 +544,213 @@ $scope.data = 99999
 }])
 
 
-.controller('marcadorpredictivoCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('marcadorpredictivoCtrl', ['$scope', '$stateParams','$http', '$localStorage','$filter',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
+function ($scope, $stateParams,$http,$localStorage,$filter) {
+
+  $scope.logeandose=1
+
+  $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+
+  $scope.servicios = response['servicios']
+
+  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
+
+
+  $scope.colas = $scope.servicios[0]['cmps']
+
+
+    $scope.id_cola = $scope.colas[0]['id']
+
+    $localStorage.id_cola = $scope.id_cola
+
+    $scope.serv = $scope.servicios[0]
+
+    $scope.col = $scope.servicios[0]['cmps'][0]
+
+
+})
+
+
+  ////Traendos datos
+
+     $scope.seleccionacola=function(data){
+
+
+        if(data){
+
+            $scope.reload2(data.id)
+
+
+
+            $scope.logeandose=1
+
+            $localStorage.id_cola = data.id
+
+            console.log('Actualizando grafica...',data)
+        }
+
+        
+
+        //$scope.colas=data.cmps
+
+    }
+
+    $scope.traecolas =function(data){
+
+        
+
+        if (data){
+
+            $scope.colas=data.cmps
+
+
+        }
+
+        
+    }
+
+
+
+
+$scope.reload2=function(cola){
+
+
+    if ($localStorage.id_cola==undefined){
+
+        $scope.logeandose=1
+
+    }
+
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+
+
+
+    $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
+
+    if(cola){
+
+        $scope.id_cola = cola 
+    
+    }
+
+    //$localStorage.id_cola = $scope.id_cola
+
+    $http.get("http://192.241.240.186:1000/reporte3/"+$scope.id_cola+'/').success(function(response) {
+
+    $scope.reporte3 = response
+
+     $scope.logeandose=0
+
+
+     var chart = $('#containerx').highcharts();
+
+
+
+    chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
+    chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
+    chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
+    chart.series[3].data[0].update(6)
+
+
+
+
+    })
+
+
+    })
+
+
+
+
+
+}
+
+$scope.reload2()
+
+$interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
+
+
+
+Highcharts.chart('containerx', {
+
+        chart: {
+            events: {
+                addSeries: function () {
+                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
+                        .attr({
+                            fill: Highcharts.getOptions().colors[0],
+                            padding: 10,
+                            r: 5,
+                            zIndex: 8
+                        })
+                        .css({
+                            color: '#FFFFFF'
+                        })
+                        .add();
+
+                    setTimeout(function () {
+                        label.fadeOut();
+                    }, 1000);
+                }
+            },
+            type:'bar'
+        },
+
+          title: {
+            text: null
+          },
+
+
+        yAxis: {
+            title: {
+                text: 'Valores expresados en porcentaje'
+            }
+        },
+
+        xAxis: {
+            title: {
+                text: null
+            }
+        },
+        legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
+
+        series: [{
+            name: 'Abandono',
+            color: '#df422e',
+            data: [0]
+        }, {
+            name: 'Contestadas',
+            color: '#2b78a0',
+            data: [0]
+        }, {
+            name: 'Discadas',
+            color: '#5dc00d',
+            data: [0]
+        },
+        {
+            name: 'Otros',
+            color: '#f07a34',
+            data: [0]
+        }]
+    });
 
 	
 
-	//https://www.ccf.com.pe/webresources/reporte3/2/2
 
-$http.get("http://192.241.240.186:1000/reporte2/").success(function(response) {
-
-
-
-	console.log('response',response)
-
-	$scope.reporte2 = response
-
-
-
-
-});
 	
 }])
 

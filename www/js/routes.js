@@ -42,11 +42,22 @@ angular.module('app.routes', [])
             })
 
               .state('menu.marcadorpredictivo', {
-              url: '/page36',
+              url: '/marcadorpredictivo',
               views: {
               'side-menu21': {
                 templateUrl: 'templates/marcadorpredictivo.html',
                 controller:'marcadorpredictivoCtrl'
+                }
+              }
+              
+            })
+
+               .state('menu.indicadores', {
+              url: '/indicadores',
+              views: {
+              'side-menu21': {
+                templateUrl: 'templates/indicadores.html',
+                controller:'indicadoresCtrl'
                 }
               }
               
