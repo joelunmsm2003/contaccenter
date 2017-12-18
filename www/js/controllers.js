@@ -410,7 +410,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
                           {
                            $scope.ns = parseFloat($scope.reporte2.gr1_rngC*100)/(parseFloat($scope.reporte2.gr1_rngA)+parseFloat($scope.reporte2.gr1_rngB)+parseFloat($scope.reporte2.gr1_rngC))
-                            chart.series[0].data[0].update(parseInt($scope.ns))
+                            chart.series[0].data[0].update(parseInt($scope.ns-2))
                             chart.series[1].data[0].update(parseInt($scope.reporte1.po))
                             chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
 
