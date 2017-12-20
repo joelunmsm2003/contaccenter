@@ -7,19 +7,25 @@
    
 
 
-     <label class="item item-select" id="sLARELEVANTES-select15">
+       <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
-        <select>
-          <option ng-repeat='s in servicios' ng-change='traecolas(servicio)' ng-model='servicio'>{{s.srvn}}</option>
 
-        </select>
+
+        <select ng-options="s as s.srvn for s in servicios track by s.id" ng-model="serv" ng-change='traecolas(serv)' ></select>
+
       </label>
       <label class="item item-select" id="sLARELEVANTES-select19">
-        <span class="input-label">Cola </span>
-        <select >
-          <option ng-repeat='c in colas'>{{c.cmpn}}</option>
-        </select>
+        <span class="input-label">Grupo </span>
+
+
+
+        <select ng-options="s as s.grupo_agente for s in colas" ng-model="col" ng-change='seleccionacola(col)' ></select>
+
+
       </label>
+
+
+
       <br>
 
    
@@ -37,7 +43,7 @@
             </tr>
             <tr>
 
-              <td >Agentes Libres</td>
+              <td>Agentes Libres</td>
               <td  class='resultado'>{{reporte2.ali}}</td>
               <td>Supervisores</td>
               <td class='resultado'>{{reporte2.sup}}</td>
@@ -84,16 +90,31 @@
           </table>
 
 
-          <button class="button button-balanced button-small" ng-click='reload2()'>
+        <!--   <button class="button button-balanced button-small" ng-click='reload2()'>
         Actualizar
-      </button>
+      </button> -->
 
 
           <br>
          
 
+    <ul class="categorias-slider" >
+
+       
+
+          <li style='padding-top: 50px;'>  <center><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round"   foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes ocupados"></ng-gauge></center> </li>
+
+          <li> <div id="pie" style="height: 300px; width: 300px; margin: 0 auto"></div>
+</li>
+
+          <li><div id="3grafica" style="height: 300px; width: 300px; margin: 0 auto"></div>
+</li>
 
 
+          </ul>
+
+<!-- 
+FInnnnn
 
      
        
@@ -107,7 +128,7 @@
     <div id="3grafica" style="height: 400px; max-width: 600px; margin: 0 auto"></div>
 
 
-
+ -->
 
 
 
