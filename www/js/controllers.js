@@ -556,7 +556,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
   $scope.servicios = response['servicios']
 
-  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
+  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'OUT'})
 
 
   $scope.colas = $scope.servicios[0]['cmps']
@@ -654,7 +654,7 @@ $scope.reload2=function(cola){
     chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
     chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
     chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
-    chart.series[3].data[0].update(6)
+    chart.series[3].data[0].update(0)
 
 
 
