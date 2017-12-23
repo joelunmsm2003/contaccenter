@@ -1,6 +1,6 @@
 <ion-view title="PUESTOS Y AGENTES CONECTADOS" id="page36">
 
-  <ion-content  class='contact' padding="true" class="has-header">
+  <ion-content  class='contact' padding="false" class="has-header">
 
  
    <div class="spacer" ng-class="{'preload_1': logeandose==1}"></div>
@@ -98,20 +98,38 @@
           <br>
          
 
-    <ul class="categorias-slider" >
-
-       
-
-          <li style='padding-top: 50px;'>  <center><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round"   foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes ocupados"></ng-gauge></center> </li>
-
-          <li> <div id="pie" style="height: 300px; width: 300px; margin: 0 auto"></div>
-</li>
-
-          <li><div id="3grafica" style="height: 300px; width: 300px; margin: 0 auto"></div>
-</li>
+<div class="row">
+  
+  <div class="col sli" ng-click='g1=1;g2=0;g3=0'>1</div>
+  <div class="col sli" ng-click='g1=0;g2=true;g3=false'>2</div>
+  <div class="col sli" ng-click='g1=0;g2=false;g3=true'>3</div>
+</div>
 
 
-          </ul>
+
+<center ng-if='g1==1 && g2==0 && g3==0' style='padding: 10px;'><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round"   foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes"></ng-gauge></center> 
+
+<center ng-show='g2==true'>
+<div  id="pie" style="height: 300px; width: 300px; margin: 0 auto"></div>
+</center>
+
+<center ng-show='g3==true'>
+<div  id="3grafica" style="height: 300px; width: 300px; margin: 0 auto"></div>
+</center>
+
+
+<style type="text/css">
+  
+.sli{
+
+     text-align: center;
+    border: 1px solid #7b933f;
+    color: #7b933f;
+
+}
+   
+</style>
+
 
 <!-- 
 FInnnnn

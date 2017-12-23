@@ -549,7 +549,9 @@ $scope.data = 99999
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
-  $scope.logeandose=1
+  $scope.logeandose=0
+
+
 
   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
@@ -581,9 +583,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
         if(data){
 
+            console.log('campanas...',data.id)
+
             $scope.reload2(data.id)
-
-
 
             $scope.logeandose=1
 
@@ -593,12 +595,16 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
         }
 
         
-
         //$scope.colas=data.cmps
 
     }
 
     $scope.traecolas =function(data){
+
+        console.log('colas..',data)
+
+
+        $localStorage.servicio=data.id
 
         
 
@@ -632,6 +638,8 @@ $scope.reload2=function(cola){
 
     $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
 
+    console.log('cola',$scope.id_cola)
+
     if(cola){
 
         $scope.id_cola = cola 
@@ -640,7 +648,7 @@ $scope.reload2=function(cola){
 
     //$localStorage.id_cola = $scope.id_cola
 
-    $http.get("http://192.241.240.186:1000/reporte3/"+$scope.id_cola+'/').success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio+'/'+$localStorage.id_cola+'/').success(function(response) {
 
     $scope.reporte3 = response
 
@@ -654,7 +662,13 @@ $scope.reload2=function(cola){
     chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
     chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
     chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
-    chart.series[3].data[0].update(0)
+    chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
+
+
+
+
+
+
 
 
 
@@ -672,7 +686,7 @@ $scope.reload2=function(cola){
 
 $scope.reload2()
 
-$interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
+$interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 
 
 
@@ -761,16 +775,20 @@ Highcharts.chart('containerx', {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$interval,$localStorage,$filter) {
 
+  $scope.g1=1
 
+  $scope.g2=0 
+  $scope.g3=0
 $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
 
   $scope.servicios = response['servicios']
 
+if(response['servicios'].length>0){
+
   $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
 
-
-  $scope.colas = $scope.servicios[0]['cmps']
+    $scope.colas = $scope.servicios[0]['cmps']
 
 
     $scope.id_cola = $scope.colas[0]['id']
@@ -780,6 +798,11 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
     $scope.serv = $scope.servicios[0]
 
     $scope.col = $scope.servicios[0]['cmps'][0]
+
+}
+
+
+
 
 
 })
@@ -843,9 +866,19 @@ $scope.reload2=function(cola){
 
 
 
+  
 
-    $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
+    console.log('hshsh',response['servicios'].length)
 
+   
+
+    if(response['servicios'].length>0){
+
+        $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
+
+
+    }
+    
     if(cola){
 
         $scope.id_cola = cola 

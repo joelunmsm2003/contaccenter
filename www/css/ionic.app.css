@@ -10057,7 +10057,10 @@ th {
   padding: 4px;
   border-width: 1px;
   border-style: solid;
-  font-size: 16px; }
+  font-size: 16px;
+  padding-left: 17px;
+  padding-top: 13px;
+  padding-right: 31px; }
 
 .resultado {
   background: #93a849;
