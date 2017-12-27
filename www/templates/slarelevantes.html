@@ -1,5 +1,5 @@
 <ion-view title="SLA RELEVANTES" id="page11">
-  <ion-content  padding="false" class="has-header contact">
+  <ion-content  padding="true" class="has-header contact">
 
 
 
@@ -21,10 +21,8 @@
           <option ng-repeat='c in colas' ng-model='colita' ng-change='seleccionacola(colita)' >{{c.cmpn}}</option>
         </select> -->
 
-
         <select ng-options="s as s.cmpn for s in colas" ng-model="col" ng-change='seleccionacola(col)' ></select>
-
-
+        
       </label>
 
 
