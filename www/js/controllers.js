@@ -1,14 +1,22 @@
 angular.module('app.controllers', ['angularjs-gauge','ngStorage'])
   
-.controller('menuCtrl', ['$scope', '$stateParams','$localStorage','$location',//,/ The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('menuCtrl', ['$scope', '$stateParams','$localStorage','$location','$ionicHistory',//,/ The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$localStorage,$location) {
+function ($scope, $stateParams,$localStorage,$location,$ionicHistory) {
 
     $scope.salir=function(){
 
         
         $location.url('/page1')
+
+        delete $localStorage
+
+        $ionicHistory.clearCache();
+
+       delete $localStorage;
+
+      ionic.Platform.exitApp();
     }
 
 }])
@@ -25,7 +33,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
         $scope.servicios = response['servicios']
 
-        $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
+        $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN','tipo_reporte':3})
 
         $scope.colas = $scope.servicios[0]['cmps']
 
@@ -44,11 +52,15 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
     $scope.seleccionacola=function(data){
 
 
+
+
         if(data){
+
+            $scope.logeandose=1
 
             $scope.reload(data.id)
 
-            $scope.logeandose=1
+            
 
             $localStorage.id_cola = data.id
 
@@ -63,7 +75,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
     $scope.traecolas =function(data){
 
-        
+        $scope.logeandose=1
 
         if (data){
 
@@ -80,14 +92,14 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
   $scope.reload=function(cola){
 
+  
 
 
+    // if ($localStorage.id_cola==undefined){
 
-    if ($localStorage.id_cola==undefined){
+    //     $scope.logeandose=1
 
-        $scope.logeandose=1
-
-    }
+    // }
     
 
     $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
@@ -306,12 +318,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
 
-    ///Grafica
-$scope.salir=function(){
 
-
-    console.log('data...')
-}
 
     $scope.addPoints = function () {
       var seriesArray = $scope.chartConfig.series
@@ -345,6 +352,151 @@ $scope.salir=function(){
         this.chartConfig.chart.zoomType = 'x'
       }
     }
+
+
+
+
+
+
+
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+        $scope.servicios = response['servicios']
+
+        $localStorage.servicio= $scope.servicios[0]['id']
+
+        $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN','tipo_reporte':1})
+
+        $scope.colas = $scope.servicios[0]['cmps']
+
+        $scope.id_cola = $scope.colas[0]['id']
+
+        $localStorage.id_cola = $scope.id_cola
+
+        $scope.serv = $scope.servicios[0]
+
+        $scope.col = $scope.servicios[0]['cmps'][0]
+
+    })
+
+    $scope.seleccionacola=function(data){
+
+
+
+        console.log('seleccionando cola',data)
+
+
+        if(data){
+
+            $scope.reload(data.id)
+
+            $scope.logeandose=1
+
+            $localStorage.id_cola = data.id
+
+            console.log('Actualizando grafica...',data)
+        }
+
+        
+
+        //$scope.colas=data.cmps
+
+    }
+
+    $scope.traecolas =function(data){
+
+
+        console.log('colas..',data)
+
+        $localStorage.servicio = data.id  
+
+        if (data){
+
+            $scope.colas=data.cmps
+
+
+        }
+
+        
+    }
+
+    $scope.logeandose=1
+
+$scope.reload=function(cola){
+
+
+    if ($localStorage.id_cola==undefined){
+
+        $scope.logeandose=1
+
+    }
+    
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+        // $scope.servicios = response['servicios']
+
+        // $scope.colas = response['servicios'][0]['cmps']
+
+        $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
+
+        if(cola){
+
+            $scope.id_cola = cola 
+        }
+
+         // $localStorage.id_cola = $scope.id_cola
+
+         ///Graficas
+
+            $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio+'/'+$scope.id_cola).success(function(response) {
+
+                $scope.reporte1 = response
+
+                console.log('reporte1', $scope.reporte1)
+
+                var chart = $('#chart1').highcharts();
+
+                $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
+
+                    $scope.reporte2 = response
+
+              
+                        chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
+                        chart.series[1].data[0].update(parseInt($scope.reporte1.po))
+                        chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
+
+
+
+                    x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+
+                    console.log('niv ser',$scope.ns)
+
+                   
+                    $scope.logeandose=0 
+
+
+                })
+
+
+
+
+
+
+
+
+            });
+
+
+    })
+
+
+
+
+
+}
+
 
     $scope.chartConfig = {
       chart: {
@@ -421,169 +573,11 @@ $scope.salir=function(){
     }
 
 
-
-
-
-
-
-    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
-
-        $scope.servicios = response['servicios']
-
-        $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
-
-        $scope.colas = $scope.servicios[0]['cmps']
-
-        $scope.id_cola = $scope.colas[0]['id']
-
-        $localStorage.id_cola = $scope.id_cola
-
-        $scope.serv = $scope.servicios[0]
-
-        $scope.col = $scope.servicios[0]['cmps'][0]
-
-    })
-
-    $scope.seleccionacola=function(data){
-
-
-        if(data){
-
-            $scope.reload(data.id)
-
-            $scope.logeandose=1
-
-            $localStorage.id_cola = data.id
-
-            console.log('Actualizando grafica...',data)
-        }
-
-        
-
-        //$scope.colas=data.cmps
-
-    }
-
-    $scope.traecolas =function(data){
-
-        
-
-        if (data){
-
-            $scope.colas=data.cmps
-
-
-        }
-
-        
-    }
-
-    $scope.logeandose=1
-
-$scope.reload=function(cola){
-
-
-    if ($localStorage.id_cola==undefined){
-
-        $scope.logeandose=1
-
-    }
-    
-
-    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
-
-        // $scope.servicios = response['servicios']
-
-        // $scope.colas = response['servicios'][0]['cmps']
-
-        $scope.id_cola = response['servicios'][0]['cmps'][0]['id']
-
-        if(cola){
-
-            $scope.id_cola = cola 
-        }
-
-         // $localStorage.id_cola = $scope.id_cola
-
-         ///Graficas
-
-            $http.get("http://192.241.240.186:1000/reporte1/"+$scope.id_cola+'/').success(function(response) {
-
-                $scope.reporte1 = response
-
-                console.log('reporte1', $scope.reporte1)
-
-                var chart = $('#chart1').highcharts();
-
-                $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
-
-                    $scope.reporte2 = response
-
-                    console.log('reporte2',$scope.reporte2)
-                    // Nivel de servicio
-
-                    if($scope.reporte1.r + $scope.reporte1.a - $scope.reporte2.gr1_rngA <= 0){
-                        
-                        $scope.ns = 0
-                    }
-
-                    else {
-
-                          if (($scope.reporte2.gr1_rngC) > $scope.reporte1.r + $scope.reporte1.a - $scope.reporte2.gr1_rngA)
-
-                          { $scope.ns = 100}
-
-                           else
-
-                          {
-
-
-                             
-                           $scope.ns = parseFloat($scope.reporte2.gr1_rngC*100)/(parseFloat($scope.reporte2.gr1_rngA)+parseFloat($scope.reporte2.gr1_rngB)+parseFloat($scope.reporte2.gr1_rngC))
-                            chart.series[0].data[0].update(parseInt($scope.ns-2))
-                            chart.series[1].data[0].update(parseInt($scope.reporte1.po))
-                            chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
-
-
-
-
-                            }
-                        }
-
-
-                    x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
-
-                    console.log('niv ser',$scope.ns)
-
-                   
-                    $scope.logeandose=0 
-
-
-                })
-
-
-
-
-
-
-
-
-            });
-
-
-    })
-
-
-
-
-
-}
-
 $interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
 
 
 
-//$scope.reload()
+$scope.reload()
 
     
 
@@ -605,6 +599,8 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
   $scope.logeandose=0
 
+ 
+
 
 
   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
@@ -612,7 +608,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
 
   $scope.servicios = response['servicios']
 
-  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'OUT'})
+  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'OUT','tipo_reporte':2})
 
 
   $scope.colas = $scope.servicios[0]['cmps']
@@ -706,10 +702,12 @@ $scope.reload2=function(cola){
 
     $scope.reporte3 = response
 
+    console.log('reporte3',response)
+
      $scope.logeandose=0
 
 
-     var chart = $('#containerx').highcharts();
+     var chart = $('#chartmarcador').highcharts();
 
 
 
@@ -742,12 +740,9 @@ $scope.reload2()
 
 $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 
-
-
-Highcharts.chart('containerx', {
-
-        chart: {
-            events: {
+$scope.chartConfigmarcador = {
+      chart: {
+        events: {
                 addSeries: function () {
                     var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
                         .attr({
@@ -766,15 +761,15 @@ Highcharts.chart('containerx', {
                     }, 1000);
                 }
             },
-            type:'bar'
-        },
-
-          title: {
+        type: 'bar',
+        width: 370
+      },
+        title: {
             text: null
           },
 
 
-        yAxis: {
+         yAxis: {
             title: {
                 text: 'Valores expresados en porcentaje'
             }
@@ -783,7 +778,15 @@ Highcharts.chart('containerx', {
         xAxis: {
             title: {
                 text: null
-            }
+            },
+            lineWidth: 0,
+            minorGridLineWidth: 0,
+            lineColor: 'transparent',
+            minorTickLength: 0,
+            tickLength: 0,
+            labels: {
+                   enabled: false
+               }
         },
         legend: {
 
@@ -796,7 +799,7 @@ Highcharts.chart('containerx', {
            
         },
 
-        series: [{
+      series: [{
             name: 'Abandono',
             color: '#df422e',
             data: [0]
@@ -814,12 +817,14 @@ Highcharts.chart('containerx', {
             color: '#f07a34',
             data: [0]
         }]
-    });
-
-	
+    }
 
 
-	
+
+    
+
+
+    
 }])
 
 
@@ -828,6 +833,28 @@ Highcharts.chart('containerx', {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$interval,$localStorage,$filter) {
+
+
+
+     $scope.grafica2=function(){
+
+        $scope.g1=0;$scope.g2=true;$scope.g3=false
+
+
+  }
+
+  $scope.grafica3=function(){
+
+   
+
+    $scope.g1=0;$scope.g2=false;$scope.g3=true
+  }
+
+
+  $scope.grafica1=function(){
+
+    $scope.g1=1;$scope.g2=0;$scope.g3=0
+  }
 
   $scope.g1=1
 
@@ -840,10 +867,11 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
 if(response['servicios'].length>0){
 
-  $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN'})
+    $localStorage.servicio= $scope.servicios[0]['id']
+
+    $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN','tipo_reporte':1})
 
     $scope.colas = $scope.servicios[0]['cmps']
-
 
     $scope.id_cola = $scope.colas[0]['id']
 
@@ -891,6 +919,10 @@ $scope.maxvalue=0
 
     $scope.traecolas =function(data){
 
+
+
+        $localStorage.servicio= data.id
+
         
 
         if (data){
@@ -920,8 +952,6 @@ $scope.reload2=function(cola){
 
 
 
-  
-
     console.log('hshsh',response['servicios'].length)
 
    
@@ -941,7 +971,7 @@ $scope.reload2=function(cola){
 
     //$localStorage.id_cola = $scope.id_cola
 
-    $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.servicio+'/'+$scope.id_cola).success(function(response) {
 
     $scope.reporte2 = response
 
@@ -1118,7 +1148,7 @@ $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 ////////
 
  ////
-	
+    
 }])
    
 .controller('puestosCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

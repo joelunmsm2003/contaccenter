@@ -44,17 +44,17 @@
             <tr>
 
               <td>Agentes Libres</td>
-              <td  class='resultado'>{{reporte2.ali}}</td>
+              <td  class='resultado' style='width: 40px;height: 40px;'>{{reporte2.ali}}</td>
               <td>Supervisores</td>
-              <td class='resultado'>{{reporte2.sup}}</td>
+              <td class='resultado' style='width: 40px;height: 40px;'>{{reporte2.sup}}</td>
 
             </tr>
               <tr >
 
               <td >Agentes Ocupados</td>
-              <td class='resultado' >{{reporte2.aoc}}</td>
+              <td class='resultado' style='width: 40px;height: 40px;'>{{reporte2.aoc}}</td>
               <td>Operadores</td>
-              <td class='resultado'>{{reporte2.gr3_aoc+reporte2.gr3_ali+reporte2.gr2_rdy+reporte2.nrd+reporte2.gr2_inb+reporte2.hold}}</td>
+              <td class='resultado' style='width: 40px;height: 40px;'>{{reporte2.gr3_aoc+reporte2.gr3_ali+reporte2.gr2_rdy+reporte2.nrd+reporte2.gr2_inb+reporte2.hold}}</td>
 
             </tr>
           </table> 
@@ -73,16 +73,16 @@
 
             <tr>
               <td >Not Ready </td>
-              <td class='resultado'>{{reporte2.nrd}}</td>
+              <td class='resultado' style='width: 40px;height: 40px;'>{{reporte2.nrd}}</td>
               <td>Wat time</td> 
-               <td class='resultado'>{{reporte2.wtm}}</td> 
+               <td class='resultado' style='width: 40px;height: 40px;'>{{reporte2.wtm}}</td> 
 
             </tr>
              <tr>
               <td >After call Work(ACW) </td>
-              <td class='resultado'>{{reporte2.acw}}</td>
+              <td class='resultado' style='width: 40px;height: 40px;'>{{reporte2.acw}}</td>
               <td>Información Adicional</td> 
-               <td class='resultado'></td> 
+               <td class='resultado' style='width: 40px;height: 40px;'></td> 
 
             </tr>
             <tr></tr>
@@ -98,22 +98,16 @@
           <br>
          
 
-<div class="row">
-  
-  <div class="col sli" ng-click='g1=1;g2=0;g3=0'>1</div>
-  <div class="col sli" ng-click='g1=0;g2=true;g3=false'>2</div>
-  <div class="col sli" ng-click='g1=0;g2=false;g3=true'>3</div>
-</div>
 
 
 
-<center ng-if='g1==1 && g2==0 && g3==0' style='padding: 10px;'><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round"   foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes"></ng-gauge></center> 
+<center ng-if='g1==1 && g2==0 && g3==0' ng-click='grafica2()' style='padding: 10px;'><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round"   foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes"></ng-gauge></center> 
 
-<center ng-show='g2==true'>
+<center ng-show='g2==true' ng-click='grafica3()' >
 <div  id="pie" style="height: 300px; width: 300px; margin: 0 auto"></div>
 </center>
 
-<center ng-show='g3==true'>
+<center ng-show='g3==true' ng-click='grafica1()'>
 <div  id="3grafica" style="height: 300px; width: 300px; margin: 0 auto"></div>
 </center>
 
