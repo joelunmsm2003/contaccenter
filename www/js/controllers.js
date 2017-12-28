@@ -458,10 +458,8 @@ $scope.reload=function(cola){
 
                 var chart = $('#chart1').highcharts();
 
-                $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
-
-                    $scope.reporte2 = response
-
+               
+                    
               
                         chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
                         chart.series[1].data[0].update(parseInt($scope.reporte1.po))
@@ -477,7 +475,7 @@ $scope.reload=function(cola){
                     $scope.logeandose=0 
 
 
-                })
+               
 
 
 
