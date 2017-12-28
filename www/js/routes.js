@@ -1,4 +1,4 @@
-angular.module('app.routes', [])
+angular.module('app.routes', ['highcharts-ng'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -18,7 +18,8 @@ angular.module('app.routes', [])
 
     .state('menu', {
     url: '/side-menu21',
-    templateUrl: 'templates/menu.html'
+    templateUrl: 'templates/menu.html',
+    controller:'menuCtrl'
     })
               .state('menu.slarelevantes', {
             url: '/page11',

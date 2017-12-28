@@ -1,11 +1,15 @@
 angular.module('app.controllers', ['angularjs-gauge','ngStorage'])
   
-.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('menuCtrl', ['$scope', '$stateParams','$localStorage','$location',//,/ The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$localStorage,$location) {
 
-    $scope.ola ='sjsjs'
+    $scope.salir=function(){
+
+        
+        $location.url('/page1')
+    }
 
 }])
    
@@ -74,7 +78,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval) {
     $scope.logeandose=1
 
 
-        $scope.reload=function(cola){
+  $scope.reload=function(cola){
 
 
 
@@ -217,10 +221,10 @@ Highcharts.chart('containerx', {
 }])
 
 
-.controller('loginCtrl', ['$scope', '$stateParams','$location','$state','$http','$localStorage',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope','$stateParams','$state','$http','$localStorage','$location',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$location,$state,$http,$localStorage) {
+function ($scope,$stateParams,$state,$http,$localStorage,$location) {
 
 
      $scope.logeandose = 0
@@ -231,7 +235,6 @@ function ($scope, $stateParams,$location,$state,$http,$localStorage) {
         console.log('dkkdkd')
 
 
-        $location.path('/side-menu21/page11')
 
 
      }
@@ -256,13 +259,18 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
      }
      else{
 
-        //$state.go('menu.slarelevantes')
+        $state.go('menu.slarelevantes')
+
+        
 
         $localStorage.user = data.usuario
         $localStorage.pass = data.password 
 
-        location.href = "#/side-menu21/page11";
+        //location.reload()
+        //location.href = "#/side-menu21/page11";
         $scope.logeandose = 0
+
+
 
      }
 
@@ -292,13 +300,131 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
 }])
    
-.controller('slarelevantesCtrl', ['$scope', '$stateParams','$http','$timeout','$interval','$localStorage','$filter',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('slarelevantesCtrl', ['$state','$scope', '$stateParams','$http','$timeout','$interval','$localStorage','$filter',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
+function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
 
     ///Grafica
+$scope.salir=function(){
+
+
+    console.log('data...')
+}
+
+    $scope.addPoints = function () {
+      var seriesArray = $scope.chartConfig.series
+      var rndIdx = Math.floor(Math.random() * seriesArray.length);
+      seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
+    };
+
+    var series = 0;
+    $scope.addSeries = function () {
+      var rnd = []
+      for (var i = 0; i < 10; i++) {
+        rnd.push(Math.floor(Math.random() * 20) + 1)
+      }
+      $scope.chartConfig.series.push({
+        data: rnd,
+        id: 'series_' + series++
+      })
+    }
+
+    $scope.removeRandomSeries = function () {
+      var seriesArray = $scope.chartConfig.series
+      var rndIdx = Math.floor(Math.random() * seriesArray.length);
+      seriesArray.splice(rndIdx, 1)
+    }
+
+    $scope.swapChartType = function () {
+      if (this.chartConfig.chart.type === 'line') {
+        this.chartConfig.chart.type = 'bar'
+      } else {
+        this.chartConfig.chart.type = 'line'
+        this.chartConfig.chart.zoomType = 'x'
+      }
+    }
+
+    $scope.chartConfig = {
+      chart: {
+        events: {
+                addSeries: function () {
+                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
+                        .attr({
+                            fill: Highcharts.getOptions().colors[0],
+                            padding: 10,
+                            r: 5,
+                            zIndex: 8
+                        })
+                        .css({
+                            color: '#FFFFFF'
+                        })
+                        .add();
+
+                    setTimeout(function () {
+                        label.fadeOut();
+                    }, 1000);
+                }
+            },
+        type: 'bar',
+        width: 370
+      },
+        title: {
+            text: null
+          },
+
+
+        yAxis: {
+            title: {
+                text: 'Valores expresados en porcentaje'
+            }
+        },
+
+        xAxis: {
+            title: {
+                text: null
+            },
+            lineWidth: 0,
+            minorGridLineWidth: 0,
+            lineColor: 'transparent',
+            minorTickLength: 0,
+            tickLength: 0,
+            labels: {
+                   enabled: false
+               }
+        },
+        legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
+
+      series: [{
+            name: 'Nivel de Servicio',
+            color: '#5dc10f',
+            data: [0]
+        }, {
+            name: 'Ocupacion',
+            color: '#2a77a0',
+            data: [0]
+        }, {
+            name: 'Abandono',
+            color: '#cd3e30',
+            data: [0]
+        }]
+    }
+
+
+
+
+
+
 
     $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
@@ -354,7 +480,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
     $scope.logeandose=1
 
-    $scope.reload=function(cola){
+$scope.reload=function(cola){
 
 
     if ($localStorage.id_cola==undefined){
@@ -387,7 +513,7 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
                 console.log('reporte1', $scope.reporte1)
 
-                var chart = $('#containerx').highcharts();
+                var chart = $('#chart1').highcharts();
 
                 $http.get("http://192.241.240.186:1000/reporte2/"+$scope.id_cola+'/').success(function(response) {
 
@@ -453,89 +579,13 @@ function ($scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
 
 }
 
+$interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
 
 
-Highcharts.chart('containerx', {
 
-        chart: {
-            events: {
-                addSeries: function () {
-                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
-                        .attr({
-                            fill: Highcharts.getOptions().colors[0],
-                            padding: 10,
-                            r: 5,
-                            zIndex: 8
-                        })
-                        .css({
-                            color: '#FFFFFF'
-                        })
-                        .add();
-
-                    setTimeout(function () {
-                        label.fadeOut();
-                    }, 1000);
-                }
-            },
-            type:'bar'
-        },
-
-	      title: {
-	        text: null
-	      },
-
-
-	    yAxis: {
-	        title: {
-	            text: 'Valores expresados en porcentaje'
-	        }
-	    },
-
-        xAxis: {
-            title: {
-	            text: null
-	        }
-        },
-        legend: {
-
-            layout: 'horizontal',
-            align: 'center',
-            verticalAlign: 'top',
-            x: 0,
-            y: 0,
-            backgroundColor:'#FFFFFF'
-           
-        },
-
-        series: [{
-            name: 'Nivel de Servicio',
-            color: '#5dc10f',
-	        data: [0]
-	    }, {
-	        name: 'Ocupacion',
-            color: '#2a77a0',
-	        data: [0]
-	    }, {
-	        name: 'Abandono',
-            color: '#cd3e30',
-	        data: [0]
-	    }]
-    });
-
-
-$scope.reload()
+//$scope.reload()
 
     
-$scope.data = 99999
-
-    $scope.frameName = 'foo';
-    $scope.frameUrl = 'http://xiencias.com';
-    
-    // The timeout is here to be sure that the DOM is fully loaded.
-    // This is a dirty-as-hell example, please use a directive in a real application.
-    $interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
-
-
 
 
 
