@@ -470,9 +470,10 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
 
         console.log('colas..',data)
 
-        $scope.col.cmpn =''
 
         $scope.serv.srvn = data.srvn
+
+        $scope.col.cmpn = data.cmps[0].cmpn
 
         $localStorage.servicio = data.id  
 
