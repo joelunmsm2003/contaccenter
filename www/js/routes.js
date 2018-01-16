@@ -12,6 +12,7 @@ angular.module('app.routes', ['highcharts-ng'])
     .state('login', {
       url: '/page1',
       templateUrl: 'templates/login.html',
+      cache:false,
       controller:'loginCtrl'
     })
 

@@ -5,25 +5,43 @@
 
     <div class="spacer" ng-class="{'preload_1': logeandose==1}"></div>
 
-      <label class="item item-select" id="sLARELEVANTES-select15">
+     
+     <div class="row" style="padding: 12px;">
+       
+        <div class='col-20'>Servicio</div>
+        <div class='col-80' style='text-align: right;' ng-click = "showPopup()">{{serv.srvn}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+     </div>
+
+
+
+
+<!--       <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
-        <!-- <select>
-          <option ng-repeat='s in servicios' ng-change='traecolas(servicio)' ng-model='servicio'>{{s.srvn}}</option>
 
-        </select> -->
+        <select ng-options="s as s.srvn for s in servicios  track by s.id" ng-model="serv" ng-change='traecolas(serv)' ></select> 
 
-        <select ng-options="s as s.srvn for s in servicios track by s.id" ng-model="serv" ng-change='traecolas(serv)' ></select>
+      </label> -->
 
-      </label>
+
+
+       <div class="row" style="padding: 12px;">
+       
+        <div class='col-20'>Cola</div>
+        <div class='col-80' style='text-align: right;' ng-click = "showPopup1()">{{col.cmpn}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+     </div>
+
+
+
+<!-- 
       <label class="item item-select" id="sLARELEVANTES-select19">
         <span class="input-label">Cola </span>
-        <!-- <select >
-          <option ng-repeat='c in colas' ng-model='colita' ng-change='seleccionacola(colita)' >{{c.cmpn}}</option>
-        </select> -->
+   
 
-        <select ng-options="s as s.cmpn for s in colas" ng-model="col" ng-change='seleccionacola(col)' ></select>
-        
-      </label>
+        <a ng-click = "showPopup1()">oooooo &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></a>
+
+         <select ng-options="s as s.cmpn for s in colas" ng-model="col" ng-change='seleccionacola(col)' ></select>
+         
+      </label> -->
 
 
         <table>
@@ -81,7 +99,7 @@
       </button> -->
 
 
-      <highchart id="chart1" config="chartConfig" class="span10"></highchart>
+      <center><highchart id="chart1" config="chartConfig" class="span10"></highchart></center>
 
   </ion-content>
 </ion-view>

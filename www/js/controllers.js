@@ -14,7 +14,6 @@ function ($scope, $stateParams,$localStorage,$location,$ionicHistory) {
 
         $ionicHistory.clearCache();
 
-       delete $localStorage;
 
       ionic.Platform.exitApp();
     }
@@ -312,10 +311,68 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
 }])
    
-.controller('slarelevantesCtrl', ['$state','$scope', '$stateParams','$http','$timeout','$interval','$localStorage','$filter',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('slarelevantesCtrl', ['$state','$scope', '$stateParams','$http','$timeout','$interval','$localStorage','$filter','$ionicModal','$ionicPopup',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter) {
+function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter,$ionicModal,$ionicPopup) {
+
+    ///Popup
+
+   // When button is clicked, the popup will be shown...
+   $scope.showPopup = function() {
+      $scope.data = {}
+    
+      // Custom popup
+      var myPopup = $ionicPopup.show({
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</li>',
+         scope: $scope,
+         title:'Seleccione:'
+            
+         // buttons: [
+         //    { text: 'Cancel' }, {
+         //       text: '<b>Save</b>',
+         //       type: 'button-positive',
+         //       onTap: function(e) {
+                        
+         //          myPopup.close()
+         //       }
+         //    }
+         // ]
+      });
+
+
+       $scope.cierra=function(){
+
+          myPopup.close()
+
+
+         }   
+   };
+
+
+      $scope.showPopup1 = function() {
+      $scope.data = {}
+    
+      // Custom popup
+      var myPopup1 = $ionicPopup.show({
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
+         scope: $scope,
+         title:'Seleccione:'
+
+      });
+
+
+       $scope.cierra=function(){
+
+          myPopup1.close()
+
+
+         }   
+   };
+
+  
+
+
 
 
 
@@ -386,6 +443,10 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
 
         console.log('seleccionando cola',data)
 
+        $scope.col.cmpn = data.cmpn
+
+
+
 
         if(data){
 
@@ -409,11 +470,17 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
 
         console.log('colas..',data)
 
+        $scope.col.cmpn =''
+
+        $scope.serv.srvn = data.srvn
+
         $localStorage.servicio = data.id  
 
         if (data){
 
             $scope.colas=data.cmps
+
+            $scope.cierra()
 
 
         }
@@ -496,6 +563,9 @@ $scope.reload=function(cola){
 }
 
 
+
+
+
     $scope.chartConfig = {
       chart: {
         events: {
@@ -518,7 +588,7 @@ $scope.reload=function(cola){
                 }
             },
         type: 'bar',
-        width: 370
+        width: 330
       },
         title: {
             text: null
