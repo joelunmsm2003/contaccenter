@@ -6,8 +6,19 @@
    <div class="spacer" ng-class="{'preload_1': logeandose==1}"></div>
    
 
+       <div class="row" style="padding: 12px;">
+        <div class='col-20'>Servicio</div>
+        <div class='col-80' style='text-align: right;' ng-click = "showPopup()">{{serv.srvn}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+     </div>
 
-       <label class="item item-select" id="sLARELEVANTES-select15">
+
+      <div class="row" style="padding: 12px;">
+        <div class='col-20'>Grupo</div>
+        <div class='col-80' style='text-align: right;' ng-click = "showPopup1()">{{col.cmpn}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+     </div>
+
+
+<!--        <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
 
 
@@ -16,15 +27,13 @@
       </label>
      <label class="item item-select" id="sLARELEVANTES-select19">
         <span class="input-label">Cola </span>
-        <!-- <select >
-          <option ng-repeat='c in colas' ng-model='colita' ng-change='seleccionacola(colita)' >{{c.cmpn}}</option>
-        </select> -->
+      
 
 
         <select ng-options="s as s.cmpn for s in colas" ng-model="col" ng-change='seleccionacola(col)' ></select>
 
 
-      </label>
+      </label> -->
 
 
 
