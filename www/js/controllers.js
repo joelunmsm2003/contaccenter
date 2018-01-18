@@ -828,7 +828,6 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
     $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':2})
 
-    $scope.servicios = $localStorage.servicioback
 
     if($scope.servicios.length>0){
 
@@ -927,17 +926,14 @@ $scope.reload2=function(cola){
 
     }
 
-   if($scope.servicios.length==0){
 
-        $scope.showPopup2()
+      if($scope.servicios.length>0){
 
-    }
-    else{
+        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
+      }
 
-      $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
-
-    }
+      
 
     console.log('cola',cola)
 
