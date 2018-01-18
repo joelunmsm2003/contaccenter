@@ -33,6 +33,8 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 })
 
+  $scope.grafic =0
+
 
 
 
@@ -155,7 +157,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         if(data){
 
-            $scope.logeandose=1
+            $scope.grafic =1
 
             $scope.grafica(data.id)
 
@@ -193,6 +195,8 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
     $scope.logeandose=1
 
+    $scope.ventasflag = false
+
     $scope.grafica=function(){
 
 
@@ -204,16 +208,53 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
                   $scope.reclamos = response['recl']
 
+
+                  console.log('servicio',$localStorage.servicio)
+
+
+                
+
+
+                  $scope.contitular = response['ctit']
+
+                  $scope.ventas = response['vent']
+
+
+                  var chart = $('#containerx').highcharts();
+
+
+
                   $scope.reporte4 = response
 
 
-                 var chart = $('#containerx').highcharts();
+                    if($localStorage.servicio==143){
+
+                      $scope.ventasflag = false
+                    }
+
+                    if($localStorage.servicio==142 || $localStorage.servicio==144){
+
+
+                      $scope.ventasflag = true
+
+                      $scope.reporte4.cons = response['ctit']
+
+                      $scope.reporte4.recl = response['vent']
+
+                       chart.series[1].update({name:"Contactos Titular"}, false);
+                      chart.series[2].update({name:"Ventas"}, false);
+                      chart.redraw();
+
+                  }
+
+
+                 
 
                 chart.series[0].data[0].update(parseInt($scope.reporte4.gest))
                 chart.series[1].data[0].update(parseInt($scope.reporte4.cons))
                 chart.series[2].data[0].update(parseInt($scope.reporte4.recl))
 
-                 $scope.logeandose=0
+                 $scope.grafic=0
         
 
 
@@ -276,14 +317,46 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
                   $scope.reclamos = response['recl']
 
+
+                  $scope.contitular = response['ctit']
+
+                  $scope.ventas = response['vent']
+
                   $scope.reporte4 = response
 
 
                  var chart = $('#containerx').highcharts();
 
+
+                  if($localStorage.servicio==143){
+
+                      $scope.ventasflag = false
+                    }
+
+
+                  if($localStorage.servicio==142 || $localStorage.servicio==144){
+
+                      $scope.reporte4.cons = response['ctit']
+
+                      $scope.reporte4.recl = response['vent']
+
+
+                      chart.series[1].update({name:"Contactos Titular"}, false);
+                      chart.series[2].update({name:"Ventas"}, false);
+                      chart.redraw();
+
+                  }
+
+
+
                 chart.series[0].data[0].update(parseInt($scope.reporte4.gest))
                 chart.series[1].data[0].update(parseInt($scope.reporte4.cons))
                 chart.series[2].data[0].update(parseInt($scope.reporte4.recl))
+
+              
+
+
+           
 
                  $scope.logeandose=0
         
@@ -862,6 +935,8 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
           $localStorage.id_cola = $scope.id_cola
 
           $scope.serv = $scope.servicios[0]
+
+          $localStorage.servicio= $scope.servicios[0]['id']
 
           $scope.col = $scope.servicios[0]['cmps'][0]
     }
