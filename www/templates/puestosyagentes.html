@@ -4,7 +4,7 @@
 
  
    <div class="spacer" ng-class="{'preload_1': logeandose==1}"></div>
-   
+   <div class="spacer" ng-class="{'preload_1': grafic==1}"></div>
 
     <div class="row" style="padding: 12px;">
         <div class='col-20'>Servicio</div>
@@ -112,11 +112,35 @@
 
           <br>
          
+<!-- <div class="row">
+  
+  <div class="col sli" ng-click='g1=1;g2=0;g3=0;grafica2()'>1</div>
+  <div class="col sli" ng-click='g1=0;g2=true;g3=false;grafica3()'>2</div>
+  <div class="col sli" ng-click='g1=0;g2=false;g3=true;grafica1()'>3</div>
 
+</div> -->
+
+<i ng-if='g1==1 && g2==0 && g3==0' ng-click='grafica2()' class="ion-android-arrow-dropright-circle" style='position: absolute;
+    font-size: 45px;
+    text-align: center;
+    color: #7b933f;    right: 11px;z-index:20'></i>
+
+<i ng-show='g2==true' ng-click='grafica3()' class="ion-android-arrow-dropright-circle" style='position: absolute;
+    font-size: 45px;
+    text-align: center;
+    color: #7b933f;   right: 11px; z-index: 20;'></i>
+
+<i ng-show='g3==true' ng-click='grafica1()' class="ion-android-arrow-dropright-circle" style='position: absolute;
+    font-size: 45px;
+    text-align: center;
+    color: #7b933f;right: 11px; z-index:20'></i>
 
 
 
 <center ng-if='g1==1 && g2==0 && g3==0' ng-click='grafica2()' style='padding: 10px;'><ng-gauge size="300"  cap="butt" type="semi" thick="20" min="0" max="maxvalue" value="reporte2.aoc" cap="round"   foreground-color="#bcc633" background-color="rgba(123,234,123, 0.4)" append="agentes"></ng-gauge></center> 
+
+
+
 
 <center ng-show='g2==true' ng-click='grafica3()' >
 <div  id="pie" style="height: 300px; width: 300px; margin: 0 auto"></div>

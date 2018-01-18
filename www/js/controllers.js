@@ -27,6 +27,14 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 
 
+  $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+     $localStorage.servicioback = response['servicios']
+
+})
+
+
+
 
     ///Popup
 
@@ -38,7 +46,12 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
       var myPopup = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
             
       });
 
@@ -59,7 +72,12 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
       var myPopup1 = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+           type: 'button-balanced'
+          },
+        ]
 
       });
 
@@ -78,7 +96,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
          scope: $scope,
          title:'No se encontraron datos',
          buttons: [
-         { text: 'Cerrar' },
+         { text: 'Cerrar',
+          type: 'button-balanced'
+          },
         ]
 
       });
@@ -93,9 +113,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 
 
-        $scope.servicios = $localStorage.servicioback['servicios']
-
-        $scope.servicios = $filter('filter')($scope.servicios,{'tipo_reporte':3})
+        $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':3})
 
 
         if($scope.servicios.length>0){
@@ -135,7 +153,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
             $scope.logeandose=1
 
-            $scope.reload(data.id)
+            $scope.grafica(data.id)
 
             $localStorage.id_cola = data.id
 
@@ -169,8 +187,45 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
     $scope.logeandose=1
 
+    $scope.grafica=function(){
+
+
+      $http.get("http://192.241.240.186:1000/reporte4/"+$scope.id_cola+'/').success(function(response) {
+
+                $scope.gestiones = response['gest']
+
+                 $scope.consultas = response['cons']
+
+                  $scope.reclamos = response['recl']
+
+                  $scope.reporte4 = response
+
+
+                 var chart = $('#containerx').highcharts();
+
+                chart.series[0].data[0].update(parseInt($scope.reporte4.gest))
+                chart.series[1].data[0].update(parseInt($scope.reporte4.cons))
+                chart.series[2].data[0].update(parseInt($scope.reporte4.recl))
+
+                 $scope.logeandose=0
+        
+
+
+            });
+
+
+
+    }
+
 
   $scope.reload=function(cola){
+
+
+      $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+      $localStorage.servicioback = response['servicios']
+
+      })
 
 
     // if ($localStorage.id_cola==undefined){
@@ -183,7 +238,12 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         // $scope.colas = response['servicios'][0]['cmps']
 
-        $scope.id_cola = $localStorage.servicioback['servicios'][0]['cmps'][0]['id']
+
+        $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':3})
+
+        console.log('Indicadores',$scope.servicios)
+
+        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
         if(cola){
 
@@ -296,9 +356,9 @@ Highcharts.chart('containerx', {
     });
 
 
+      
 
-
-
+  
 
 
 
@@ -326,9 +386,9 @@ function ($scope,$stateParams,$state,$http,$localStorage,$location) {
 
 $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.password).success(function(response) {
 
-     console.log('ehhhe',response)
+     console.log('Ingresando....')
 
-     $localStorage.servicioback = response
+     $localStorage.servicioback = response['servicios']
 
 
      if (response=='nologin'){
@@ -370,6 +430,18 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$filter,$ionicModal,$ionicPopup) {
 
+
+$http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+    $localStorage.servicioback = response['servicios']
+
+
+})
+
+
+$scope.grafic=0
+
+
     ///Popup
 
    // When button is clicked, the popup will be shown...
@@ -380,7 +452,12 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
       var myPopup = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+          type: 'button-balanced'
+           },
+        ]
             
       });
 
@@ -401,7 +478,12 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
       var myPopup1 = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+          type: 'button-balanced'
+          },
+        ]
 
       });
 
@@ -411,12 +493,10 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
          }   
    };
 
-  
-        $scope.servicios = $localStorage.servicioback['servicios']
+
+        $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':1})
 
         $localStorage.servicio= $scope.servicios[0]['id']
-
-        $scope.servicios = $filter('filter')($scope.servicios,{'tipo_reporte':1})
 
         $scope.colas = $scope.servicios[0]['cmps']
 
@@ -435,13 +515,16 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
 
         $scope.col.cmpn = data.cmpn
 
+        $scope.grafic=1
+
 
         if(data){
 
 
-            $scope.reload(data.id)
 
-            $scope.logeandose=1
+            $scope.grafica(data.id)
+
+            
 
             $localStorage.id_cola = data.id
 
@@ -477,7 +560,33 @@ function ($state,$scope, $stateParams,$http,$timeout,$interval,$localStorage,$fi
 
     $scope.logeandose=1
 
-$scope.reload=function(cola){
+
+    $scope.grafica=function(cola){
+
+    
+    $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio+'/'+cola).success(function(response) {
+
+                  $scope.reporte1 = response
+
+
+                  var chart = $('#chart1').highcharts();
+
+
+                  chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
+                  chart.series[1].data[0].update(parseInt($scope.reporte1.po))
+                  chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
+
+
+                  x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+
+                  $scope.grafic=0 
+
+            });
+
+
+}
+
+    $scope.reload=function(cola){
 
 
     if ($localStorage.id_cola==undefined){
@@ -486,8 +595,11 @@ $scope.reload=function(cola){
 
     }
     
+        $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':1})
 
-        $scope.id_cola = $localStorage.servicioback['servicios'][0]['cmps'][0]['id']
+        console.log('SLA',$scope.servicios)
+
+        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
         if(cola){
 
@@ -616,12 +728,6 @@ $scope.reload()
 
 
 
-
-
-
-
-
-
 }])
 
 
@@ -629,6 +735,16 @@ $scope.reload()
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup) {
+
+$scope.grafic=0
+
+
+$http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+    $localStorage.servicioback = response['servicios']
+
+
+})
 
 
           ///Popup
@@ -641,7 +757,12 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
       var myPopup = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
             
       });
 
@@ -662,7 +783,12 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
       var myPopup1 = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+          type: 'button-balanced'
+          },
+        ]
 
       });
 
@@ -681,7 +807,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
         scope: $scope,
         title:'No existen datos',
         buttons: [
-         { text: 'Cerrar' },
+         { text: 'Cerrar',
+          type: 'button-balanced'
+          },
         ]
 
 
@@ -698,10 +826,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
     $scope.logeandose=0
 
-    $scope.servicios = $localStorage.servicioback['servicios']
+    $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':2})
 
-    $scope.servicios = $filter('filter')($scope.servicios,{'tipo_reporte':2})
-
+    $scope.servicios = $localStorage.servicioback
 
     if($scope.servicios.length>0){
 
@@ -723,29 +850,17 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
     }
 
 
-
-
-
-
-
-
-
-
   ////Traendos datos
 
      $scope.seleccionacola=function(data){
 
-
-
         if(data){
-
-        console.log('seleccionacola..',data.cmpn)
 
             $scope.col = data
 
-            $scope.reload2(data.id)
+            $scope.grafica(data.id)
 
-            $scope.logeandose=1
+            $scope.grafic=1
 
             $localStorage.id_cola = data.id
  
@@ -773,9 +888,37 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
     }
 
 
+$scope.grafica=function(cola){
 
+    
+      $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio+'/'+cola+'/').success(function(response) {
+
+      console.log(response)
+
+      $scope.reporte3 = response
+
+      $scope.grafic =0
+
+      var chart = $('#chartmarcador').highcharts();
+
+      chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
+      chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
+      chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
+      chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
+
+    })
+
+
+}
 
 $scope.reload2=function(cola){
+
+
+    
+    $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':2})
+
+
+    console.log('MPP',$scope.servicios)
 
 
     if ($localStorage.id_cola==undefined){
@@ -784,7 +927,20 @@ $scope.reload2=function(cola){
 
     }
 
-    $scope.id_cola = $localStorage.servicioback['servicios'][0]['cmps'][0]['id']
+   if($scope.servicios.length==0){
+
+        $scope.showPopup2()
+
+    }
+    else{
+
+
+      $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
+
+    }
+
+    console.log('cola',cola)
+
 
 
     if(cola){
@@ -795,11 +951,16 @@ $scope.reload2=function(cola){
 
     $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio+'/'+$localStorage.id_cola+'/').success(function(response) {
 
+
     $scope.reporte3 = response
 
 
+      $scope.logeandose= 0
 
-     $scope.logeandose=0
+
+      $scope.grafic =0
+ 
+    
 
 
      var chart = $('#chartmarcador').highcharts();
@@ -811,7 +972,7 @@ $scope.reload2=function(cola){
     chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
     chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
 
-
+  
 
     })
 
@@ -844,7 +1005,7 @@ $scope.chartConfigmarcador = {
                 }
             },
         type: 'bar',
-        width: 370
+        width: 330
       },
         title: {
             text: null
@@ -880,6 +1041,15 @@ $scope.chartConfigmarcador = {
             backgroundColor:'#FFFFFF'
            
         },
+        plotOptions: {
+        bar: {
+
+            groupPadding:0,
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
 
       series: [{
             name: 'Abandono',
@@ -902,10 +1072,6 @@ $scope.chartConfigmarcador = {
     }
 
 
-
-    
-
-
     
 }])
 
@@ -917,6 +1083,14 @@ $scope.chartConfigmarcador = {
 function ($scope, $stateParams,$http,$interval,$localStorage,$filter,$ionicPopup) {
 
 
+$scope.grafic=0
+$http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+     $localStorage.servicioback = response['servicios']
+
+})
+
+
 //Popup
 
 
@@ -926,7 +1100,12 @@ function ($scope, $stateParams,$http,$interval,$localStorage,$filter,$ionicPopup
       var myPopup = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+       },
+        ]
             
       });
 
@@ -945,7 +1124,12 @@ function ($scope, $stateParams,$http,$interval,$localStorage,$filter,$ionicPopup
       var myPopup1 = $ionicPopup.show({
          template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
          scope: $scope,
-         title:'Seleccione:'
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
 
       });
 
@@ -983,13 +1167,12 @@ function ($scope, $stateParams,$http,$interval,$localStorage,$filter,$ionicPopup
   $scope.g2=0 
   $scope.g3=0
 
-  $scope.servicios = $localStorage.servicioback['servicios']
 
-  if($localStorage.servicioback['servicios'].length>0){
+  $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo' : 'IN','tipo_reporte':1})
+
+  if($scope.servicios.length>0){
 
       $localStorage.servicio= $scope.servicios[0]['id']
-
-      $scope.servicios = $filter('filter')($scope.servicios,{'tipo' : 'IN','tipo_reporte':1})
 
       $scope.colas = $scope.servicios[0]['cmps']
 
@@ -1010,11 +1193,13 @@ $scope.maxvalue=0
 
    $scope.seleccionacola=function(data){
 
+        $scope.grafic=1
+
         $scope.col = data
 
         if(data){
 
-            $scope.reload2(data.id)
+            $scope.grafica(data.id)
 
             $scope.logeandose=1
 
@@ -1053,10 +1238,44 @@ $scope.maxvalue=0
         
     }
 
+$scope.grafica=function(cola){
 
+    $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.servicio+'/'+cola).success(function(response) {
+
+    $scope.reporte2 = response
+
+    $scope.maxvalue =response.gr3_aoc+response.gr3_ali+response.gr2_rdy+response.nrd+response.gr2_inb
+     
+
+
+     var chart = $('#pie').highcharts();
+
+
+
+     chart.series[0].data[0].update(response.ali)
+     chart.series[0].data[1].update(response.aoc)
+
+     var chart1 = $('#3grafica').highcharts();
+
+     chart1.series[0].data[0].update(response.gr2_nrd)
+     chart1.series[0].data[1].update(response.gr2_rdy)
+     chart1.series[0].data[2].update(response.gr2_inb)
+     chart1.series[0].data[3].update(response.gr2_hold)
+     chart1.series[0].data[4].update(response.gr2_acw)
+
+
+     $scope.grafic=0
+
+
+
+    })
+
+}
 
 
 $scope.reload2=function(cola){
+
+
 
 
     if ($localStorage.id_cola==undefined){
@@ -1066,9 +1285,14 @@ $scope.reload2=function(cola){
     }
 
 
-    if($localStorage.servicioback['servicios'].length>0){
+  $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo' : 'IN','tipo_reporte':1})
 
-        $scope.id_cola = $localStorage.servicioback['servicios'][0]['cmps'][0]['id']
+  console.log('Puestos',$scope.servicios)
+
+
+    if($scope.servicios.length>0){
+
+        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
     }
     
@@ -1253,6 +1477,13 @@ Highcharts.chart('3grafica', {
 
 
 $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
+
+
+
+
+
+
+
     
 ////////
 
