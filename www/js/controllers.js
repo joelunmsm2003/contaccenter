@@ -250,9 +250,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
                  
 
-                chart.series[0].data[0].update(parseInt($scope.reporte4.gest))
+                chart.series[0].data[0].update(parseInt($scope.reporte4.recl))
                 chart.series[1].data[0].update(parseInt($scope.reporte4.cons))
-                chart.series[2].data[0].update(parseInt($scope.reporte4.recl))
+                chart.series[2].data[0].update(parseInt($scope.reporte4.gest))
 
                  $scope.grafic=0
         
@@ -349,9 +349,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 
 
-                chart.series[0].data[0].update(parseInt($scope.reporte4.gest))
+                chart.series[0].data[0].update(parseInt($scope.reporte4.recl))
                 chart.series[1].data[0].update(parseInt($scope.reporte4.cons))
-                chart.series[2].data[0].update(parseInt($scope.reporte4.recl))
+                chart.series[2].data[0].update(parseInt($scope.reporte4.gest))
 
               
 
@@ -437,19 +437,22 @@ Highcharts.chart('containerx', {
            
         },
 
-        series: [{
-            name: 'Gestion',
-            color: '#e84530',
-            data: [0]
-        }, {
-            name: 'Consulta',
-            color: '#2a789e',
-            data: [0]
-        }, {
+        series: [
+        {
             name: 'Reclamo',
             color: '#5cbf0d',
             data: [0]
-        }]
+        },
+        {
+            name: 'Consulta',
+            color: '#2a789e',
+            data: [0]
+        },
+        {
+            name: 'Gestion',
+            color: '#e84530',
+            data: [0]
+        } ]
     });
 
 
