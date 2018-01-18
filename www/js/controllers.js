@@ -343,6 +343,16 @@ Highcharts.chart('containerx', {
                 text: null
             }
         },
+        plotOptions: {
+        bar: {
+
+            groupPadding:0,
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+
         legend: {
 
             layout: 'horizontal',
