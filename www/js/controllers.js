@@ -120,6 +120,8 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
           $scope.colas = $scope.servicios[0]['cmps']
 
+          $localStorage.servicio= $scope.servicios[0]['id']
+
           $scope.id_cola = $scope.colas[0]['id']
 
           $localStorage.id_cola = $scope.id_cola
@@ -149,7 +151,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         $scope.col = data
 
-        
+
 
         if(data){
 
