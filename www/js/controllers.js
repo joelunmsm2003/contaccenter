@@ -149,6 +149,8 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         $scope.col = data
 
+        
+
         if(data){
 
             $scope.logeandose=1
@@ -171,6 +173,8 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         $scope.serv.srvn = data.srvn
 
+        $localStorage.servicio = data.id  
+
         $scope.seleccionacola(data.cmps[0])
 
         $scope.logeandose=1
@@ -190,7 +194,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
     $scope.grafica=function(){
 
 
-      $http.get("http://192.241.240.186:1000/reporte4/"+$scope.id_cola+'/').success(function(response) {
+      $http.get("http://192.241.240.186:1000/reporte4/"+$localStorage.servicio+'/'+$localStorage.id_cola+'/').success(function(response) {
 
                 $scope.gestiones = response['gest']
 
@@ -241,9 +245,17 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':3})
 
+
+
         console.log('Indicadores',$scope.servicios)
 
-        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
+        if($scope.servicios.length>0){
+
+          $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
+
+        }
+
+        
 
         if(cola){
 
@@ -254,7 +266,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
          ///Graficas
 
-            $http.get("http://192.241.240.186:1000/reporte4/"+$scope.id_cola+'/').success(function(response) {
+            $http.get("http://192.241.240.186:1000/reporte4/"+$localStorage.servicio+'/'+$localStorage.id_cola+'/').success(function(response) {
 
                 $scope.gestiones = response['gest']
 
