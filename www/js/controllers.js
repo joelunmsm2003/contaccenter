@@ -1410,11 +1410,11 @@ $scope.reload2=function(cola){
 
 
 
-    if ($localStorage.id_cola==undefined){
+    // if ($localStorage.id_cola==undefined){
 
-        $scope.logeandose=1
+    //     $scope.logeandose=1
 
-    }
+    // }
 
 
   $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo' : 'IN','tipo_reporte':1})
