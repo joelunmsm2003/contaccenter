@@ -596,17 +596,19 @@ $scope.grafic=0
 
         $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':1})
 
-        $localStorage.servicio= $scope.servicios[0]['id']
+        $localStorage.servicio_sla= $scope.servicios[0]['id']
 
         $scope.colas = $scope.servicios[0]['cmps']
 
         $scope.id_cola = $scope.colas[0]['id']
 
-        $localStorage.id_cola = $scope.id_cola
+        $localStorage.id_cola_sla = $scope.id_cola
 
         $scope.serv = $scope.servicios[0]
 
         $scope.col = $scope.servicios[0]['cmps'][0]
+
+        console.log('ser,cola',$localStorage.servicio,$scope.id_cola)
 
 
 
@@ -626,7 +628,7 @@ $scope.grafic=0
 
             
 
-            $localStorage.id_cola = data.id
+            $localStorage.id_cola_sla = data.id
 
 
         }
@@ -644,7 +646,7 @@ $scope.grafic=0
 
     
 
-        $localStorage.servicio = data.id  
+        $localStorage.servicio_sla = data.id  
 
         if (data){
 
@@ -664,7 +666,7 @@ $scope.grafic=0
     $scope.grafica=function(cola){
 
     
-    $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio+'/'+cola).success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio_sla+'/'+cola).success(function(response) {
 
                   $scope.reporte1 = response
 
@@ -689,7 +691,10 @@ $scope.grafic=0
     $scope.reload=function(cola){
 
 
-    if ($localStorage.id_cola==undefined){
+      console.log('colas..',$localStorage.id_cola_sla,$localStorage.servicio_sla)
+
+
+    if ($localStorage.id_cola_sla==undefined){
 
         $scope.logeandose=1
 
@@ -708,7 +713,7 @@ $scope.grafic=0
 
          ///Graficas
 
-            $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio+'/'+$scope.id_cola).success(function(response) {
+            $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio_sla+'/'+$localStorage.id_cola_sla).success(function(response) {
 
                   $scope.reporte1 = response
 
@@ -935,11 +940,11 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
           $scope.id_cola = $scope.colas[0]['id']
 
-          $localStorage.id_cola = $scope.id_cola
+          $localStorage.id_cola_marc = $scope.id_cola
 
           $scope.serv = $scope.servicios[0]
 
-          $localStorage.servicio= $scope.servicios[0]['id']
+          $localStorage.servicio_marc= $scope.servicios[0]['id']
 
           $scope.col = $scope.servicios[0]['cmps'][0]
     }
@@ -963,7 +968,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
             $scope.grafic=1
 
-            $localStorage.id_cola = data.id
+            $localStorage.id_cola_marc = data.id
  
         }
 
@@ -979,7 +984,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
         $scope.serv.srvn = data.srvn
 
-        $localStorage.servicio=data.id
+        $localStorage.servicio_marc=data.id
 
         if (data){
 
@@ -992,7 +997,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 $scope.grafica=function(cola){
 
     
-      $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio+'/'+cola+'/').success(function(response) {
+      $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio_marc+'/'+cola+'/').success(function(response) {
 
       console.log(response)
 
@@ -1047,7 +1052,7 @@ $scope.reload2=function(cola){
     
     }
 
-    $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio+'/'+$localStorage.id_cola+'/').success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio_marc+'/'+$localStorage.id_cola_marc+'/').success(function(response) {
 
 
     $scope.reporte3 = response
@@ -1270,13 +1275,13 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
   if($scope.servicios.length>0){
 
-      $localStorage.servicio= $scope.servicios[0]['id']
+      $localStorage.servicio_pues= $scope.servicios[0]['id']
 
       $scope.colas = $scope.servicios[0]['cmps']
 
       $scope.id_cola = $scope.colas[0]['id']
 
-      $localStorage.id_cola = $scope.id_cola
+      $localStorage.id_cola_pues = $scope.id_cola
 
       $scope.serv = $scope.servicios[0]
 
@@ -1301,7 +1306,7 @@ $scope.maxvalue=0
 
             $scope.logeandose=1
 
-            $localStorage.id_cola = data.id
+            $localStorage.id_cola_pues = data.id
 
 
         }
@@ -1316,7 +1321,7 @@ $scope.maxvalue=0
 
         $scope.serv.srvn = data.srvn
 
-        $localStorage.servicio= data.id
+        $localStorage.servicio_pues= data.id
 
      
           $scope.seleccionacola(data.cmps[0])
@@ -1338,7 +1343,7 @@ $scope.maxvalue=0
 
 $scope.grafica=function(cola){
 
-    $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.servicio+'/'+cola).success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.servicio_pues+'/'+cola).success(function(response) {
 
     $scope.reporte2 = response
 
@@ -1402,7 +1407,7 @@ $scope.reload2=function(cola){
 
     //$localStorage.id_cola = $scope.id_cola
 
-    $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.servicio+'/'+$scope.id_cola).success(function(response) {
+    $http.get("http://192.241.240.186:1000/reporte2/"+$localStorage.servicio_pues+'/'+$localStorage.id_cola_pues).success(function(response) {
 
     $scope.reporte2 = response
 
