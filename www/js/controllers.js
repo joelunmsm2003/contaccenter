@@ -1019,7 +1019,6 @@ $scope.grafica=function(cola){
 
       $scope.grafic =0
 
-
       if($scope.reporte3.aban==0){
 
         $scope.showPopup2()
@@ -1028,11 +1027,10 @@ $scope.grafica=function(cola){
 
       var chart = $('#chartmarcador').highcharts();
 
-      chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
-      chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
-      chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
-      chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
-
+            chart.series[0].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
+            chart.series[1].data[0].update(parseInt($scope.reporte3.disc))
+            chart.series[2].data[0].update($scope.reporte3.cont)
+            chart.series[3].data[0].update($scope.reporte3.aban)
     })
 
 
@@ -1086,10 +1084,10 @@ $scope.reload2=function(cola){
          
             var chart = $('#chartmarcador').highcharts();
 
-            chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
-            chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
-            chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
-            chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
+            chart.series[0].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
+            chart.series[1].data[0].update(parseInt($scope.reporte3.disc))
+            chart.series[2].data[0].update($scope.reporte3.cont)
+            chart.series[3].data[0].update($scope.reporte3.aban)
           
 
             })
@@ -1180,22 +1178,27 @@ $scope.chartConfigmarcador = {
         }
     },
 
-      series: [{
-            name: 'Abandono',
-            color: '#df422e',
+  
+
+      series: [ 
+        {
+            name: 'Otros',
+            color: '#f07a34',
             data: [0]
-        }, {
-            name: 'Contestadas',
-            color: '#2b78a0',
-            data: [0]
-        }, {
+        },
+        {
             name: 'Discadas',
             color: '#5dc00d',
             data: [0]
         },
         {
-            name: 'Otros',
-            color: '#f07a34',
+            name: 'Contestadas',
+            color: '#2b78a0',
+            data: [0]
+        },
+        {
+            name: 'Abandono',
+            color: '#df422e',
             data: [0]
         }]
     }
