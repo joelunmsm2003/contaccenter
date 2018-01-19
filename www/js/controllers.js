@@ -96,9 +96,10 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
       // Custom popup
       var myPopup2 = $ionicPopup.show({
          scope: $scope,
-         title:'No se encontraron datos',
+         title:'Informacion',
+         template:'<center>No se encontraron datos</center>',
          buttons: [
-         { text: 'Cerrar',
+         { text: 'Aceptar',
           type: 'button-balanced'
           },
         ]
@@ -241,8 +242,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
                       $scope.reporte4.recl = response['vent']
 
-                       chart.series[1].update({name:"Contactos Titular"}, false);
-                      chart.series[2].update({name:"Ventas"}, false);
+                      chart.series[0].update({name:"Ventas",color:'#5cbf0d'}, false);
+                      chart.series[1].update({name:"Contactos Titular"}, false);
+                      chart.series[2].update({name:"Gestiones",color:'#e84530'}, false);
                       chart.redraw();
 
                   }
@@ -343,9 +345,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
                       $scope.reporte4.recl = response['vent']
 
-
+                      chart.series[0].update({name:"Ventas",color:'#5cbf0d'}, false);
                       chart.series[1].update({name:"Contactos Titular"}, false);
-                      chart.series[2].update({name:"Ventas"}, false);
+                      chart.series[2].update({name:"Gestiones",color:'#e84530'}, false);
                       chart.redraw();
 
                   }
@@ -498,9 +500,12 @@ function ($scope,$stateParams,$state,$http,$localStorage,$location) {
         $scope.logeandose = 1
 
 
+        //https://www.ccf.com.pe/webresources/login/
+
+
 $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.password).success(function(response) {
 
-     console.log('Ingresando....')
+
 
      $localStorage.servicioback = response['servicios']
 
@@ -514,16 +519,13 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
         $state.go('menu.slarelevantes')
 
-        
-
         $localStorage.user = data.usuario
-        $localStorage.pass = data.password 
+
+        $localStorage.pass = data.password
 
         //location.reload()
         //location.href = "#/side-menu21/page11";
         $scope.logeandose = 0
-
-
 
      }
 
@@ -918,30 +920,29 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
    };
 
 
-         $scope.showPopup2 = function() {
+ $scope.showPopup2 = function() {
       $scope.data = {}
     
       // Custom popup
       var myPopup2 = $ionicPopup.show({
-        scope: $scope,
-        title:'No existen datos',
-        buttons: [
-         { text: 'Cerrar',
+         scope: $scope,
+         title:'Informacion',
+         template:'<center>No se encontraron datos</center>',
+         buttons: [
+         { text: 'Aceptar',
           type: 'button-balanced'
           },
         ]
 
-
-
       });
+
+   
+
 
        $scope.cierra=function(){
           myPopup2.close()
          }   
-
-
    };
-
 
     $scope.logeandose=0
 
@@ -1492,7 +1493,7 @@ Highcharts.chart('pie', {
         text: null
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '<b>{point.y}</b>'
     },
     legend: {
 
@@ -1515,7 +1516,7 @@ Highcharts.chart('pie', {
         }
     },
     series: [{
-        name: 'Brands',
+        name:'Valor:',
         colorByPoint: true,
         data: [{
             name: 'Libres',
@@ -1544,7 +1545,7 @@ Highcharts.chart('3grafica', {
         text: null
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '<b>{point.y}</b>'
     },
  
 
@@ -1574,7 +1575,7 @@ Highcharts.chart('3grafica', {
            
         },
     series: [{
-        name: 'Brands',
+
         colorByPoint: true,
         data: [{
             name: 'Not Ready',
