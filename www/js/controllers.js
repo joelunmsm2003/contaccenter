@@ -309,6 +309,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
          ///Graficas
 
+         if($scope.servicios.length>0){
+
+
             $http.get("http://192.241.240.186:1000/reporte4/"+$localStorage.servicio+'/'+$localStorage.id_cola+'/').success(function(response) {
 
                 $scope.gestiones = response['gest']
@@ -363,6 +366,17 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 
             });
+
+
+
+          }
+          if($scope.servicios.length==0){
+
+            $scope.logeandose=0
+
+          }
+
+
 
 
 
@@ -1005,6 +1019,13 @@ $scope.grafica=function(cola){
 
       $scope.grafic =0
 
+
+      if($scope.reporte3.aban==0){
+
+        $scope.showPopup2()
+
+      }
+
       var chart = $('#chartmarcador').highcharts();
 
       chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
@@ -1018,20 +1039,20 @@ $scope.grafica=function(cola){
 }
 
 $scope.reload2=function(cola){
-
-
     
     $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':2})
 
+    console.log('MPP',$scope.servicios.length)
 
-    console.log('MPP',$scope.servicios)
+
+    // if ($localStorage.id_cola==undefined){
+
+    //     $scope.logeandose=1
+
+    // }
 
 
-    if ($localStorage.id_cola==undefined){
-
-        $scope.logeandose=1
-
-    }
+    console.log('login..',$scope.logeandose,$localStorage.id_cola)
 
 
       if($scope.servicios.length>0){
@@ -1052,32 +1073,37 @@ $scope.reload2=function(cola){
     
     }
 
-    $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio_marc+'/'+$localStorage.id_cola_marc+'/').success(function(response) {
+    if($scope.servicios.length>0){
 
 
-    $scope.reporte3 = response
+            $http.get("http://192.241.240.186:1000/reporte3/"+$localStorage.servicio_marc+'/'+$localStorage.id_cola_marc+'/').success(function(response) {
+
+            $scope.reporte3 = response
+
+            $scope.logeandose= 0
+
+            $scope.grafic =0
+         
+            var chart = $('#chartmarcador').highcharts();
+
+            chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
+            chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
+            chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
+            chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
+          
+
+            })
 
 
-      $scope.logeandose= 0
+    }
+
+    // if($scope.servicios.length==0){
+
+    //   $scope.logeandose= 0
+
+    // }
 
 
-      $scope.grafic =0
- 
-    
-
-
-     var chart = $('#chartmarcador').highcharts();
-
-
-
-    chart.series[0].data[0].update(parseInt($scope.reporte3.aban))
-    chart.series[1].data[0].update(parseInt($scope.reporte3.cont))
-    chart.series[2].data[0].update(parseInt($scope.reporte3.disc))
-    chart.series[3].data[0].update(parseInt($scope.reporte3.disc)-parseInt($scope.reporte3.cont)-parseInt($scope.reporte3.aban))
-
-  
-
-    })
 
 
 }
