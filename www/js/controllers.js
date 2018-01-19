@@ -100,7 +100,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
          template:'<center>No se encontraron datos</center>',
          buttons: [
          { text: 'Aceptar',
-          type: 'button-balanced'
+          type: 'button-balanced button-outline'
           },
         ]
 
@@ -930,7 +930,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
          template:'<center>No se encontraron datos</center>',
          buttons: [
          { text: 'Aceptar',
-          type: 'button-balanced'
+          type: 'button-balanced button-outline'
           },
         ]
 
