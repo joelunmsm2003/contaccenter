@@ -205,6 +205,13 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
                 $scope.gestiones = response['gest']
 
+
+                if(response['gest']==0){
+
+                    $scope.showPopup2()
+
+                  }
+
                  $scope.consultas = response['cons']
 
                   $scope.reclamos = response['recl']
@@ -394,26 +401,10 @@ $interval(function () { $scope.reload($localStorage.id_cola); }, 10000);
 Highcharts.chart('containerx', {
 
         chart: {
-            events: {
-                addSeries: function () {
-                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
-                        .attr({
-                            fill: Highcharts.getOptions().colors[0],
-                            padding: 10,
-                            r: 5,
-                            zIndex: 8
-                        })
-                        .css({
-                            color: '#FFFFFF'
-                        })
-                        .add();
-
-                    setTimeout(function () {
-                        label.fadeOut();
-                    }, 1000);
-                }
-            },
-            type:'bar'
+          
+            type:'bar',
+            height:300,
+            width:300
         },
 
           title: {
@@ -757,27 +748,9 @@ $scope.grafic=0
 
     $scope.chartConfig = {
       chart: {
-        events: {
-                addSeries: function () {
-                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
-                        .attr({
-                            fill: Highcharts.getOptions().colors[0],
-                            padding: 10,
-                            r: 5,
-                            zIndex: 8
-                        })
-                        .css({
-                            color: '#FFFFFF'
-                        })
-                        .add();
-
-                    setTimeout(function () {
-                        label.fadeOut();
-                    }, 1000);
-                }
-            },
         type: 'bar',
-        width: 330
+        width: 290,
+        height:300
       },
         title: {
             text: null
@@ -1113,27 +1086,9 @@ $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 
 $scope.chartConfigmarcador = {
       chart: {
-        events: {
-                addSeries: function () {
-                    var label = this.renderer.label('A series was added, about to redraw chart', 100, 120)
-                        .attr({
-                            fill: Highcharts.getOptions().colors[0],
-                            padding: 10,
-                            r: 5,
-                            zIndex: 8
-                        })
-                        .css({
-                            color: '#FFFFFF'
-                        })
-                        .add();
-
-                    setTimeout(function () {
-                        label.fadeOut();
-                    }, 1000);
-                }
-            },
         type: 'bar',
-        width: 330
+        width: 330,
+        height:300
       },
         title: {
             text: null
@@ -1188,7 +1143,7 @@ $scope.chartConfigmarcador = {
             data: [0]
         },
         {
-            name: 'Discadas',
+            name: 'Discados',
             color: '#5dc00d',
             data: [0]
         },
@@ -1487,7 +1442,9 @@ Highcharts.chart('pie', {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
+        width:300,
+        height:300
     },
     title: {
         text: null
@@ -1539,7 +1496,10 @@ Highcharts.chart('3grafica', {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
+        width:300,
+        height:300
+
     },
     title: {
         text: null

@@ -9894,6 +9894,9 @@ a.button {
   .efectividad span {
     font-size: 10px; }
 
+svg {
+  margin-top: -12px !important; }
+
 .porcentaje {
   padding: 0px !important;
   height: 28px;
@@ -9908,16 +9911,26 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  border: 1px solid #ddd !important;
   color: #000;
   font-size: 13px; }
 
 th, td {
   border: none;
   text-align: left;
-  padding: 9px; }
+  padding: 4px;
+  padding-left: 11px; }
+
+.padding {
+  padding: 10px;
+  padding-top: 5px !important; }
 
 th {
   font-weight: bold; }
+
+.tittd {
+  width: 51%;
+  font-size: 12px; }
 
 .x {
   color: #E0E49F; }
@@ -9925,6 +9938,10 @@ th {
 .info {
   background: #E0E49F;
   color: #fff; }
+
+.cuadro {
+  border: 1px solid #9a9a9a;
+  border-radius: 3px; }
 
 .historial {
   font-size: 10px; }
@@ -10069,7 +10086,9 @@ th {
   background: #93a849;
   text-align: center;
   color: #fff;
-  border: 1px solid #fff; }
+  border: 1px solid #fff;
+  padding-left: 5px;
+  width: 28px; }
 
 .resultado1 {
   background: #72993b;

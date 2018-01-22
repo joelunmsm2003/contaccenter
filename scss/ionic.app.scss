@@ -135,6 +135,11 @@ li:hover{
 	}
 	
 }
+
+svg{
+
+    margin-top: -12px !important;
+}
 .porcentaje {
 	padding: 0px !important;
 	height: 28px;
@@ -151,19 +156,32 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 100%;
-	//border: 1px solid #ddd;
+	border: 1px solid #ddd !important;
 	color: #000;
 	font-size: 13px;
+
 }
 
 th, td {
 	border: none;
-	text-align: left;
-	padding: 9px;
+    text-align: left;
+    padding: 4px;
+    padding-left: 11px;
+
 }
+
+.padding {
+  padding: 10px;
+  padding-top: 5px !important;
+  }
 
 th {
 	font-weight: bold;
+}
+.tittd{
+
+	    width: 51%;
+    font-size: 12px;
 }
 
 
@@ -174,6 +192,12 @@ th {
 .info {
 	background: $primario;
 	color: #fff;
+}
+
+.cuadro{
+
+	border: 1px solid #9a9a9a;
+    border-radius: 3px;
 }
 
 .historial {
@@ -348,6 +372,8 @@ th {
 	text-align:center;
 	color:#fff;
 	border: 1px solid #fff;
+	padding-left: 5px;
+	width: 28px;
 
 }
 
@@ -356,6 +382,7 @@ th {
 	text-align:center;
 	color:#fff;
 	border: 1px solid #fff;
+
 
 }
 
