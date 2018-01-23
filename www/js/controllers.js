@@ -14,8 +14,8 @@ function ($scope, $stateParams,$localStorage,$location,$ionicHistory) {
 
         $ionicHistory.clearCache();
 
-
-      ionic.Platform.exitApp();
+        navigator.app.exitApp();
+      //ionic.Platform.exitApp();
     }
 
 }])
