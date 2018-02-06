@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['angularjs-gauge','ngStorage'])
+angular.module('app.controllers', ['angularjs-gauge','ngStorage','angular.filter'])
   
 .controller('menuCtrl', ['$scope', '$stateParams','$localStorage','$location','$ionicHistory',//,/ The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -1230,7 +1230,8 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
     
       // Custom popup
       var myPopup1 = $ionicPopup.show({
-         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.grupo_agente}}</li>',
+         //template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas | groupBy:item.grupo_agente " ng-click="seleccionacola(item);cierra()">{{item.grupo_agente}}</li>',
+         templateUrl:'templates/puestosgruposmodal.html',
          scope: $scope,
          title:'Seleccione:',
          buttons: [
@@ -1308,9 +1309,33 @@ $scope.maxvalue=0
 
    $scope.seleccionacola=function(data){
 
+
+
+
+
+
+        console.log('SC...',data,data.length)
+
+        
+
+          
+
+          if(data.length){
+
+            data=data[0]
+            
+          }
+     
+
+
         $scope.grafic=1
 
+        //$scope.col = $filter('filter')($scope.colas,{'id' : 'IN','tipo_reporte':1})
+
+
         $scope.col = data
+
+
 
         if(data){
 
@@ -1334,6 +1359,9 @@ $scope.maxvalue=0
         $scope.serv.srvn = data.srvn
 
         $localStorage.servicio_pues= data.id
+
+
+        console.log('trayendo colas,...',data.cmps[0])
 
      
           $scope.seleccionacola(data.cmps[0])
