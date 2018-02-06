@@ -121,7 +121,15 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         if($scope.servicios.length>0){
 
+
           $scope.colas = $scope.servicios[0]['cmps']
+
+          $scope.colas = $scope.colas.filter(function (data) {
+            
+              return (data.cmpn);
+
+          });
+
 
           $localStorage.servicio= $scope.servicios[0]['id']
 
@@ -607,17 +615,23 @@ $scope.grafic=0
 
         $scope.colas = $scope.servicios[0]['cmps']
 
+        $scope.colas = $scope.colas.filter(function (data) {
+        
+              return (data.cmpn);
+        });
+
+        $scope.col = $scope.colas[0]
+
+
         $scope.id_cola = $scope.colas[0]['id']
 
         $localStorage.id_cola_sla = $scope.id_cola
 
         $scope.serv = $scope.servicios[0]
 
-        $scope.col = $scope.servicios[0]['cmps'][0]
-
-        console.log('ser,cola',$localStorage.servicio,$scope.id_cola)
 
 
+        console.log('campanas..',$scope.cmps)
 
     $scope.seleccionacola=function(data){
 
@@ -926,6 +940,13 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
           $scope.colas = $scope.servicios[0]['cmps']
 
+          $scope.colas = $scope.colas.filter(function (data) {
+        
+                return (data.cmpn);
+          });
+
+          $scope.col = $scope.colas[0]
+
           $scope.id_cola = $scope.colas[0]['id']
 
           $localStorage.id_cola_marc = $scope.id_cola
@@ -934,7 +955,6 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
           $localStorage.servicio_marc= $scope.servicios[0]['id']
 
-          $scope.col = $scope.servicios[0]['cmps'][0]
     }
 
     if($scope.servicios.length==0){
@@ -1210,7 +1230,7 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
     
       // Custom popup
       var myPopup1 = $ionicPopup.show({
-         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.grupo_agente}}</li>',
          scope: $scope,
          title:'Seleccione:',
          buttons: [
@@ -1264,13 +1284,20 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
       $scope.colas = $scope.servicios[0]['cmps']
 
+      $scope.colas = $scope.colas.filter(function (data) {
+        
+          return (data.cmpn);
+
+      });
+
+      $scope.col = $scope.colas[0]
+
       $scope.id_cola = $scope.colas[0]['id']
 
       $localStorage.id_cola_pues = $scope.id_cola
 
       $scope.serv = $scope.servicios[0]
 
-      $scope.col = $scope.servicios[0]['cmps'][0]
 
   }
 

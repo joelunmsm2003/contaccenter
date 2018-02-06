@@ -18,6 +18,7 @@
      </div>
 
 
+
 <!--       <label class="item item-select" id="sLARELEVANTES-select15">
         <span class="input-label">Servicio:</span>
 
@@ -28,7 +29,11 @@
       <div class="row" style="padding: 12px;padding-top: 10px;
     padding-bottom: 5px;">
         <div class='col-20'>Cola</div>
-        <div class='col-80' style='text-align: right;' ng-click = "showPopup1()">{{col.cmpn}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+        <div ng-if='col.cmpn' class='col-80' style='text-align: right;' ng-click = "showPopup1()">{{col.cmpn}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+
+ <!--        <div ng-if='!col.cmpn' class='col-80' style='text-align: right;' ng-click = "showPopup1()">{{col.grupo_agente}} &nbsp;&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+ -->
+      
      </div>
 
 
