@@ -1285,11 +1285,11 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
       $scope.colas = $scope.servicios[0]['cmps']
 
-      $scope.colas = $scope.colas.filter(function (data) {
+      // $scope.colas = $scope.colas.filter(function (data) {
         
-          return (data.cmpn);
+      //     return (data.cmpn);
 
-      });
+      // });
 
       $scope.col = $scope.colas[0]
 
