@@ -733,9 +733,9 @@ $scope.grafic=0
     
         $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':1})
 
-        if($scope.servicios){
+        if($scope.servicios.length>0){
 
-                console.log('$scope.servicios...',$scope.servicios)
+                console.log('$scope.servicios...',$scope.servicios.length)
 
                 $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
