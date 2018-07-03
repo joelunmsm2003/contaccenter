@@ -1724,8 +1724,6 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 
    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
-     $localStorage.servicioback = response['campanas_ivr']
-
 
 
      $scope.servicios= response['campanas_ivr']
