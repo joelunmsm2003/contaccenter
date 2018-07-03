@@ -513,6 +513,10 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
      $localStorage.servicioback = response['servicios']
 
+     $localStorage.campanas_ivr = response['campanas_ivr']
+
+     console.log('Encuestas...',$localStorage.campanas_ivr)
+
 
      if (response=='nologin'){
 
@@ -1224,6 +1228,8 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
      $localStorage.servicioback = response['servicios']
 
+     $localStorage.campanas_ivr = response['campanas_ivr']
+
 })
 
 
@@ -1720,80 +1726,93 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
   }
 
 
+  $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
+     $localStorage.servicioback = response['servicios']
 
-   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
-
-
-
-     $scope.servicios= response['campanas_ivr']
-
-
-
-     
-      $localStorage.campana_id = $scope.servicios[0]['id']
-
-      $scope.servicio = $scope.servicios[0]['campana']
-
-      $localStorage.pregunta_id = $scope.servicios[0].preguntas[0]['id']
-
-      $scope.pregunta = $scope.servicios[0].preguntas[0]['descripcion']
-
-      $localStorage.respuesta_id = $scope.servicios[0].preguntas[0].respuestas[0]['id']
-
-
-      $http.get("http://192.241.240.186:1000/encuesta/"+$scope.servicios[0]['id']+'/'+$scope.servicios[0].preguntas[0]['id']+'/'+$scope.servicios[0].preguntas[0].respuestas[0]['id']).success(function(response) {
-
-
-      console.log('datos del django...',response)
-
-      $scope.segundagrafica=response[0]['segundagrafica']
-
-
-      $scope.serie_grafico_score=JSON.stringify(response[0]['serie_grafico_score'])
-
-      console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
-
-
-      var lineas = $('#container').highcharts();
-
-
-      for(o in $scope.segundagrafica){
-
-      console.log($scope.segundagrafica[o])
-
-      lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
-
-
-      }
-        
-
-      $scope.encuestas = response[0]['data']
-
-      $scope.primergrafico = response[0]['categoria']
-
-      $scope.logeandose=0
-
-
-      var chart = $('#pie').highcharts();
-
-      for(o in $scope.primergrafico){
-
-        console.log(o)
-
-        chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
-
-
-      }
-
-
-
-
-
-
-      })
+     $localStorage.campanas_ivr = response['campanas_ivr']
 
 })
+
+
+
+
+      $scope.reload = function(){
+
+
+
+            console.log('Total..',$localStorage.campana_id,$localStorage.pregunta_id,$localStorage.respuesta_id)
+
+
+            $scope.servicios= $localStorage.campanas_ivr
+           
+            $localStorage.campana_id = $scope.servicios[0]['id']
+
+            $scope.servicio = $scope.servicios[0]['campana']
+
+            $localStorage.pregunta_id = $scope.servicios[0].preguntas[0]['id']
+
+            $scope.pregunta = $scope.servicios[0].preguntas[0]['descripcion']
+
+            $localStorage.respuesta_id = $scope.servicios[0].preguntas[0].respuestas[0]['id']
+
+
+            $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+
+
+            console.log('datos del django...',response)
+
+            $scope.segundagrafica=response[0]['segundagrafica']
+
+
+            $scope.serie_grafico_score=JSON.stringify(response[0]['serie_grafico_score'])
+
+            console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
+
+
+            var lineas = $('#container').highcharts();
+
+
+            for(o in $scope.segundagrafica){
+
+            console.log($scope.segundagrafica[o])
+
+            lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
+
+
+            }
+              
+
+            $scope.encuestas = response[0]['data']
+
+            $scope.primergrafico = response[0]['categoria']
+
+            $scope.logeandose=0
+
+           
+
+            var chart = $('#pie').highcharts();
+
+             chart.series[0].setData([]);
+
+            for(o in $scope.primergrafico){
+
+              console.log(o)
+
+              chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+
+
+            }
+
+
+            })
+
+
+      }
+
+
+
+
 
 
       $scope.showPopup = function() {
@@ -1922,7 +1941,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
    }
 
 
-   $interval(function () { $scope.graficando(); }, 10000);
+   $interval(function () { $scope.reload(); }, 10000);
 
 
 
