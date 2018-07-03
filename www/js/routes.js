@@ -65,6 +65,17 @@ angular.module('app.routes', ['highcharts-ng','ionic'])
               
             })
 
+             .state('menu.encuestas', {
+              url: '/encuestas',
+              views: {
+              'side-menu21': {
+                templateUrl: 'templates/encuestas.html',
+                controller:'encuestasCtrl'
+                }
+              }
+              
+            })
+
               .state('menu.marcadorpredictivo', {
               url: '/marcadorpredictivo',
               views: {

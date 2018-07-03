@@ -118,8 +118,9 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
         $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':3})
 
+        if($scope.servicios){
 
-        if($scope.servicios.length>0){
+           if($scope.servicios.length>0){
 
 
           $scope.colas = $scope.servicios[0]['cmps']
@@ -143,6 +144,10 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 
         }
+
+        }
+
+       
 
         if($scope.servicios.length==0){
 
@@ -611,27 +616,32 @@ $scope.grafic=0
 
         $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':1})
 
-        $localStorage.servicio_sla= $scope.servicios[0]['id']
+        console.log('$scope.servicios',$scope.servicios)
 
-        $scope.colas = $scope.servicios[0]['cmps']
+        if($scope.servicios){
 
-        $scope.colas = $scope.colas.filter(function (data) {
-        
-              return (data.cmpn);
-        });
+              $localStorage.servicio_sla= $scope.servicios[0]['id']
 
-        $scope.col = $scope.colas[0]
+              $scope.colas = $scope.servicios[0]['cmps']
 
+              $scope.colas = $scope.colas.filter(function (data) {
+              
+                    return (data.cmpn);
+              });
 
-        $scope.id_cola = $scope.colas[0]['id']
-
-        $localStorage.id_cola_sla = $scope.id_cola
-
-        $scope.serv = $scope.servicios[0]
+              $scope.col = $scope.colas[0]
 
 
+              $scope.id_cola = $scope.colas[0]['id']
 
-        console.log('campanas..',$scope.cmps)
+              $localStorage.id_cola_sla = $scope.id_cola
+
+              $scope.serv = $scope.servicios[0]
+
+        }
+
+
+
 
     $scope.seleccionacola=function(data){
 
@@ -723,35 +733,48 @@ $scope.grafic=0
     
         $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':1})
 
-        console.log('SLA',$scope.servicios)
+        if($scope.servicios){
 
-        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
-        if(cola){
 
-            $scope.id_cola = cola 
-        }
+                $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
+
+                if(cola){
+
+                    $scope.id_cola = cola 
+                }
 
          ///Graficas
 
-            $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio_sla+'/'+$localStorage.id_cola_sla).success(function(response) {
+                $http.get("http://192.241.240.186:1000/reporte1/"+$localStorage.servicio_sla+'/'+$localStorage.id_cola_sla).success(function(response) {
 
-                  $scope.reporte1 = response
-
-
-                  var chart = $('#chart1').highcharts();
+                      $scope.reporte1 = response
 
 
-                  chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
-                  chart.series[1].data[0].update(parseInt($scope.reporte1.po))
-                  chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
+                      var chart = $('#chart1').highcharts();
 
 
-                  x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+                      chart.series[0].data[0].update(parseInt($scope.reporte1.sla))
+                      chart.series[1].data[0].update(parseInt($scope.reporte1.po))
+                      chart.series[2].data[0].update(parseInt($scope.reporte1.pa))
 
-                  $scope.logeandose=0 
 
-            });
+                      x=parseInt($scope.reporte1.a)+parseInt($scope.reporte1.r)
+
+                      $scope.logeandose=0 
+
+                });
+
+
+
+        }
+        else{
+
+            $scope.logeandose=0
+
+        }
+
+
 
 
 }
@@ -935,8 +958,9 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
     $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo_reporte':2})
 
+    if($scope.servicios){
 
-    if($scope.servicios.length>0){
+          if($scope.servicios.length>0){
 
           $scope.colas = $scope.servicios[0]['cmps']
 
@@ -955,7 +979,11 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
           $localStorage.servicio_marc= $scope.servicios[0]['id']
 
+            }
+
     }
+
+
 
     if($scope.servicios.length==0){
 
@@ -1279,28 +1307,35 @@ $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$local
 
   $scope.servicios = $filter('filter')($localStorage.servicioback,{'tipo' : 'IN','tipo_reporte':1})
 
-  if($scope.servicios.length>0){
 
-      $localStorage.servicio_pues= $scope.servicios[0]['id']
+  if($scope.servicios){
 
-      $scope.colas = $scope.servicios[0]['cmps']
+      if($scope.servicios.length>0){
 
-      // $scope.colas = $scope.colas.filter(function (data) {
-        
-      //     return (data.cmpn);
+          $localStorage.servicio_pues= $scope.servicios[0]['id']
 
-      // });
+          $scope.colas = $scope.servicios[0]['cmps']
 
-      $scope.col = $scope.colas[0]
+          // $scope.colas = $scope.colas.filter(function (data) {
+            
+          //     return (data.cmpn);
 
-      $scope.id_cola = $scope.colas[0]['id']
+          // });
 
-      $localStorage.id_cola_pues = $scope.id_cola
+          $scope.col = $scope.colas[0]
 
-      $scope.serv = $scope.servicios[0]
+          $scope.id_cola = $scope.colas[0]['id']
 
+          $localStorage.id_cola_pues = $scope.id_cola
+
+          $scope.serv = $scope.servicios[0]
+
+
+      }
 
   }
+
+
 
 
 $scope.logeandose=1
@@ -1433,11 +1468,17 @@ $scope.reload2=function(cola){
   console.log('Puestos',$scope.servicios)
 
 
-    if($scope.servicios.length>0){
+    if($scope.servicios){
 
-        $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
+            if($scope.servicios.length>0){
+
+              $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
+
+          }
 
     }
+
+
     
     if(cola){
 
@@ -1637,6 +1678,439 @@ $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 
  ////
     
+}])
+
+
+.controller('encuestasCtrl', ['$scope', '$stateParams','$http','$localStorage','$ionicPopup','$interval', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
+
+
+
+  $scope.logeandose=1
+
+
+   $scope.g1=true
+  $scope.g2=false
+  $scope.g3=false
+
+
+ $scope.grafica2=function(){
+
+            $scope.g1=false
+            $scope.g2=true
+            $scope.g3=false
+
+  }
+
+  $scope.grafica3=function(){
+
+            $scope.g1=false
+            $scope.g2=false
+            $scope.g3=true
+  }
+
+
+  $scope.grafica1=function(){
+
+            $scope.g1=true
+            $scope.g2=false
+            $scope.g3=false
+  }
+
+
+
+
+   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+     $localStorage.servicioback = response['campanas_ivr']
+
+
+
+     $scope.servicios= response['campanas_ivr']
+
+
+
+     
+      $localStorage.campana_id = $scope.servicios[0]['id']
+
+      $scope.servicio = $scope.servicios[0]['campana']
+
+      $localStorage.pregunta_id = $scope.servicios[0].preguntas[0]['id']
+
+      $scope.pregunta = $scope.servicios[0].preguntas[0]['descripcion']
+
+      $localStorage.respuesta_id = $scope.servicios[0].preguntas[0].respuestas[0]['id']
+
+
+      $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+
+
+      console.log('datos del django...',response)
+
+      $scope.segundagrafica=response[0]['segundagrafica']
+
+
+      $scope.serie_grafico_score=JSON.stringify(response[0]['serie_grafico_score'])
+
+      console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
+
+
+      var lineas = $('#container').highcharts();
+
+
+      for(o in $scope.segundagrafica){
+
+      console.log($scope.segundagrafica[o])
+
+      lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
+
+
+      }
+        
+
+      $scope.encuestas = response[0]['data']
+
+      $scope.primergrafico = response[0]['categoria']
+
+      $scope.logeandose=0
+
+
+      var chart = $('#pie').highcharts();
+
+      for(o in $scope.primergrafico){
+
+        console.log(o)
+
+        chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+
+
+      }
+
+
+
+
+
+
+      })
+
+})
+
+
+      $scope.showPopup = function() {
+      $scope.data = {}
+    
+      // Custom popup
+      var myPopup = $ionicPopup.show({
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traepreguntas(item);cierra()">{{item.campana}}</li>',
+         scope: $scope,
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
+            
+      });
+
+
+       $scope.cierra=function(){
+
+          myPopup.close()
+
+
+         }   
+   };
+
+
+      $scope.showPopup1 = function() {
+      $scope.data = {}
+    
+      // Custom popup
+      var myPopup = $ionicPopup.show({
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in preguntas" ng-click="traeresultados(item);cierra()">{{item.descripcion}}</li>',
+         scope: $scope,
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
+            
+      });
+
+
+       $scope.cierra=function(){
+
+          myPopup.close()
+
+
+         }   
+   };
+
+
+   $scope.traepreguntas=function(data){
+
+    console.log('hshs',data)
+
+    $localStorage.campana_id = data['id']
+
+    $scope.servicio= data.campana
+
+    $scope.preguntas=data.preguntas
+
+    //$scope.pregunta=$scope.preguntas[0]
+
+
+    console.log('respuestas..',$scope.preguntas[0]['respuestas'].length)
+
+
+    $localStorage.pregunta_id=$scope.preguntas[0].id
+
+    if ($scope.preguntas[0]['respuestas'].length>0){
+
+      $localStorage.respuesta_id = $scope.preguntas[0]['respuestas'].id
+
+    }
+    else{
+
+      $localStorage.respuesta_id = 9
+
+    }
+
+
+  
+
+  
+
+
+    $scope.traeresultados($scope.preguntas[0])
+
+    //$scope.logeandose=1
+
+
+   }
+
+
+   $scope.graficando=function(){
+
+
+       $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+
+
+    $scope.encuestas = response[0]['data']
+
+    $scope.primergrafico = response[0]['categoria']
+
+    $scope.logeandose=0
+
+
+    var chart = $('#pie').highcharts();
+
+    chart.series[0].setData([]);
+
+    for(o in $scope.primergrafico){
+
+    console.log(o)
+
+    chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+
+
+    }
+
+    })
+
+   }
+
+
+   $interval(function () { $scope.graficando(); }, 10000);
+
+
+
+   $scope.traeresultados=function(data){
+
+    console.log('traeresultados',data)
+
+
+
+    $scope.encuestas = data
+
+    $localStorage.pregunta_id =data['id']
+
+    $scope.pregunta=data.descripcion
+
+    $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+
+
+
+
+    $scope.encuestas = response[0]['data']
+
+    $scope.primergrafico = response[0]['categoria']
+
+    $scope.logeandose=0
+
+
+    var chart = $('#pie').highcharts();
+
+    chart.series[0].setData([]);
+
+    for(o in $scope.primergrafico){
+
+    console.log(o)
+
+    chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+
+
+    }
+
+    })
+
+
+   }
+
+
+   Highcharts.chart('pie', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        width:300,
+        height:300
+    },
+    title: {
+        text: null
+    },
+    tooltip: {
+        pointFormat: '<b>{point.y}</b>'
+    },
+    legend: {
+
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'top',
+            x: 0,
+            y: 0,
+            backgroundColor:'#FFFFFF'
+           
+        },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y} ',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name:'Valor:',
+        colorByPoint: true,
+        data: []
+    }]
+});
+
+
+  Highcharts.chart('container', {
+      chart: {
+          type: 'line'
+      },
+      title: {
+          text: 'Eficiencia por Hora',
+          style: {
+
+                font: 'normal 12px Verdana, sans-serif',
+
+                }
+
+      },
+      xAxis: {
+          categories: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00','21:00','22:00','23:00']
+      },
+      yAxis: {
+          title: {
+              text: null
+          },
+          labels: {
+          format: '{value}%'
+          }
+      },
+      tooltip: {
+        pointFormat: "Value: {point.y:.2f} mm"
+      },
+      plotOptions: {
+          line: {
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.y}%'
+              },
+              enableMouseTracking: false
+          }
+      },
+      series: [{
+          name: 'Eficiencia',
+          data: []
+      }]
+  });
+
+
+
+Highcharts.chart('barras', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Resultados por Hora',
+        style: {
+
+                font: 'normal 12px Verdana, sans-serif'
+
+                }
+    },
+    xAxis: {
+        categories: ['09:00', '10:00', '11:00', '12:00', '13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21.00','22:00','23:00']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: null
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Buena',
+        data: [5, 3, 4, 7, 2,4,4,4,4,4,4,4,4,4,4]
+    },
+    {
+        name: 'Regular',
+        data: [5, 3, 4, 7, 2,15,3,1,2,3,4,5,6,7]
+    },
+    {
+        name: 'Mala',
+        data: [5, 3, 4, 7, 2,15,3,1,2,3,4,5,6,7]
+    }]
+});
+
+
+
+
+
+
 }])
    
 .controller('puestosCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
