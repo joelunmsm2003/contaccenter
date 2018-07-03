@@ -1744,7 +1744,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
       $localStorage.respuesta_id = $scope.servicios[0].preguntas[0].respuestas[0]['id']
 
 
-      $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+      $http.get("http://192.241.240.186:1000/encuesta/"+$scope.servicios[0]['id']+'/'+$scope.servicios[0].preguntas[0]['id']+'/'+$scope.servicios[0].preguntas[0].respuestas[0]['id']).success(function(response) {
 
 
       console.log('datos del django...',response)
