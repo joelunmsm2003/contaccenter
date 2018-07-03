@@ -735,7 +735,7 @@ $scope.grafic=0
 
         if($scope.servicios){
 
-
+                console.log('$scope.servicios...',$scope.servicios)
 
                 $scope.id_cola = $scope.servicios[0]['cmps'][0]['id']
 
