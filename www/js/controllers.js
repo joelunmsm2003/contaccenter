@@ -515,7 +515,6 @@ $http.get("http://192.241.240.186:1000/loginuser/"+data.usuario+'/'+data.passwor
 
      $localStorage.campanas_ivr = response['campanas_ivr']
 
-     console.log('Encuestas...',$localStorage.campanas_ivr)
 
 
      if (response=='nologin'){
@@ -2013,13 +2012,16 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
             backgroundColor:'#FFFFFF'
            
         },
+
+
+        
     plotOptions: {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.y} ',
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                 style: {
                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                 }
