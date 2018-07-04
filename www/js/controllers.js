@@ -2069,10 +2069,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.0f} %',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                }
+                format: '<b>{point.name}</b>: {point.percentage:.0f} %'
             },
             showInLegend: true
         }
@@ -2127,7 +2124,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
           }
       },
       series: [{
-          name: '',
+          name: 'Eficiencia',
           data: []
       }]
   });
