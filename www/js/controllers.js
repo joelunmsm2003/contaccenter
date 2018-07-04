@@ -1739,9 +1739,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
       $scope.reload = function(){
 
 
-
             console.log('Total..',$localStorage.campana_id,$localStorage.pregunta_id,$localStorage.respuesta_id)
-
 
             $scope.servicios= $localStorage.campanas_ivr
            
@@ -1763,45 +1761,91 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 
             $scope.segundagrafica=response[0]['segundagrafica']
 
-
-            $scope.serie_grafico_score=JSON.stringify(response[0]['serie_grafico_score'])
+            $scope.serie_grafico_score=response[0]['serie_grafico_score']
 
             console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
 
+            eval('var obj='+$scope.serie_grafico_score);
 
-            var lineas = $('#container').highcharts();
-
-
-            for(o in $scope.segundagrafica){
-
-            console.log($scope.segundagrafica[o])
-
-            lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
+            $scope.serie_grafico_score = obj
 
 
-            }
+
+                  var barras = $('#barras').highcharts();
+
+                  barras.series[0].setData([]);
+                  barras.series[1].setData([]);
+                  barras.series[2].setData([]);
+                  //barras.series[3].setData([]);
+                  // barras.series[4].setData([]);
+                  // barras.series[5].setData([]);
+                  // barras.series[6].setData([]);
+                  // barras.series[7].setData([]);
+                  // barras.series[8].setData([]);
+                  // barras.series[9].setData([]);
+                  // barras.series[10].setData([]);
+                  // barras.series[11].setData([]);
+                  // barras.series[12].setData([]);
+                  // barras.series[13].setData([]);
+                  // barras.series[14].setData([]);
+
+                  for(o in $scope.serie_grafico_score){
+
+                  console.log($scope.serie_grafico_score[o]['data'])
+
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][13],color:$scope.serie_grafico_score[o]['color']});
+                  // barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
+
+
+                  }
+
+
+                  var lineas = $('#container').highcharts();
+
+                  lineas.series[0].setData([]);
+
+                  for(o in $scope.segundagrafica){
+
+                  console.log($scope.segundagrafica[o])
+
+                  lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
+
+                  }
               
 
-            $scope.encuestas = response[0]['data']
+                  $scope.encuestas = response[0]['data']
 
-            $scope.primergrafico = response[0]['categoria']
+                  $scope.primergrafico = response[0]['categoria']
 
-            $scope.logeandose=0
+                  $scope.logeandose=0
 
            
 
-            var chart = $('#pie').highcharts();
+                  var chart = $('#pie').highcharts();
 
-             chart.series[0].setData([]);
+                   chart.series[0].setData([]);
 
-            for(o in $scope.primergrafico){
+                  for(o in $scope.primergrafico){
 
-              console.log(o)
+                    console.log(o)
 
-              chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+                    chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
 
 
-            }
+                  }
 
 
             })
@@ -1909,35 +1953,35 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
    }
 
 
-   $scope.graficando=function(){
+   // $scope.graficando=function(){
 
 
-       $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+   //     $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
 
 
-    $scope.encuestas = response[0]['data']
+   //  $scope.encuestas = response[0]['data']
 
-    $scope.primergrafico = response[0]['categoria']
+   //  $scope.primergrafico = response[0]['categoria']
 
-    $scope.logeandose=0
-
-
-    var chart = $('#pie').highcharts();
-
-    chart.series[0].setData([]);
-
-    for(o in $scope.primergrafico){
-
-    console.log(o)
-
-    chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+   //  $scope.logeandose=0
 
 
-    }
+   //  var chart = $('#pie').highcharts();
 
-    })
+   //  chart.series[0].setData([]);
 
-   }
+   //  for(o in $scope.primergrafico){
+
+   //  console.log(o)
+
+   //  chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
+
+
+   //  }
+
+   //  })
+
+   // }
 
 
    $interval(function () { $scope.reload(); }, 10000);
@@ -1992,12 +2036,16 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie',
-        width:300,
-        height:300
+        type: 'pie'
     },
     title: {
-        text: null
+        text: 'Resultados del dia',
+        style: {
+
+                font: 'normal 12px Verdana, sans-serif',
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+
+                }
     },
     tooltip: {
         pointFormat: '<b>{point.y}</b>'
@@ -2006,7 +2054,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 
             layout: 'horizontal',
             align: 'center',
-            verticalAlign: 'top',
+            verticalAlign: 'bottom',
             x: 0,
             y: 0,
             backgroundColor:'#FFFFFF'
@@ -2014,14 +2062,14 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
         },
 
 
-        
+
     plotOptions: {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                format: '<b>{point.name}</b>: {point.percentage:.0f} %',
                 style: {
                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                 }
@@ -2046,6 +2094,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
           style: {
 
                 font: 'normal 12px Verdana, sans-serif',
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 
                 }
 
@@ -2089,7 +2138,8 @@ Highcharts.chart('barras', {
         text: 'Resultados por Hora',
         style: {
 
-                font: 'normal 12px Verdana, sans-serif'
+                font: 'normal 12px Verdana, sans-serif',
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 
                 }
     },
@@ -2113,15 +2163,15 @@ Highcharts.chart('barras', {
     },
     series: [{
         name: 'Buena',
-        data: [5, 3, 4, 7, 2,4,4,4,4,4,4,4,4,4,4]
+        data: []
     },
     {
         name: 'Regular',
-        data: [5, 3, 4, 7, 2,15,3,1,2,3,4,5,6,7]
+        data: []
     },
     {
         name: 'Mala',
-        data: [5, 3, 4, 7, 2,15,3,1,2,3,4,5,6,7]
+        data: []
     }]
 });
 
