@@ -2100,7 +2100,11 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 
       },
       xAxis: {
-          categories: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00','21:00','22:00','23:00']
+          categories: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00','21:00','22:00','23:00'],
+          labels: {
+          visible: false
+          }
+
       },
       yAxis: {
           title: {
@@ -2123,7 +2127,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
           }
       },
       series: [{
-          name: 'Eficiencia',
+          name: '',
           data: []
       }]
   });
@@ -2163,14 +2167,17 @@ Highcharts.chart('barras', {
     },
     series: [{
         name: 'Buena',
+        color:'#a9ff96',
         data: []
     },
     {
         name: 'Regular',
+        color:'#e4d354',
         data: []
     },
     {
         name: 'Mala',
+        color:'#ffbc75',
         data: []
     }]
 });
