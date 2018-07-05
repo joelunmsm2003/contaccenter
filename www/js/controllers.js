@@ -1734,304 +1734,7 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 })
 
 
-
-
-      $scope.reload = function(){
-
-
-            console.log('Total..',$localStorage.campana_id,$localStorage.pregunta_id,$localStorage.respuesta_id)
-
-            $scope.servicios= $localStorage.campanas_ivr
-           
-            $localStorage.campana_id = $scope.servicios[0]['id']
-
-            $scope.servicio = $scope.servicios[0]['campana']
-
-            $localStorage.pregunta_id = $scope.servicios[0].preguntas[0]['id']
-
-            $scope.pregunta = $scope.servicios[0].preguntas[0]['descripcion']
-
-            $localStorage.respuesta_id = $scope.servicios[0].preguntas[0].respuestas[0]['id']
-
-
-            $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
-
-
-            console.log('datos del django...',response)
-
-            $scope.segundagrafica=response[0]['segundagrafica']
-
-            $scope.serie_grafico_score=response[0]['serie_grafico_score']
-
-            console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
-
-            eval('var obj='+$scope.serie_grafico_score);
-
-            $scope.serie_grafico_score = obj
-
-
-
-                  var barras = $('#barras').highcharts();
-
-                  barras.series[0].setData([]);
-                  barras.series[1].setData([]);
-                  barras.series[2].setData([]);
-                  //barras.series[3].setData([]);
-                  // barras.series[4].setData([]);
-                  // barras.series[5].setData([]);
-                  // barras.series[6].setData([]);
-                  // barras.series[7].setData([]);
-                  // barras.series[8].setData([]);
-                  // barras.series[9].setData([]);
-                  // barras.series[10].setData([]);
-                  // barras.series[11].setData([]);
-                  // barras.series[12].setData([]);
-                  // barras.series[13].setData([]);
-                  // barras.series[14].setData([]);
-
-                  for(o in $scope.serie_grafico_score){
-
-                  console.log($scope.serie_grafico_score[o]['data'])
-
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
-                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][13],color:$scope.serie_grafico_score[o]['color']});
-                  // barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
-
-
-                  }
-
-
-                  var lineas = $('#container').highcharts();
-
-                  lineas.series[0].setData([]);
-
-                  for(o in $scope.segundagrafica){
-
-                  console.log($scope.segundagrafica[o])
-
-                  lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
-
-                  }
-              
-
-                  $scope.encuestas = response[0]['data']
-
-                  $scope.primergrafico = response[0]['categoria']
-
-                  $scope.logeandose=0
-
-           
-
-                  var chart = $('#pie').highcharts();
-
-                   chart.series[0].setData([]);
-
-                  for(o in $scope.primergrafico){
-
-                    console.log(o)
-
-                    chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
-
-
-                  }
-
-
-            })
-
-
-      }
-
-
-
-
-
-
-      $scope.showPopup = function() {
-      $scope.data = {}
-    
-      // Custom popup
-      var myPopup = $ionicPopup.show({
-         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traepreguntas(item);cierra()">{{item.campana}}</li>',
-         scope: $scope,
-         title:'Seleccione:',
-         buttons: [
-         { text: 'Cerrar',
-            type: 'button-balanced'
-          },
-        ]
-            
-      });
-
-
-       $scope.cierra=function(){
-
-          myPopup.close()
-
-
-         }   
-   };
-
-
-      $scope.showPopup1 = function() {
-      $scope.data = {}
-    
-      // Custom popup
-      var myPopup = $ionicPopup.show({
-         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in preguntas" ng-click="traeresultados(item);cierra()">{{item.descripcion}}</li>',
-         scope: $scope,
-         title:'Seleccione:',
-         buttons: [
-         { text: 'Cerrar',
-            type: 'button-balanced'
-          },
-        ]
-            
-      });
-
-
-       $scope.cierra=function(){
-
-          myPopup.close()
-
-
-         }   
-   };
-
-
-   $scope.traepreguntas=function(data){
-
-    console.log('hshs',data)
-
-    $localStorage.campana_id = data['id']
-
-    $scope.servicio= data.campana
-
-    $scope.preguntas=data.preguntas
-
-    //$scope.pregunta=$scope.preguntas[0]
-
-
-    console.log('respuestas..',$scope.preguntas[0]['respuestas'].length)
-
-
-    $localStorage.pregunta_id=$scope.preguntas[0].id
-
-    if ($scope.preguntas[0]['respuestas'].length>0){
-
-      $localStorage.respuesta_id = $scope.preguntas[0]['respuestas'].id
-
-    }
-    else{
-
-      $localStorage.respuesta_id = 9
-
-    }
-
-
-  
-
-  
-
-
-    $scope.traeresultados($scope.preguntas[0])
-
-    //$scope.logeandose=1
-
-
-   }
-
-
-   // $scope.graficando=function(){
-
-
-   //     $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
-
-
-   //  $scope.encuestas = response[0]['data']
-
-   //  $scope.primergrafico = response[0]['categoria']
-
-   //  $scope.logeandose=0
-
-
-   //  var chart = $('#pie').highcharts();
-
-   //  chart.series[0].setData([]);
-
-   //  for(o in $scope.primergrafico){
-
-   //  console.log(o)
-
-   //  chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
-
-
-   //  }
-
-   //  })
-
-   // }
-
-
-   $interval(function () { $scope.reload(); }, 10000);
-
-
-
-   $scope.traeresultados=function(data){
-
-    console.log('traeresultados',data)
-
-
-
-    $scope.encuestas = data
-
-    $localStorage.pregunta_id =data['id']
-
-    $scope.pregunta=data.descripcion
-
-    $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
-
-
-
-
-    $scope.encuestas = response[0]['data']
-
-    $scope.primergrafico = response[0]['categoria']
-
-    $scope.logeandose=0
-
-
-    var chart = $('#pie').highcharts();
-
-    chart.series[0].setData([]);
-
-    for(o in $scope.primergrafico){
-
-    console.log(o)
-
-    chart.series[0].addPoint({name: $scope.primergrafico[o]['estado'],y: parseInt($scope.primergrafico[o]['valor']),color:$scope.primergrafico[o]['color']});
-
-
-    }
-
-    })
-
-
-   }
-
-
-   Highcharts.chart('pie', {
+     Highcharts.chart('pie', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -2159,10 +1862,25 @@ Highcharts.chart('barras', {
     },
     plotOptions: {
         column: {
-            stacking: 'percent'
+            stacking: 'percent',
+            dataLabels: {
+                  enabled: true,
+                  format: '{point.percentage:.0f}'
+            }
         }
     },
-    series: [{
+    series: [
+    {
+        name: 'Excelente',
+        color:'#6cea71',
+        data: []
+    },
+    {
+        name: 'Muy Buena',
+        color:'#2b908f',
+        data: []
+    },
+    {
         name: 'Buena',
         color:'#a9ff96',
         data: []
@@ -2176,8 +1894,382 @@ Highcharts.chart('barras', {
         name: 'Mala',
         color:'#ffbc75',
         data: []
+    },
+    {
+        name: 'Muy Mala',
+        color:'#f45b5b',
+        data: []
     }]
 });
+
+
+
+
+
+
+
+
+      $scope.reload = function(){
+
+
+            console.log('Total..',$localStorage.campana_id,$localStorage.pregunta_id,$localStorage.respuesta_id)
+
+            $scope.servicios= $localStorage.campanas_ivr
+           
+            $localStorage.campana_id = $scope.servicios[0]['id']
+
+            $scope.servicio = $scope.servicios[0]['campana']
+
+            $localStorage.pregunta_id = $scope.servicios[0].preguntas[0]['id']
+
+            $scope.pregunta = $scope.servicios[0].preguntas[0]['descripcion']
+
+            $localStorage.respuesta_id = $scope.servicios[0].preguntas[0].respuestas[0]['id']
+
+
+            $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+
+
+                console.log('datos del django...',response)
+
+                $scope.segundagrafica=response[0]['segundagrafica']
+
+                $scope.serie_grafico_score=response[0]['serie_grafico_score']
+
+                console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
+
+                eval('var obj='+$scope.serie_grafico_score);
+
+                $scope.serie_grafico_score = obj
+
+
+
+                  var barras = $('#barras').highcharts();
+
+                  for(o in $scope.serie_grafico_score){
+
+                      console.log('borrando...',o)
+
+                      barras.series[o].setData([]);
+
+                  }
+
+                  for(o in $scope.serie_grafico_score){
+
+                  console.log('nuevo...',$scope.serie_grafico_score[o]['data'])
+
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][13],color:$scope.serie_grafico_score[o]['color']});
+                  barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
+                  
+                  // barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
+
+
+                  }
+
+
+                  var lineas = $('#container').highcharts();
+
+                  lineas.series[0].setData([]);
+
+                  for(o in $scope.segundagrafica){
+
+                  console.log($scope.segundagrafica[o])
+
+                  lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
+
+                  }
+              
+
+                  $scope.encuestas = response[0]['data']
+
+                  //$scope.primergrafico = response[0]['categoria']
+
+                  $scope.series_pregunta = response[0]['series_pregunta']
+
+                  eval('var obj=['+$scope.series_pregunta+']');
+
+                  $scope.primergrafico = obj
+           
+                  $scope.logeandose=0
+
+                  var chart = $('#pie').highcharts();
+
+                   chart.series[0].setData([]);
+
+                  for(o in $scope.primergrafico){
+
+                   
+                    chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
+
+
+                  }
+
+
+
+
+            })
+
+
+      }
+
+
+
+
+
+
+      $scope.showPopup = function() {
+      $scope.data = {}
+    
+      // Custom popup
+      var myPopup = $ionicPopup.show({
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traepreguntas(item);cierra()">{{item.campana}}</li>',
+         scope: $scope,
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
+            
+      });
+
+
+       $scope.cierra=function(){
+
+          myPopup.close()
+
+
+         }   
+   };
+
+
+      $scope.showPopup1 = function() {
+      $scope.data = {}
+    
+      // Custom popup
+      var myPopup = $ionicPopup.show({
+         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in preguntas" ng-click="traeresultados(item);cierra()">{{item.descripcion}}</li>',
+         scope: $scope,
+         title:'Seleccione:',
+         buttons: [
+         { text: 'Cerrar',
+            type: 'button-balanced'
+          },
+        ]
+            
+      });
+
+
+       $scope.cierra=function(){
+
+          myPopup.close()
+
+
+         }   
+   };
+
+
+   $scope.traepreguntas=function(data){
+
+    console.log('hshs',data)
+
+
+    $scope.logeandose=1
+
+    $localStorage.campana_id = data['id']
+
+    $scope.servicio= data.campana
+
+    $scope.preguntas=data.preguntas
+
+    //$scope.pregunta=$scope.preguntas[0]
+
+
+    console.log('respuestas..',$scope.preguntas[0]['respuestas'].length)
+
+
+    $localStorage.pregunta_id=$scope.preguntas[0].id
+
+    if ($scope.preguntas[0]['respuestas'].length>0){
+
+      $localStorage.respuesta_id = $scope.preguntas[0]['respuestas'].id
+
+    }
+    else{
+
+      $localStorage.respuesta_id = 9
+
+    }
+
+
+  
+
+  
+
+
+    $scope.traeresultados($scope.preguntas[0])
+
+    //$scope.logeandose=1
+
+
+   }
+
+
+
+
+
+   $scope.reload();
+
+   //$interval(function () { $scope.reload(); }, 20000);
+
+
+
+   $scope.traeresultados=function(data){
+
+    console.log('traeresultados',data)
+
+
+
+    $scope.encuestas = data
+
+    $localStorage.pregunta_id =data['id']
+
+    $scope.pregunta=data.descripcion
+
+    $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
+
+
+                console.log('datos del django...',response)
+
+                $scope.segundagrafica=response[0]['segundagrafica']
+
+
+                 var barras = $('#barras').highcharts();
+
+                for(o in $scope.serie_grafico_score){
+
+
+                      console.log('borrando...',o)
+
+                      barras.series[o].setData([]);
+
+                  }
+
+                $scope.serie_grafico_score=response[0]['serie_grafico_score']
+
+                console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
+
+                eval('var obj='+$scope.serie_grafico_score);
+
+                $scope.serie_grafico_score = obj
+
+
+
+                  var barras = $('#barras').highcharts();
+
+
+
+
+                  //barras.series[3].setData([]);
+                  // barras.series[4].setData([]);
+                  // barras.series[5].setData([]);
+                  // barras.series[6].setData([]);
+                  // barras.series[7].setData([]);
+                  // barras.series[8].setData([]);
+                  // barras.series[9].setData([]);
+                  // barras.series[10].setData([]);
+                  // barras.series[11].setData([]);
+                  // barras.series[12].setData([]);
+                  // barras.series[13].setData([]);
+                  // barras.series[14].setData([]);
+
+                  for(o in $scope.serie_grafico_score){
+
+                  console.log('nuevo...',$scope.serie_grafico_score[o])
+
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][13],color:$scope.serie_grafico_score[o]['color']});
+                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
+
+
+// barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
+
+
+                  }
+
+
+                  var lineas = $('#container').highcharts();
+
+                  lineas.series[0].setData([]);
+
+                  for(o in $scope.segundagrafica){
+
+                  console.log($scope.segundagrafica[o])
+
+                  lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
+
+                  }
+              
+
+                  $scope.encuestas = response[0]['data']
+
+                  //$scope.primergrafico = response[0]['categoria']
+
+                  $scope.series_pregunta = response[0]['series_pregunta']
+
+                  eval('var obj=['+$scope.series_pregunta+']');
+
+                  $scope.primergrafico = obj
+           
+                  $scope.logeandose=0
+
+                  var chart = $('#pie').highcharts();
+
+                   chart.series[0].setData([]);
+
+                  for(o in $scope.primergrafico){
+
+                   
+                    chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
+
+
+                  }
+
+
+
+
+    })
+
+
+   }
+
+
+
 
 
 
