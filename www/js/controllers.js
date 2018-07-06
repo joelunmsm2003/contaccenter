@@ -27,7 +27,7 @@ function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup
 
 
 
-  $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+$http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
      $localStorage.servicioback = response['servicios']
 
@@ -1544,8 +1544,8 @@ Highcharts.chart('pie', {
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
-        width:300,
-        height:300
+        width:500,
+        height:200
     },
     title: {
         text: null
