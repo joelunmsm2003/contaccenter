@@ -14,8 +14,22 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$localStorage,$location) {
   $ionicPlatform.ready(function() {
+
+
+    console.log('entrando......',$localStorage.user)
+
+    if(!$localStorage.user){
+
+        console.log('entre-......')    
+
+        $location.url('/page1') 
+
+    }
+
+
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
