@@ -1772,9 +1772,15 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.0f} %'
+                format: '<b>{point.name}</b>: {point.percentage:.0f} %',
+                style: {
+                    fontSize: '8px',
+                    color: 'contrast',
+                    textOutline: '1px contrast'
+                }
             },
-            showInLegend: true
+            showInLegend: true,
+           
         }
     },
     series: [{
@@ -1865,7 +1871,21 @@ Highcharts.chart('barras', {
             stacking: 'percent',
             dataLabels: {
                   enabled: true,
-                  format: '{point.percentage:.0f}'
+                 
+                  style: {
+
+                    font: 'normal 12px Verdana, sans-serif',
+                    color:'black',
+                    textOutline:'0px'
+
+                  },
+                  formatter: function() {
+                      if (this.y != 0) {
+                        return Math.round(this.point.percentage);
+                      } else {
+                        return null;
+                      }
+                  }
             }
         }
     },
@@ -1921,6 +1941,8 @@ Highcharts.chart('barras', {
             $scope.servicio = $scope.servicios[0]['campana']
 
             $localStorage.pregunta_id = $scope.servicios[0].preguntas[0]['id']
+
+            $scope.preguntas = $scope.servicios[0].preguntas
 
             $scope.pregunta = $scope.servicios[0].preguntas[0]['descripcion']
 
@@ -2094,6 +2116,10 @@ Highcharts.chart('barras', {
     $scope.servicio= data.campana
 
     $scope.preguntas=data.preguntas
+    
+
+
+    console.log('$scope.preguntas',$scope.preguntas)
 
     //$scope.pregunta=$scope.preguntas[0]
 
@@ -2141,7 +2167,7 @@ Highcharts.chart('barras', {
 
     console.log('traeresultados',data)
 
-
+    $scope.logeandose=1
 
     $scope.encuestas = data
 
@@ -2217,6 +2243,9 @@ Highcharts.chart('barras', {
                       barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
 
 
+
+                      $scope.logeandose=0
+
 // barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
 
 
@@ -2254,7 +2283,7 @@ Highcharts.chart('barras', {
 
                   for(o in $scope.primergrafico){
 
-                   
+                    console.log('ii',o)
                     chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
 
 
