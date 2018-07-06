@@ -565,7 +565,7 @@ $scope.grafic=0
     
       // Custom popup
       var myPopup = $ionicPopup.show({
-         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</li>',
+         template: '<p style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in servicios" ng-click="traecolas(item);cierra()">{{item.srvn}}</p>',
          scope: $scope,
          title:'Seleccione:',
          buttons: [
@@ -591,7 +591,7 @@ $scope.grafic=0
     
       // Custom popup
       var myPopup1 = $ionicPopup.show({
-         template: '<li style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</li>',
+         template: '<p style="text-decoration: none;list-style: none;padding: 10px;" ng-repeat="item in colas" ng-click="seleccionacola(item);cierra()">{{item.cmpn}}</p>',
          scope: $scope,
          title:'Seleccione:',
          buttons: [

@@ -12,7 +12,6 @@
     "angular-filter": "^0.5.17",
     "angularjs-gauge": "^2.1.1",
     "cordova-android": "5.2.2",
-    "cordova-ios": "4.5.3",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-exitapp-ios": "0.0.2",
     "cordova-plugin-splashscreen": "^4.1.0",
@@ -22,8 +21,7 @@
   },
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ],
     "plugins": {
       "ionic-plugin-keyboard": {},
