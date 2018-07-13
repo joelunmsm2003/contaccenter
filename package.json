@@ -12,7 +12,11 @@
     "angular-filter": "^0.5.17",
     "angularjs-gauge": "^2.1.1",
     "cordova-android": "5.2.2",
+<<<<<<< HEAD
     "cordova-ios": "4.5.4",
+=======
+    "cordova-ios": "^4.5.4",
+>>>>>>> 5a293c264f12833550ad073b30026317bdd999eb
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-exitapp-ios": "0.0.2",
     "cordova-plugin-splashscreen": "^4.1.0",
