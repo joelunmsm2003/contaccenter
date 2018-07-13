@@ -1725,13 +1725,13 @@ function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
   }
 
 
-  $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+//   $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
 
-     $localStorage.servicioback = response['servicios']
+//      $localStorage.servicioback = response['servicios']
 
-     $localStorage.campanas_ivr = response['campanas_ivr']
+//      $localStorage.campanas_ivr = response['campanas_ivr']
 
-})
+// })
 
 
      Highcharts.chart('pie', {
@@ -1935,7 +1935,7 @@ Highcharts.chart('barras', {
 
 
 
-
+    
 
 
 
@@ -1964,6 +1964,28 @@ Highcharts.chart('barras', {
 
 
                 console.log('datos del django...',response)
+
+
+                
+                  $scope.series_pregunta = response[0]['series_pregunta']
+
+                  eval('var obj=['+$scope.series_pregunta+']');
+
+                  $scope.primergrafico = obj
+           
+                  $scope.logeandose=0
+
+                  var chart = $('#pie').highcharts();
+
+                   chart.series[0].setData([]);
+
+                  for(o in $scope.primergrafico){
+
+                   
+                    chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
+
+
+                  }
 
                 $scope.segundagrafica=response[0]['segundagrafica']
 
@@ -2030,25 +2052,6 @@ Highcharts.chart('barras', {
 
                   //$scope.primergrafico = response[0]['categoria']
 
-                  $scope.series_pregunta = response[0]['series_pregunta']
-
-                  eval('var obj=['+$scope.series_pregunta+']');
-
-                  $scope.primergrafico = obj
-           
-                  $scope.logeandose=0
-
-                  var chart = $('#pie').highcharts();
-
-                   chart.series[0].setData([]);
-
-                  for(o in $scope.primergrafico){
-
-                   
-                    chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
-
-
-                  }
 
 
 
@@ -2060,7 +2063,8 @@ Highcharts.chart('barras', {
 
 
 
-
+      
+   $scope.reload();
 
 
       $scope.showPopup = function() {
@@ -2168,7 +2172,6 @@ Highcharts.chart('barras', {
 
 
 
-   $scope.reload();
 
    //$interval(function () { $scope.reload(); }, 20000);
 
@@ -2190,6 +2193,27 @@ Highcharts.chart('barras', {
 
 
                 console.log('datos del django...',response)
+
+
+                $scope.series_pregunta = response[0]['series_pregunta']
+
+                  eval('var obj=['+$scope.series_pregunta+']');
+
+                  $scope.primergrafico = obj
+           
+                  $scope.logeandose=0
+
+                  var chart = $('#pie').highcharts();
+
+                   chart.series[0].setData([]);
+
+                  for(o in $scope.primergrafico){
+
+                    console.log('ii',o)
+                    chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
+
+
+                  }
 
                 $scope.segundagrafica=response[0]['segundagrafica']
 
@@ -2255,7 +2279,7 @@ Highcharts.chart('barras', {
 
 
 
-                      $scope.logeandose=0
+                      //$scope.logeandose=0
 
 // barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
 
@@ -2280,25 +2304,7 @@ Highcharts.chart('barras', {
 
                   //$scope.primergrafico = response[0]['categoria']
 
-                  $scope.series_pregunta = response[0]['series_pregunta']
-
-                  eval('var obj=['+$scope.series_pregunta+']');
-
-                  $scope.primergrafico = obj
-           
-                  $scope.logeandose=0
-
-                  var chart = $('#pie').highcharts();
-
-                   chart.series[0].setData([]);
-
-                  for(o in $scope.primergrafico){
-
-                    console.log('ii',o)
-                    chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
-
-
-                  }
+                  
 
 
 
