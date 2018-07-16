@@ -1692,7 +1692,7 @@ $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 
 
-  console.log('ingrese a encuestasCtrl')
+  alert('ingrese a encuestasCtrl')
 
   $scope.logeandose=1
 
@@ -1964,17 +1964,17 @@ Highcharts.chart('barras', {
             $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
 
 
-                console.log('datos del django...',response)
+                  alert('Django datos')
 
                   $scope.encuestas = response[0]['data']
 
                   $scope.series_pregunta = response[0]['series_pregunta']
 
-                  console.log('antes del eval 1')
+                  
 
                   eval('var obj=['+$scope.series_pregunta+']');
 
-                  console.log('despues del eval 1')
+                  
 
                   $scope.primergrafico = obj
            
@@ -1983,6 +1983,8 @@ Highcharts.chart('barras', {
                   var chart = $('#pie').highcharts();
 
                    chart.series[0].setData([]);
+
+                   alert('grafica 1')
 
                   for(o in $scope.primergrafico){
 
@@ -1997,7 +1999,7 @@ Highcharts.chart('barras', {
                 $scope.serie_grafico_score=response[0]['serie_grafico_score']
 
 
-                console.log('antes del eval serie_grafico_score')
+                alert('grafica 2')
 
                 eval('var obj='+$scope.serie_grafico_score);
 
@@ -2010,7 +2012,7 @@ Highcharts.chart('barras', {
 
                   for(o in $scope.serie_grafico_score){
 
-                      console.log('borrando...',o)
+                     
 
                       barras.series[o].setData([]);
 
@@ -2019,7 +2021,7 @@ Highcharts.chart('barras', {
                   for(o in $scope.serie_grafico_score){
 
 
-                  console.log('serie_grafico_score...',o)
+                 
 
                   
                   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
@@ -2043,11 +2045,13 @@ Highcharts.chart('barras', {
 
                   }
 
-                  console.log('pintando lineas del')
+                
 
                   var lineas = $('#container').highcharts();
 
                   lineas.series[0].setData([]);
+
+                  alert('grafica 3')
 
                   for(o in $scope.segundagrafica){
 
@@ -2056,6 +2060,9 @@ Highcharts.chart('barras', {
                   lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
 
                   }
+
+
+                  alert('grafica 4')
               
 
                   //$scope.encuestas = response[0]['data']
