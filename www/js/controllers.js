@@ -1692,7 +1692,6 @@ $interval(function () { $scope.reload2($localStorage.id_cola); }, 10000);
 function ($scope, $stateParams,$http,$localStorage,$ionicPopup,$interval) {
 
 
-  alert('ingrese a encuestasCtrl')
 
   $scope.logeandose=1
 
