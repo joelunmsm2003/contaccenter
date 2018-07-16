@@ -1964,7 +1964,7 @@ Highcharts.chart('barras', {
             $http.get("http://192.241.240.186:1000/encuesta/"+$localStorage.campana_id+'/'+$localStorage.pregunta_id+'/'+$localStorage.respuesta_id).success(function(response) {
 
 
-                  alert('Django datos')
+                  //alert('Django datos')
 
                   $scope.encuestas = response[0]['data']
 
@@ -1984,7 +1984,7 @@ Highcharts.chart('barras', {
 
                    chart.series[0].setData([]);
 
-                   alert('grafica 1')
+                   //alert('grafica 1')
 
                   for(o in $scope.primergrafico){
 
@@ -2008,7 +2008,7 @@ Highcharts.chart('barras', {
 
                   var barras = $('#barras').highcharts();
 
-                   alert(' borrando grafica 2')
+                   //alert(' borrando grafica 2')
 
 
                   for(o in $scope.serie_grafico_score){
@@ -2019,7 +2019,7 @@ Highcharts.chart('barras', {
 
                   }
 
-                   alert('graficando 2')
+                   //alert('graficando 2')
 
 
                   for(o in $scope.serie_grafico_score){
@@ -2055,7 +2055,7 @@ Highcharts.chart('barras', {
 
                   lineas.series[0].setData([]);
 
-                  alert('grafica 3')
+                  //alert('grafica 3')
 
                   for(o in $scope.segundagrafica){
 
@@ -2066,7 +2066,7 @@ Highcharts.chart('barras', {
                   }
 
 
-                  alert('grafica 4')
+                  //alert('grafica 4')
               
 
                   //$scope.encuestas = response[0]['data']
