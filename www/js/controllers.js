@@ -1987,6 +1987,10 @@ Highcharts.chart('barras', {
 
                   for(o in $scope.primergrafico){
 
+
+                    //__series=[$scope.primergrafico[o]['data'][0],$scope.serie_grafico_score[o]['data'][1],$scope.serie_grafico_score[o]['data'][2],$scope.serie_grafico_score[o]['data'][3],$scope.serie_grafico_score[o]['data'][4],$scope.serie_grafico_score[o]['data'][5],$scope.serie_grafico_score[o]['data'][6],$scope.serie_grafico_score[o]['data'][7],$scope.serie_grafico_score[o]['data'][8],$scope.serie_grafico_score[o]['data'][9],$scope.serie_grafico_score[o]['data'][10],$scope.serie_grafico_score[o]['data'][11],$scope.serie_grafico_score[o]['data'][12],$scope.serie_grafico_score[o]['data'][13],$scope.serie_grafico_score[o]['data'][14]]
+
+
                    
                     chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
 
@@ -2018,172 +2022,25 @@ Highcharts.chart('barras', {
 
                   }
 
-                   alert('graficando 2')
+             
 
 
                   var d = new Date();
                   
+                  __series=[2,3,4,6,2,2,3]
 
 
                   for(o in $scope.serie_grafico_score){
+
+                    __series=[$scope.serie_grafico_score[o]['data'][0],$scope.serie_grafico_score[o]['data'][1],$scope.serie_grafico_score[o]['data'][2],$scope.serie_grafico_score[o]['data'][3],$scope.serie_grafico_score[o]['data'][4],$scope.serie_grafico_score[o]['data'][5],$scope.serie_grafico_score[o]['data'][6],$scope.serie_grafico_score[o]['data'][7],$scope.serie_grafico_score[o]['data'][8],$scope.serie_grafico_score[o]['data'][9],$scope.serie_grafico_score[o]['data'][10],$scope.serie_grafico_score[o]['data'][11],$scope.serie_grafico_score[o]['data'][12],$scope.serie_grafico_score[o]['data'][13],$scope.serie_grafico_score[o]['data'][14]]
+
+
+                    barras.series[o].setData(__series)
 
 
                   console.log('hora..',d.getHours())
 
                   
-                    barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  
-                  // if(d.getHours()==10){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  // }
-                  // if(d.getHours()==11){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  // }
-                  // if(d.getHours()==12){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  
-                  // }
-                  // if(d.getHours()==13){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  
-                  // }
-
-                  // if(d.getHours()==14){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  
-                  // }
-                  // if(d.getHours()==15){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  
-                  // }
-                  // if(d.getHours()==16){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   //barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  
-                  // }
-                  // if(d.getHours()==17){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  //   //barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                    
-                  // }
-                  // if(d.getHours()==18){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                  //   //barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                    
-                  // }
-                  // if(d.getHours()==19){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
-                  //   //barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
-                    
-                  // }
-                  // if(d.getHours()==20){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
-                  //   //barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                    
-                  // }
-
-                  // if(d.getHours()==21){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
-                    
-                  // }
-                  // if(d.getHours()==22){
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
-                  //   barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][13],color:$scope.serie_grafico_score[o]['color']});
-                    
-                  // }
-
-
-
                
                   
                   
@@ -2196,7 +2053,7 @@ Highcharts.chart('barras', {
 
                   lineas.series[0].setData([]);
 
-                  alert('grafica 3')
+                  
 
                   for(o in $scope.segundagrafica){
 
