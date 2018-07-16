@@ -1901,36 +1901,34 @@ Highcharts.chart('barras', {
         }
     },
     series: [
-    {
-        name: 'Excelente',
-        color:'#6cea71',
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-    {
-        name: 'Muy Buena',
-        color:'#2b908f',
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-    {
-        name: 'Buena',
-        color:'#a9ff96',
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-    {
-        name: 'Regular',
-        color:'#e4d354',
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-    {
-        name: 'Mala',
-        color:'#ffbc75',
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-    {
-        name: 'Muy Mala',
-        color:'#f45b5b',
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    }]
+    
+    // {
+    //     name: 'Muy Buena',
+    //     color:'#2b908f',
+    //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    // },
+    // {
+    //     name: 'Buena',
+    //     color:'#a9ff96',
+    //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    // },
+    // {
+    //     name: 'Regular',
+    //     color:'#e4d354',
+    //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    // },
+    // {
+    //     name: 'Mala',
+    //     color:'#ffbc75',
+    //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    // },
+    // {
+    //     name: 'Muy Mala',
+    //     color:'#f45b5b',
+    //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    // }
+    // 
+    ]
 });
 
 
@@ -2013,39 +2011,55 @@ Highcharts.chart('barras', {
 
                    //alert(' borrando grafica 2')
 
+                 
 
                   for(o in $scope.serie_grafico_score){
 
-                     
-
-                      barras.series[o].setData([]);
-
-                  }
-
-             
+                      console.log('jsjsj',$scope.serie_grafico_score[o]['data'])
+                      
 
 
-                  var d = new Date();
-                  
-                  __series=[2,3,4,6,2,2,3]
+                      barras.addSeries({
 
-
-                  for(o in $scope.serie_grafico_score){
-
-                    __series=[$scope.serie_grafico_score[o]['data'][0],$scope.serie_grafico_score[o]['data'][1],$scope.serie_grafico_score[o]['data'][2],$scope.serie_grafico_score[o]['data'][3],$scope.serie_grafico_score[o]['data'][4],$scope.serie_grafico_score[o]['data'][5],$scope.serie_grafico_score[o]['data'][6],$scope.serie_grafico_score[o]['data'][7],$scope.serie_grafico_score[o]['data'][8],$scope.serie_grafico_score[o]['data'][9],$scope.serie_grafico_score[o]['data'][10],$scope.serie_grafico_score[o]['data'][11],$scope.serie_grafico_score[o]['data'][12],$scope.serie_grafico_score[o]['data'][13],$scope.serie_grafico_score[o]['data'][14]]
-
-
-                    barras.series[o].setData(__series)
-
-
-                  console.log('hora..',d.getHours())
-
-                  
-               
-                  
-                  
+                          name: $scope.serie_grafico_score[o]['name'],
+                          data: $scope.serie_grafico_score[o]['data'],
+                          color: $scope.serie_grafico_score[o]['color']
+                          
+                      });
 
                   }
+
+
+                  // for(o in $scope.serie_grafico_score){
+
+
+                  //     barras.series[o].setData([]);
+
+                  // }
+
+                  __score=[]
+
+                  // for(o in $scope.serie_grafico_score){
+
+                  //       __score=[]
+
+                  //       for (i = 0; i < 15; i++) {
+                          
+                  //         __score.push($scope.serie_grafico_score[o]['data'][i])
+
+                  //         //__score.push({y:$scope.serie_grafico_score[o]['data'][o],color:$scope.serie_grafico_score[o]['color']})
+
+                  //       }
+
+
+
+                  //   //__series=[$scope.serie_grafico_score[o]['data'][0],$scope.serie_grafico_score[o]['data'][1],$scope.serie_grafico_score[o]['data'][2],$scope.serie_grafico_score[o]['data'][3],$scope.serie_grafico_score[o]['data'][4],$scope.serie_grafico_score[o]['data'][5],$scope.serie_grafico_score[o]['data'][6],$scope.serie_grafico_score[o]['data'][7],$scope.serie_grafico_score[o]['data'][8],$scope.serie_grafico_score[o]['data'][9],$scope.serie_grafico_score[o]['data'][10],$scope.serie_grafico_score[o]['data'][11],$scope.serie_grafico_score[o]['data'][12],$scope.serie_grafico_score[o]['data'][13],$scope.serie_grafico_score[o]['data'][14]]
+
+                  //   barras.series[o].setData(__score)
+
+                  //   //$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']
+
+                  // }
 
                 
 
@@ -2057,7 +2071,6 @@ Highcharts.chart('barras', {
 
                   for(o in $scope.segundagrafica){
 
-                  console.log($scope.segundagrafica[o])
 
                   lineas.series[0].addPoint(parseInt($scope.segundagrafica[o]));
 
@@ -2228,7 +2241,7 @@ Highcharts.chart('barras', {
 
                   for(o in $scope.primergrafico){
 
-                    console.log('ii',o)
+                    
                     chart.series[0].addPoint({name: $scope.primergrafico[o]['name'],y: parseInt($scope.primergrafico[o]['y']),color:$scope.primergrafico[o]['color']});
 
 
@@ -2239,71 +2252,39 @@ Highcharts.chart('barras', {
 
                  var barras = $('#barras').highcharts();
 
-                for(o in $scope.serie_grafico_score){
-
-
-                      console.log('borrando...',o)
-
-                      barras.series[o].setData([]);
-
-                  }
+                
 
                 $scope.serie_grafico_score=response[0]['serie_grafico_score']
 
-                console.log('$scope.serie_grafico_score',$scope.serie_grafico_score)
 
                 eval('var obj='+$scope.serie_grafico_score);
 
                 $scope.serie_grafico_score = obj
 
+                var seriesLength = barras.series.length;
+
+                for(var i = seriesLength -1; i > -1; i--) {
+                     
+                      barras.series[i].remove();
+                      
+                  }
 
 
-                  var barras = $('#barras').highcharts();
-
-
-
-
-                  //barras.series[3].setData([]);
-                  // barras.series[4].setData([]);
-                  // barras.series[5].setData([]);
-                  // barras.series[6].setData([]);
-                  // barras.series[7].setData([]);
-                  // barras.series[8].setData([]);
-                  // barras.series[9].setData([]);
-                  // barras.series[10].setData([]);
-                  // barras.series[11].setData([]);
-                  // barras.series[12].setData([]);
-                  // barras.series[13].setData([]);
-                  // barras.series[14].setData([]);
 
                   for(o in $scope.serie_grafico_score){
 
-                  console.log('nuevo...',$scope.serie_grafico_score[o])
+                      
 
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][0],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][1],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][2],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][3],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][4],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][5],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][6],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][7],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][8],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][9],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][10],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][11],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][12],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][13],color:$scope.serie_grafico_score[o]['color']});
-                      barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
+                      barras.addSeries({
 
-
-
-                      //$scope.logeandose=0
-
-// barras.series[o].addPoint({y:$scope.serie_grafico_score[o]['data'][14],color:$scope.serie_grafico_score[o]['color']});
-
+                          name: $scope.serie_grafico_score[o]['name'],
+                          data: $scope.serie_grafico_score[o]['data'],
+                          color: $scope.serie_grafico_score[o]['color']
+                          
+                      });
 
                   }
+                  
 
 
                   var lineas = $('#container').highcharts();
