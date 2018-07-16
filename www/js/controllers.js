@@ -2018,7 +2018,7 @@ Highcharts.chart('barras', {
 
                   }
 
-                   //alert('graficando 2')
+                   alert('graficando 2')
 
 
                   var d = new Date();
@@ -2196,7 +2196,7 @@ Highcharts.chart('barras', {
 
                   lineas.series[0].setData([]);
 
-                  //alert('grafica 3')
+                  alert('grafica 3')
 
                   for(o in $scope.segundagrafica){
 
