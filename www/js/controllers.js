@@ -1,9 +1,18 @@
 angular.module('app.controllers', ['angularjs-gauge','ngStorage','angular.filter'])
   
-.controller('menuCtrl', ['$scope', '$stateParams','$localStorage','$location','$ionicHistory',//,/ The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('menuCtrl', ['$scope', '$stateParams','$localStorage','$location','$ionicHistory','$http',//,/ The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$localStorage,$location,$ionicHistory) {
+function ($scope, $stateParams,$localStorage,$location,$ionicHistory,$http) {
+
+
+    $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {
+
+     console.log('hshshshsh',response)
+
+     $scope.menu= response
+
+})
 
     $scope.salir=function(){
 
@@ -24,7 +33,6 @@ function ($scope, $stateParams,$localStorage,$location,$ionicHistory) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$localStorage,$filter,$interval,$ionicPopup) {
-
 
 
 $http.get("http://192.241.240.186:1000/loginuser/"+$localStorage.user+'/'+$localStorage.pass).success(function(response) {

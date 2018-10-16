@@ -1,15 +1,14 @@
 {
   "name": "contacto",
-  "app_id": "",
+  "integrations": {
+    "gulp": {},
+    "cordova": {}
+  },
   "type": "ionic1",
   "gulpStartupTasks": [
     "sass",
     "watch"
   ],
-  "integrations": {
-    "gulp": {},
-    "cordova": {}
-  },
   "watchPatterns": [
     "scss/**/*",
     "www/**/*",

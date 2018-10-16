@@ -29,7 +29,7 @@
            <ion-item class="item-icon-left dark side-menu" id="capital-list-item112" ui-sref="menu.indicadores()" menu-close="">
           <i class="icon ion-speedometer"></i>Indicadores del Negocio</ion-item>
 
-             <ion-item class="item-icon-left dark side-menu" id="capital-list-item112" ui-sref="menu.encuestas()" menu-close="">
+             <ion-item ng-if='menu.hasPermisoIVR' class="item-icon-left dark side-menu" id="capital-list-item112" ui-sref="menu.encuestas()" menu-close="">
         <i class="icon ion-podium"></i>Encuestas</ion-item>
 
 
